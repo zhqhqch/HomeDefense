@@ -1,4 +1,6 @@
 bin/
 log/
+obj/
+gen/
 .DS_Store
 */.DS_Store
