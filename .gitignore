@@ -3,5 +3,6 @@ log/
 obj/
 gen/
 assets/
+armeabi/
 .DS_Store
 */.DS_Store
