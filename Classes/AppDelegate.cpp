@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "MainViewScene.h"
 
 USING_NS_CC;
 
@@ -17,6 +17,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
         glview = GLView::create("My Game");
+
+        Size referenceSize = Size(1280,640);
+        Size winSize = glview->getFrameSize();
+        float scale_x = winSize.width / referenceSize.width;
+        float scale_y = winSize.height / referenceSize.height;
+        Size resolutionSize;
+        if(scale_x < scale_y){
+        	resolutionSize = Size(referenceSize.width, winSize.height / scale_x);
+        } else {
+        	resolutionSize = Size(winSize.width / scale_y, referenceSize.height);
+        }
+        glview->setDesignResolutionSize(resolutionSize.width,resolutionSize.height, kResolutionShowAll);
         director->setOpenGLView(glview);
     }
 
@@ -27,7 +39,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    auto scene = MainView::createScene();
 
     // run
     director->runWithScene(scene);
