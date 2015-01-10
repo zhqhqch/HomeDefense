@@ -46,15 +46,15 @@ bool MainView::init()
     										"shareBtn_selected.png",
     										CC_CALLBACK_1(MainView::menuShareCallback, this));
 
-    shareItem->setPosition(Vec2(shareItem->getContentSize().width / 2,
-    						shareItem->getContentSize().height / 2));
+    shareItem->setPosition(Vec2(shareItem->getContentSize().width / 2 + 20,
+    						shareItem->getContentSize().height / 2 + 20));
 
     auto shopItem = MenuItemImage::create("shopBtn.png",
         										"shopBtn_selected.png",
         										CC_CALLBACK_1(MainView::menuShopCallback, this));
 
-    shopItem->setPosition(Vec2(visibleSize.width - shopItem->getContentSize().width / 2,
-    						shopItem->getContentSize().height / 2));
+    shopItem->setPosition(Vec2(visibleSize.width - shopItem->getContentSize().width / 2 - 20,
+    						shopItem->getContentSize().height / 2 + 20));
 
     auto menu = Menu::create(startItem,shareItem, shopItem, NULL);
     menu->setPosition(Vec2::ZERO);
