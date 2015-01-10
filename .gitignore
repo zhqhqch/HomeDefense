@@ -2,5 +2,6 @@ bin/
 log/
 obj/
 gen/
+assets/
 .DS_Store
 */.DS_Store
