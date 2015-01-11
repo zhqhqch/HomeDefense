@@ -17,21 +17,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
         glview = GLView::create("My Game");
-
-        Size referenceSize = Size(1280,640);
-        Size winSize = glview->getFrameSize();
-        float scale_x = winSize.width / referenceSize.width;
-        float scale_y = winSize.height / referenceSize.height;
-        Size resolutionSize;
-        if(scale_x < scale_y){
-        	resolutionSize = Size(referenceSize.width, winSize.height / scale_x);
-        } else {
-        	resolutionSize = Size(winSize.width / scale_y, referenceSize.height);
-        }
-        glview->setDesignResolutionSize(resolutionSize.width,resolutionSize.height, kResolutionShowAll);
         director->setOpenGLView(glview);
     }
 
+    Size referenceSize = Size(1280,640);
+    glview->setDesignResolutionSize(referenceSize.width,referenceSize.height, ResolutionPolicy::SHOW_ALL);
+    
     // turn on display FPS
     director->setDisplayStats(true);
 

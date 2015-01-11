@@ -42,33 +42,28 @@ bool MainView::init()
     
     startItem->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.3));
 
+    
     auto shareItem = MenuItemImage::create("shareBtn.png",
     										"shareBtn_selected.png",
     										CC_CALLBACK_1(MainView::menuShareCallback, this));
 
-    shareItem->setPosition(Vec2(shareItem->getContentSize().width / 2 + 20,
-    						shareItem->getContentSize().height / 2 + 20));
+    shareItem->setPosition(Vec2(shareItem->getContentSize().width / 2 + 38,
+    						shareItem->getContentSize().height / 2 + 33));
 
+    
     auto shopItem = MenuItemImage::create("shopBtn.png",
         										"shopBtn_selected.png",
         										CC_CALLBACK_1(MainView::menuShopCallback, this));
 
-    shopItem->setPosition(Vec2(visibleSize.width - shopItem->getContentSize().width / 2 - 20,
-    						shopItem->getContentSize().height / 2 + 20));
-
+    shopItem->setPosition(Vec2(visibleSize.width - shopItem->getContentSize().width / 2 - 38,
+    						shopItem->getContentSize().height / 2 + 33));
+    
     auto menu = Menu::create(startItem,shareItem, shopItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
     auto mainBgSprite = Sprite::create("main_bg.jpg");
     mainBgSprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    float scale_x = visibleSize.width / mainBgSprite->getContentSize().width;
-    float scale_y = visibleSize.height / mainBgSprite->getContentSize().height;
-    if(scale_x > scale_y){
-    	mainBgSprite->setScale(scale_x);
-    } else {
-    	mainBgSprite->setScale(scale_y);
-    }
 
     this->addChild(mainBgSprite, 0);
     
