@@ -68,6 +68,11 @@ bool MainView::init()
 
     this->addChild(mainBgSprite, 0);
     
+    ParticleSystem * ps = ParticleSnow::create();
+    ps->setTexture(Director::getInstance()->getTextureCache()->addImage("item_a_1.png"));
+    ps->setPosition(visibleSize.width / 2,visibleSize.height * 0.9);
+    this->addChild(ps, 2);
+
     return true;
 }
 
