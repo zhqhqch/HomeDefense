@@ -1,4 +1,6 @@
 #include "MainViewScene.h"
+#include "GameViewScene.h"
+#include "TransitionUtil.h"
 
 USING_NS_CC;
 
@@ -28,7 +30,6 @@ bool MainView::init()
     }
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     auto airshipSprite = Sprite::create("airship.png");
     airshipSprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.7));
@@ -38,7 +39,7 @@ bool MainView::init()
     auto startItem = MenuItemImage::create(
                                            "startBtn.png",
                                            "startBtn_selected.png",
-                                           CC_CALLBACK_1(MainView::menuCloseCallback, this));
+                                           CC_CALLBACK_1(MainView::menuStartCallback, this));
     
     startItem->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.3));
 
@@ -63,13 +64,17 @@ bool MainView::init()
     this->addChild(menu, 1);
 
     auto mainBgSprite = Sprite::create("main_bg.jpg");
-    mainBgSprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    mainBgSprite->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2));
 
     this->addChild(mainBgSprite, 0);
     
     return true;
 }
 
+void MainView::menuStartCallback(Ref* pSender) {
+	auto gameView = GameView::createScene();
+	TransitionUtil::enterScene(gameView);
+}
 
 void MainView::menuCloseCallback(Ref* pSender)
 {
@@ -86,12 +91,28 @@ void MainView::menuCloseCallback(Ref* pSender)
 }
 
 void MainView::menuShareCallback(Ref* pSender) {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+    return;
+#endif
 
+    Director::getInstance()->end();
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    exit(0);
+#endif
 }
 
 
 void MainView::menuShopCallback(Ref* pSender) {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+    return;
+#endif
 
+    Director::getInstance()->end();
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    exit(0);
+#endif
 }
