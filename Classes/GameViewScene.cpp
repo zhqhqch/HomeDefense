@@ -28,6 +28,17 @@ bool GameView::init(){
 	if(!Layer::init()){
 		return false;
 	}
+    
+    auto listener = EventListenerTouchOneByOne::create();       //单点触摸
+    //auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸
+    //setTouchEnabled(true);        //3.0版本已经被弃用
+    
+    listener->onTouchBegan = CC_CALLBACK_2(GameView::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(GameView::onTouchMoved, this);
+    listener->onTouchEnded = CC_CALLBACK_2(GameView::onTouchEnded, this);
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
@@ -133,3 +144,23 @@ void GameView::menuBackCallback(Ref* pSender){
 	auto mainView = MainView::createScene();
 	TransitionUtil::backScene(mainView);
 }
+
+
+
+bool GameView::onTouchBegan(Touch *touch, Event *unused_event) {
+    CCLOG("===========onTouchBegan");
+    return true;
+}
+
+
+void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
+    CCLOG("@@@@@@@@@@@@@onTouchMoved");
+}
+
+void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
+    CCLOG("^^^^^^^^^^^^onTouchEnded");
+    
+    airshipSprite->grab();
+    
+}
+

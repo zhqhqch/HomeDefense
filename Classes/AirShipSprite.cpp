@@ -25,4 +25,10 @@ void AirShip::showRope(){
 	this->addChild(ropeSprite);
 
 	ropeSprite->reachProbe();
+    
+//    ropeSprite->sawy();
+}
+
+void AirShip::grab() {
+    
 }

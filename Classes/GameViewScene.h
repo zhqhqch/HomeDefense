@@ -20,6 +20,12 @@ public:
 
 	void onEnterTransitionDidFinish();
 	void menuBackCallback(cocos2d::Ref* pSender);
+    
+    
+    virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+    virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+    virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+
 
 private:
 	AirShip *airshipSprite;

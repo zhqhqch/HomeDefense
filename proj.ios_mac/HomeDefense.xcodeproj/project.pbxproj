@@ -84,6 +84,12 @@
 		9F0D06781A63EF900044089E /* GameViewScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D06751A63EF900044089E /* GameViewScene.cpp */; };
 		9F0D067B1A63EFA60044089E /* TransitionUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D06791A63EFA60044089E /* TransitionUtil.cpp */; };
 		9F0D067C1A63EFA60044089E /* TransitionUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D06791A63EFA60044089E /* TransitionUtil.cpp */; };
+		9F3EA6771A6539AC00F5996E /* AirShipRopeSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */; };
+		9F3EA6781A6539AC00F5996E /* AirShipSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA6751A6539AC00F5996E /* AirShipSprite.cpp */; };
+		9F3EA67D1A6539B500F5996E /* Vec2Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA67B1A6539B500F5996E /* Vec2Util.cpp */; };
+		9F3EA67F1A6539BE00F5996E /* airship_game.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA67E1A6539BE00F5996E /* airship_game.png */; };
+		9F3EA6821A6539CA00F5996E /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA6801A6539CA00F5996E /* line.png */; };
+		9F3EA6831A6539CA00F5996E /* target_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA6811A6539CA00F5996E /* target_point.png */; };
 		9F8825D51A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
 		9F8825D61A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
 		9F8825D71A61373A000067F1 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CE1A61373A000067F1 /* main_bg.jpg */; };
@@ -312,6 +318,15 @@
 		9F0D06761A63EF900044089E /* GameViewScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewScene.h; path = ../Classes/GameViewScene.h; sourceTree = "<group>"; };
 		9F0D06791A63EFA60044089E /* TransitionUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TransitionUtil.cpp; path = ../Classes/TransitionUtil.cpp; sourceTree = "<group>"; };
 		9F0D067A1A63EFA60044089E /* TransitionUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransitionUtil.h; path = ../Classes/TransitionUtil.h; sourceTree = "<group>"; };
+		9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirShipRopeSprite.cpp; path = ../Classes/AirShipRopeSprite.cpp; sourceTree = "<group>"; };
+		9F3EA6741A6539AC00F5996E /* AirShipRopeSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirShipRopeSprite.h; path = ../Classes/AirShipRopeSprite.h; sourceTree = "<group>"; };
+		9F3EA6751A6539AC00F5996E /* AirShipSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirShipSprite.cpp; path = ../Classes/AirShipSprite.cpp; sourceTree = "<group>"; };
+		9F3EA6761A6539AC00F5996E /* AirShipSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirShipSprite.h; path = ../Classes/AirShipSprite.h; sourceTree = "<group>"; };
+		9F3EA67B1A6539B500F5996E /* Vec2Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vec2Util.cpp; path = ../Classes/Vec2Util.cpp; sourceTree = "<group>"; };
+		9F3EA67C1A6539B500F5996E /* Vec2Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vec2Util.h; path = ../Classes/Vec2Util.h; sourceTree = "<group>"; };
+		9F3EA67E1A6539BE00F5996E /* airship_game.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airship_game.png; sourceTree = "<group>"; };
+		9F3EA6801A6539CA00F5996E /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		9F3EA6811A6539CA00F5996E /* target_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = target_point.png; sourceTree = "<group>"; };
 		9F8825CD1A61373A000067F1 /* airship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airship.png; sourceTree = "<group>"; };
 		9F8825CE1A61373A000067F1 /* main_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_bg.jpg; sourceTree = "<group>"; };
 		9F8825CF1A61373A000067F1 /* shareBtn_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareBtn_selected.png; sourceTree = "<group>"; };
@@ -398,6 +413,12 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9F3EA67B1A6539B500F5996E /* Vec2Util.cpp */,
+				9F3EA67C1A6539B500F5996E /* Vec2Util.h */,
+				9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */,
+				9F3EA6741A6539AC00F5996E /* AirShipRopeSprite.h */,
+				9F3EA6751A6539AC00F5996E /* AirShipSprite.cpp */,
+				9F3EA6761A6539AC00F5996E /* AirShipSprite.h */,
 				9F0D06791A63EFA60044089E /* TransitionUtil.cpp */,
 				9F0D067A1A63EFA60044089E /* TransitionUtil.h */,
 				9F0D06751A63EF900044089E /* GameViewScene.cpp */,
@@ -521,6 +542,9 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F3EA6801A6539CA00F5996E /* line.png */,
+				9F3EA6811A6539CA00F5996E /* target_point.png */,
+				9F3EA67E1A6539BE00F5996E /* airship_game.png */,
 				9F0D065A1A63EF490044089E /* item_a_1.png */,
 				9F0D065B1A63EF490044089E /* item_a_2.png */,
 				9F0D065C1A63EF490044089E /* item_a_3.png */,
@@ -728,11 +752,14 @@
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				9F3EA6821A6539CA00F5996E /* line.png in Resources */,
 				9F0D066F1A63EF490044089E /* item_c_1.png in Resources */,
+				9F3EA6831A6539CA00F5996E /* target_point.png in Resources */,
 				9F8825D71A61373A000067F1 /* main_bg.jpg in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				9F8825DF1A61373A000067F1 /* shopBtn.png in Resources */,
+				9F3EA67F1A6539BE00F5996E /* airship_game.png in Resources */,
 				9F0D06711A63EF490044089E /* item_c_2.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				9F8825E11A61373A000067F1 /* startBtn_selected.png in Resources */,
@@ -788,10 +815,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F8825E81A6138AF000067F1 /* MainViewScene.cpp in Sources */,
+				9F3EA6781A6539AC00F5996E /* AirShipSprite.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				9F3EA6771A6539AC00F5996E /* AirShipRopeSprite.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				9F0D067B1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
+				9F3EA67D1A6539B500F5996E /* Vec2Util.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				9F0D06771A63EF900044089E /* GameViewScene.cpp in Sources */,
 			);

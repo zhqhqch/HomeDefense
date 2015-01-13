@@ -17,6 +17,9 @@ public:
 	AirShipRope(float x, float y);
 
 	void reachProbe();
+    
+    void sawy();
+    
 private:
 	cocos2d::Sprite * targetPoint;
 
