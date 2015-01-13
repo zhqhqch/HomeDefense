@@ -8,6 +8,7 @@
 #include "GameViewScene.h"
 #include "TransitionUtil.h"
 #include "MainViewScene.h"
+#include "AirShipSprite.h"
 
 
 USING_NS_CC;
@@ -43,11 +44,9 @@ bool GameView::init(){
 	gameBgSprite->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2));
 	this->addChild(gameBgSprite, 0);
 
-	airshipSprite = Sprite::create("airship.png");
-	airshipSprite->setPosition(Vec2(0, visibleSize.height * 0.7));
-	airshipSprite->setScale(0.5f);
+	airshipSprite = new AirShip(0, visibleSize.height * 0.7);
 	airshipSprite->setVisible(false);
-	this->addChild(airshipSprite, 1);
+	this->addChild(airshipSprite, 2);
 
 	auto itemA1 = Sprite::create("item_a_1.png");
 	itemA1->setPosition(Vec2(100, 150));
@@ -125,6 +124,8 @@ void GameView::showItem(){
 		FadeIn *itemA1FadeIn = FadeIn::create(time);
 		item->runAction(itemA1FadeIn);
 	}
+
+	airshipSprite->showRope();
 }
 
 

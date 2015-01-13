@@ -9,6 +9,7 @@
 #define __GAMEVIEW_SCENE_H__
 
 #include "cocos2d.h"
+#include "AirShipSprite.h"
 
 class GameView : public cocos2d::Layer {
 public:
@@ -21,7 +22,7 @@ public:
 	void menuBackCallback(cocos2d::Ref* pSender);
 
 private:
-	cocos2d::Sprite *airshipSprite;
+	AirShip *airshipSprite;
 	cocos2d::Vector<cocos2d::Sprite*> itemArr;
 
 	void showItem();
