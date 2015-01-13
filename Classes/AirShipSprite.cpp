@@ -14,12 +14,20 @@ AirShip::AirShip(float x, float y){
 
 	Sprite::initWithFile("airship_game.png");
 	setPosition(x, y);
+    
+    startX = x;
+    startY = y;
 }
 
 void AirShip::showRope(){
-	Size airshipSize = getContentSize();
+    
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    float catchAngle = atan2(fabs(startX - visibleSize.width),fabs(startY-visibleSize.height));
+    catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
 
-	ropeSprite = new AirShipRope(airshipSize.width / 2, 0);
+    
+	Size airshipSize = getContentSize();
+	ropeSprite = new AirShipRope(airshipSize.width / 2, 0, catchAngle);
 //	ropeSprite->setOpacity(0);
 //	this->addChild(ropeSprite, -1); //隐藏绳子在飞船背后
 	this->addChild(ropeSprite);
@@ -29,6 +37,7 @@ void AirShip::showRope(){
 //    ropeSprite->sawy();
 }
 
+
 void AirShip::grab() {
-    
+    ropeSprite->grab();
 }

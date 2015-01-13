@@ -10,8 +10,11 @@
 
 USING_NS_CC;
 
-AirShipRope::AirShipRope(float x, float y) {
-
+AirShipRope::AirShipRope(float x, float y, float catchAngle) {
+    
+    startX = x;
+    startY = y;
+    
 	Sprite::initWithFile("line.png");
 	setPosition(x, y);
     setAnchorPoint(Vec2(0.5f,1.0f));
@@ -67,4 +70,104 @@ void AirShipRope::sawy() {
     }
     RepeatForever *repeat = RepeatForever::create(action3);
     this->runAction(repeat);
+}
+
+
+void AirShipRope::grab(){
+    float x;
+    float y;
+    
+    CCLOG("%f=====", this->getRotation());
+    
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    
+    Vec2 target;
+    
+    if(this->getRotation()>0){
+        if(this->getRotation() <= catchAngle){
+            y = visibleSize.height / 4 - visibleSize.width / 4 / tan(this->getRotation()*3.1415/180);
+            x = 0.0;
+            
+            target = getIntersectPoint(Vec2(x, y), false, true);
+        }else{
+            y = 0.0;
+            x = visibleSize.width / 4 - visibleSize.height / 4 * tan(this->getRotation()*3.1415/180);
+            
+            target = getIntersectPoint(Vec2(x, y), true, true);
+        }
+    }else if(this->getRotation()<0){
+        if(this->getRotation() <= -catchAngle){
+            y = visibleSize.height / 4 + visibleSize.width / 4 / tan(this->getRotation()*3.1415/180);
+            x = visibleSize.width;
+            
+            //            target = getIntersectPoint(Vec2(x, y), false, false);
+            target = Vec2(x, y);
+        }else{
+            y = 0;
+            x = visibleSize.width / 2 - visibleSize.height / 4 * tan(this->getRotation()*3.1415/180);
+            
+            //            target = getIntersectPoint(Vec2(x, y), true, false);
+            target = Vec2(x, y);
+        }
+    }else if(this->getRotation() == 0){
+        x= visibleSize.height;
+        y= 0;
+    }
+    
+    CCLOG("%f======%f---%f---%f", x, y, target.x, target.y);
+    
+    moving = true;
+    
+    //    catchRock(Point(x, y));
+    catchRock(Vec2(target.x, target.y));
+}
+
+Vec2 AirShipRope::getIntersectPoint(Vec2 start, bool isVertical, bool threeQuadrant) {
+    Vec2 start1 = Vec2(startX, startY);
+    Vec2 end1;
+    Vec2 end2;
+    if (threeQuadrant) {
+        end1 = Vec2(0, 0);
+        if(isVertical){
+            end2 = Vec2(0,480);
+        } else {
+            end2 = Vec2(960,0);
+        }
+    } else {
+        if(isVertical){
+            end1 = Vec2(0,480);
+            end2 = Vec2(960,480);
+        } else {
+            end1 = Vec2(0, 0);
+            end2 = Vec2(960,0);
+        }
+    }
+    return Vec2::getIntersectPoint(start1, start, end1, end2);
+}
+
+void AirShipRope::catchRock(Vec2 point){
+    this->stopAllActions();
+    
+    //    setAnchorPoint(Vec2(0.5, 0));
+    
+    Vec2 start = Vec2(startX, startY);
+    float distance = point.distance(start);
+    useTime = distance * 0.01;
+    
+    ActionInterval *actionTo = MoveTo::create(useTime, point);
+    //    ActionInterval *actionTo = MoveBy::create(useTime, Vec2(10, 10));
+    CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this, false));
+    Sequence *seq = Sequence::create(actionTo,fun,NULL);
+    this->runAction(seq);
+}
+
+void AirShipRope::hookBack(bool isCatch) {
+    
+    this->stopAllActions();
+    
+    Size winSize = Director::getInstance()->getWinSize();
+    ActionInterval *action4 = MoveTo::create(useTime, Vec2(startX, startY));
+    CallFunc *func = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
+    Sequence *seq = Sequence::create(action4,func,NULL);
+    this->runAction(seq);
 }

@@ -14,16 +14,32 @@
 class AirShipRope : public cocos2d::Sprite {
 
 public:
-	AirShipRope(float x, float y);
+	AirShipRope(float x, float y,float catchAngle);
 
 	void reachProbe();
     
     void sawy();
     
+    void grab();
+    
+    void hookBack(bool isCatch);
+    
 private:
 	cocos2d::Sprite * targetPoint;
 
 	void stretchRope(cocos2d::Vec2 add);
+
+    float useTime;
+    bool moving;
+    float catchAngle;
+    float startX;
+    float startY;
+    
+    void catchRock(cocos2d::Point point);
+    void move();
+    
+    cocos2d::Vec2 getIntersectPoint(cocos2d::Vec2 start, bool isVertical, bool threeQuadrant);
+
 };
 
 #endif /* AIRSHIPROPESPRITE_H_ */
