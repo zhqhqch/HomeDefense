@@ -21,9 +21,11 @@ public:
     void sawy();
     
     void grab();
-    
+
     void hookBack(bool isCatch);
-    
+
+    void catchRock(cocos2d::Point point);
+
 private:
 	cocos2d::Sprite * targetPoint;
 
@@ -35,9 +37,9 @@ private:
     float startX;
     float startY;
     
-    void catchRock(cocos2d::Point point);
     void move();
-    
+    cocos2d::Vec2 getTargetPoint(float rotation);
+
     cocos2d::Vec2 getIntersectPoint(cocos2d::Vec2 start, bool isVertical, bool threeQuadrant);
 
 };

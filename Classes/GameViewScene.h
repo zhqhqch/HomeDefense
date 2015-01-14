@@ -29,6 +29,7 @@ public:
 
 private:
 	AirShip *airshipSprite;
+	AirShipRope *airShipRopeSprite;
 	cocos2d::Vector<cocos2d::Sprite*> itemArr;
 
 	void showItem();

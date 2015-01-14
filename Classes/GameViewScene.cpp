@@ -135,8 +135,14 @@ void GameView::showItem(){
 		FadeIn *itemA1FadeIn = FadeIn::create(time);
 		item->runAction(itemA1FadeIn);
 	}
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	float catchAngle = atan2(fabs(airshipSprite->getPosition().x - visibleSize.width),fabs(airshipSprite->getPosition().y-visibleSize.height));
+	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
 
-	airshipSprite->showRope();
+	airShipRopeSprite = new AirShipRope(visibleSize.width / 2, airshipSprite->getPosition().y - airshipSprite->getContentSize().height / 3,catchAngle);
+	this->addChild(airShipRopeSprite,3);
+
+	airShipRopeSprite->reachProbe();
 }
 
 
@@ -160,7 +166,7 @@ void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     CCLOG("^^^^^^^^^^^^onTouchEnded");
     
-    airshipSprite->grab();
+    airShipRopeSprite->grab();
     
 }
 

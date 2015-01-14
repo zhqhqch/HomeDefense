@@ -7,17 +7,20 @@
 
 #include "AirShipRopeSprite.h"
 #include "Vec2Util.h"
+#include "math.h"
 
 USING_NS_CC;
 
-AirShipRope::AirShipRope(float x, float y, float catchAngle) {
-    
+AirShipRope::AirShipRope(float x, float y,float ca) {
+
     startX = x;
     startY = y;
+    catchAngle = ca;
     
 	Sprite::initWithFile("line.png");
 	setPosition(x, y);
     setAnchorPoint(Vec2(0.5f,1.0f));
+//    setScaleY(0.1f);
 
 	Size ropeSize = getContentSize();
 
@@ -27,25 +30,27 @@ AirShipRope::AirShipRope(float x, float y, float catchAngle) {
 	targetPoint->setPosition(ropeSize.width / 2, 0);
 //	targetPoint->setAnchorPoint(Vec2(0.5, 0));
 //	targetPoint->setOpacity(0);
+//	targetPoint->setScaleY(1.0f);
 	this->addChild(targetPoint);
 }
 
 void AirShipRope::reachProbe() {
+
     Vector<FiniteTimeAction *> listAction;
-    
+
 	for(int i = 0;i<10;i++){
 		DelayTime * dTime = DelayTime::create(0.1f);
 		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::stretchRope, this, Vec2(0, 5)));
-        
+
         listAction.pushBack(dTime);
         listAction.pushBack(fun);
 	}
-    
+
     DelayTime * endTime = DelayTime::create(0.5f);
     listAction.pushBack(endTime);
     CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
     listAction.pushBack(endFun);
-    
+
     Sequence *seq = Sequence::create(listAction);
     this->runAction(seq);
 
@@ -73,87 +78,15 @@ void AirShipRope::sawy() {
 }
 
 
-void AirShipRope::grab(){
-    float x;
-    float y;
-    
-    CCLOG("%f=====", this->getRotation());
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    
-    Vec2 target;
-    
-    if(this->getRotation()>0){
-        if(this->getRotation() <= catchAngle){
-            y = visibleSize.height / 4 - visibleSize.width / 4 / tan(this->getRotation()*3.1415/180);
-            x = 0.0;
-            
-            target = getIntersectPoint(Vec2(x, y), false, true);
-        }else{
-            y = 0.0;
-            x = visibleSize.width / 4 - visibleSize.height / 4 * tan(this->getRotation()*3.1415/180);
-            
-            target = getIntersectPoint(Vec2(x, y), true, true);
-        }
-    }else if(this->getRotation()<0){
-        if(this->getRotation() <= -catchAngle){
-            y = visibleSize.height / 4 + visibleSize.width / 4 / tan(this->getRotation()*3.1415/180);
-            x = visibleSize.width;
-            
-            //            target = getIntersectPoint(Vec2(x, y), false, false);
-            target = Vec2(x, y);
-        }else{
-            y = 0;
-            x = visibleSize.width / 2 - visibleSize.height / 4 * tan(this->getRotation()*3.1415/180);
-            
-            //            target = getIntersectPoint(Vec2(x, y), true, false);
-            target = Vec2(x, y);
-        }
-    }else if(this->getRotation() == 0){
-        x= visibleSize.height;
-        y= 0;
-    }
-    
-    CCLOG("%f======%f---%f---%f", x, y, target.x, target.y);
-    
-    moving = true;
-    
-    //    catchRock(Point(x, y));
-    catchRock(Vec2(target.x, target.y));
-}
-
-Vec2 AirShipRope::getIntersectPoint(Vec2 start, bool isVertical, bool threeQuadrant) {
-    Vec2 start1 = Vec2(startX, startY);
-    Vec2 end1;
-    Vec2 end2;
-    if (threeQuadrant) {
-        end1 = Vec2(0, 0);
-        if(isVertical){
-            end2 = Vec2(0,480);
-        } else {
-            end2 = Vec2(960,0);
-        }
-    } else {
-        if(isVertical){
-            end1 = Vec2(0,480);
-            end2 = Vec2(960,480);
-        } else {
-            end1 = Vec2(0, 0);
-            end2 = Vec2(960,0);
-        }
-    }
-    return Vec2::getIntersectPoint(start1, start, end1, end2);
-}
-
 void AirShipRope::catchRock(Vec2 point){
     this->stopAllActions();
-    
+
     //    setAnchorPoint(Vec2(0.5, 0));
-    
+
     Vec2 start = Vec2(startX, startY);
     float distance = point.distance(start);
     useTime = distance * 0.01;
-    
+
     ActionInterval *actionTo = MoveTo::create(useTime, point);
     //    ActionInterval *actionTo = MoveBy::create(useTime, Vec2(10, 10));
     CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this, false));
@@ -162,12 +95,87 @@ void AirShipRope::catchRock(Vec2 point){
 }
 
 void AirShipRope::hookBack(bool isCatch) {
-    
+
     this->stopAllActions();
-    
+
     Size winSize = Director::getInstance()->getWinSize();
     ActionInterval *action4 = MoveTo::create(useTime, Vec2(startX, startY));
     CallFunc *func = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
     Sequence *seq = Sequence::create(action4,func,NULL);
     this->runAction(seq);
+}
+
+
+void AirShipRope::grab(){
+    CCLOG("%f=====%f", getRotation(), catchAngle);
+
+    Vec2 target;
+    float rotation = getRotation();
+
+    if(rotation > 0){
+        if(rotation <= catchAngle){
+        	target = getTargetPoint(rotation);
+        	CCLog("1111111111111111111");
+            target = getIntersectPoint(target, false, true);
+        }else{
+            target = getTargetPoint(rotation);
+            CCLog("222222222222222222222");
+            target = getIntersectPoint(target, true, true);
+        }
+    }else if(rotation < 0){
+        if(rotation <= -catchAngle){
+            target = getTargetPoint(rotation);
+            CCLog("333333333333333");
+            target = getIntersectPoint(target, false, false);
+        }else{
+            target = getTargetPoint(rotation);
+            CCLog("4444444444444444");
+            target = getIntersectPoint(target, true, false);
+        }
+    }else if(rotation == 0){
+    	Size visibleSize = Director::getInstance()->getVisibleSize();
+        target = Vec2(visibleSize.height, 0);
+    }
+
+    CCLOG("---%f---%f",target.x, target.y);
+
+    moving = true;
+
+    catchRock(Vec2(target.x, target.y));
+}
+
+Vec2 AirShipRope::getIntersectPoint(Vec2 start, bool isVertical, bool threeQuadrant) {
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+
+	Vec2 start1 = Vec2(startX, startY);
+	Vec2 end1;
+	Vec2 end2;
+	if (threeQuadrant) {
+		end1 = Vec2(0, 0);
+		if(isVertical){
+			end2 = Vec2(0,visibleSize.height);
+		} else {
+			end2 = Vec2(visibleSize.width, 0);
+		}
+	} else {
+		if(isVertical){
+			end1 = Vec2(0,visibleSize.height);
+			end2 = Vec2(visibleSize.width, visibleSize.height);
+		} else {
+			end1 = Vec2(0, 0);
+			end2 = Vec2(visibleSize.width, 0);
+		}
+	}
+	return Vec2::getIntersectPoint(start1, start, end1, end2);
+}
+
+Vec2 AirShipRope::getTargetPoint(float rotation){
+	if(rotation < 0){
+		rotation -= 180;
+	}
+	float x = startX + cos(rotation) * 1280;
+	float y = startY + sin(rotation) * 1280;
+
+	CCLog("target==========%f======%f$$$$$%f^^^^^%f", x, y,startX,startY);
+	return Vec2(x, y);
 }
