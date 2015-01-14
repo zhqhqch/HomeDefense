@@ -7,12 +7,16 @@
 
 #include "AirShipRopeSprite.h"
 #include "Vec2Util.h"
-#include "math.h"
 
 USING_NS_CC;
 
 AirShipRope::AirShipRope(float x, float y,float ca) {
 
+    startX = 0;
+    startY = 0;
+    getTargetPoint(225,true);
+    
+    
     startX = x;
     startY = y;
     catchAngle = ca;
@@ -114,30 +118,26 @@ void AirShipRope::grab(){
 
     if(rotation > 0){
         if(rotation <= catchAngle){
-        	target = getTargetPoint(rotation);
-        	CCLog("1111111111111111111");
+        	target = getTargetPoint(rotation,true);
             target = getIntersectPoint(target, false, true);
         }else{
-            target = getTargetPoint(rotation);
-            CCLog("222222222222222222222");
+            target = getTargetPoint(rotation,true);
             target = getIntersectPoint(target, true, true);
         }
     }else if(rotation < 0){
         if(rotation <= -catchAngle){
-            target = getTargetPoint(rotation);
-            CCLog("333333333333333");
-            target = getIntersectPoint(target, false, false);
-        }else{
-            target = getTargetPoint(rotation);
-            CCLog("4444444444444444");
+            target = getTargetPoint(rotation,false);
             target = getIntersectPoint(target, true, false);
+        }else{
+            target = getTargetPoint(rotation,false);
+            target = getIntersectPoint(target, false, false);
         }
     }else if(rotation == 0){
     	Size visibleSize = Director::getInstance()->getVisibleSize();
         target = Vec2(visibleSize.height, 0);
     }
 
-    CCLOG("---%f---%f",target.x, target.y);
+    CCLOG("########%f#######%f",target.x, target.y);
 
     moving = true;
 
@@ -148,34 +148,43 @@ Vec2 AirShipRope::getIntersectPoint(Vec2 start, bool isVertical, bool threeQuadr
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	Vec2 start1 = Vec2(startX, startY);
-	Vec2 end1;
-	Vec2 end2;
+	Vec2 end1 = Vec2(0,0);
+	Vec2 end2 = Vec2(0,0);
 	if (threeQuadrant) {
-		end1 = Vec2(0, 0);
 		if(isVertical){
-			end2 = Vec2(0,visibleSize.height);
+            end1 = Vec2(0,visibleSize.height);
+			end2 = Vec2(0,0);
 		} else {
-			end2 = Vec2(visibleSize.width, 0);
+            end1 = Vec2(0, 0);
+			end2 = Vec2(visibleSize.width,0);
 		}
 	} else {
 		if(isVertical){
-			end1 = Vec2(0,visibleSize.height);
+			end1 = Vec2(visibleSize.width,0);
 			end2 = Vec2(visibleSize.width, visibleSize.height);
 		} else {
 			end1 = Vec2(0, 0);
 			end2 = Vec2(visibleSize.width, 0);
 		}
 	}
-	return Vec2::getIntersectPoint(start1, start, end1, end2);
+
+    return Vec2Util::getIntersectPoint(start1, start, end1, end2);
 }
 
-Vec2 AirShipRope::getTargetPoint(float rotation){
-	if(rotation < 0){
-		rotation -= 180;
-	}
-	float x = startX + cos(rotation) * 1280;
-	float y = startY + sin(rotation) * 1280;
+Vec2 AirShipRope::getTargetPoint(float rotation,bool threeQuadrant){
 
-	CCLog("target==========%f======%f$$$$$%f^^^^^%f", x, y,startX,startY);
-	return Vec2(x, y);
+    if(threeQuadrant){
+        rotation = 270 - rotation;
+    } else {
+        rotation = -(90 + rotation);
+    }
+    
+    
+    float radian = rotation * M_PI / 180;
+    float xMargin = cos(radian) * 1;
+    float yMargin = sin(radian) * 1;
+    Vec2 target = Vec2(startX + xMargin,startY + yMargin);
+
+	CCLog("target==========%f======%f$$$$$%f^^^^^%f", target.x, target.y,startX,startY);
+	return target;
 }

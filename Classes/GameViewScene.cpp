@@ -29,6 +29,7 @@ bool GameView::init(){
 		return false;
 	}
     
+    
     auto listener = EventListenerTouchOneByOne::create();       //单点触摸
     //auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸
     //setTouchEnabled(true);        //3.0版本已经被弃用
@@ -136,10 +137,13 @@ void GameView::showItem(){
 		item->runAction(itemA1FadeIn);
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	float catchAngle = atan2(fabs(airshipSprite->getPosition().x - visibleSize.width),fabs(airshipSprite->getPosition().y-visibleSize.height));
+    
+    Point ropePoint = Point(visibleSize.width / 2, airshipSprite->getPosition().y - airshipSprite->getContentSize().height / 3);
+    
+	float catchAngle = atan2(ropePoint.x,ropePoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
 
-	airShipRopeSprite = new AirShipRope(visibleSize.width / 2, airshipSprite->getPosition().y - airshipSprite->getContentSize().height / 3,catchAngle);
+	airShipRopeSprite = new AirShipRope(ropePoint.x, ropePoint.y,catchAngle);
 	this->addChild(airShipRopeSprite,3);
 
 	airShipRopeSprite->reachProbe();

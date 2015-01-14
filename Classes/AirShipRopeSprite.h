@@ -38,7 +38,7 @@ private:
     float startY;
     
     void move();
-    cocos2d::Vec2 getTargetPoint(float rotation);
+    cocos2d::Vec2 getTargetPoint(float rotation,bool threeQuadrant);
 
     cocos2d::Vec2 getIntersectPoint(cocos2d::Vec2 start, bool isVertical, bool threeQuadrant);
 
