@@ -10,7 +10,7 @@
 
 #include "cocos2d.h"
 #include "AirShipSprite.h"
-#include "OreSptite.h"
+#include "OreSprite.h"
 
 class GameView : public cocos2d::Layer {
 public:
@@ -21,6 +21,8 @@ public:
 
 	void onEnterTransitionDidFinish();
 	void menuBackCallback(cocos2d::Ref* pSender);
+    
+    void catchBack(Ore * ore);
     
     
     virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
@@ -35,8 +37,11 @@ private:
 	cocos2d::Vector<Ore*> itemArr;
 
 	cocos2d::Point ropeStartPoint;
+    
+    bool isReady;
 
 	void showItem();
+    void removeScoreLabel(cocos2d::Label * scoreLabel);
 };
 
 

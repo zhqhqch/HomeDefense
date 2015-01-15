@@ -10,26 +10,26 @@
 
 
 #include "cocos2d.h"
-#include "OreSptite.h"
+#include "OreSprite.h"
+class GameView;
 
 class AirShipRope : public cocos2d::Sprite {
 
 public:
-	AirShipRope(float x, float y,float catchAngle);
+	AirShipRope(GameView * gameView, float x, float y,float catchAngle);
 
 	void reachProbe();
     
-    void sawy();
-    
     cocos2d::Point grab();
 
-    void hookBack(bool isCatch, cocos2d::Point point);
+    void hookBack(cocos2d::Point point, Ore * catchOre);
 
     void catchRock(cocos2d::Point point, Ore * ore);
 private:
 	cocos2d::Sprite * targetPoint;
 
 	Ore * targetOre;
+    GameView * gameView;
 
 	void stretchRope(cocos2d::Vec2 add);
 	void shrinkRope(cocos2d::Vec2 subtract);
@@ -39,7 +39,9 @@ private:
     float catchAngle;
     float startX;
     float startY;
+    bool isCatch;
     
+    void sawy();
     void move();
     cocos2d::Vec2 getTargetPoint(float rotation,bool threeQuadrant);
 

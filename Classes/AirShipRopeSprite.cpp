@@ -7,6 +7,8 @@
 
 #include "AirShipRopeSprite.h"
 #include "Vec2Util.h"
+#include "Constants.h"
+#include "GameViewScene.h"
 
 USING_NS_CC;
 
@@ -16,13 +18,9 @@ const float init_rope_len = 50.0f;
 
 #define NULLRef(type) (*((type*)(NULL)))
 
-AirShipRope::AirShipRope(float x, float y,float ca) {
+AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca) {
 
-    startX = 0;
-    startY = 0;
-    getTargetPoint(225,true);
-    
-    
+    gameView = gw;
     startX = x;
     startY = y;
     catchAngle = ca;
@@ -30,7 +28,6 @@ AirShipRope::AirShipRope(float x, float y,float ca) {
 	Sprite::initWithFile("line.png");
 	setPosition(x, y);
     setAnchorPoint(Vec2(0.5f,1.0f));
-//    setScaleY(0.1f);
 
 	Size ropeSize = getContentSize();
 
@@ -44,7 +41,11 @@ AirShipRope::AirShipRope(float x, float y,float ca) {
 	this->addChild(targetPoint, 2);
 
 	targetOre = new Ore("item_a_3.png", ropeSize.width / 2, targetPoint->getContentSize().height,0,0);
-	this->addChild(targetOre, 1);
+	targetOre->setVisible(false);
+    this->addChild(targetOre, 1);
+    
+    
+    isCatch = false;
 }
 
 void AirShipRope::reachProbe() {
@@ -80,9 +81,19 @@ void AirShipRope::shrinkRope(Vec2 sub){
 	Vec2 curRope = Vec2(getTextureRect().size.width, getTextureRect().size.height);
 	Vec2 newRope = Vec2Util::subtract(curRope, sub);
 	setTextureRect(Rect(0, 0, newRope.x, newRope.y));
+    
+    
+    Point curPoint = convertToWorldSpace(targetPoint->getPosition());
+    
+    targetOre->setPosition(curPoint.x, curPoint.y);
 }
 
 void AirShipRope::sawy() {
+    if(isCatch){
+        targetOre->setVisible(false);
+        gameView->catchBack(targetOre);
+    }
+    isCatch = false;
 	moving = false;
     ActionInterval *action1 = RotateTo::create(2,-90.0);
     ActionInterval *action2 = RotateTo::create(2, 90.0);
@@ -100,29 +111,18 @@ void AirShipRope::sawy() {
 
 void AirShipRope::catchRock(Vec2 point, Ore * ore){
 	moving = true;
+    isCatch = false;
     this->stopAllActions();
-    if(typeid(ore).name() != "Dn"){
-    	targetOre = ore;
-    	CCLog("^^^^^^^^^^^^^^");
+    if(ore != nullptr){
+        isCatch = true;
     }
-
-    //    setAnchorPoint(Vec2(0.5, 0));
 
     Vec2 start = Vec2(startX, startY);
     float distance = point.distance(start);
-//    useTime = distance * 0.01;
-//
-//    ActionInterval *actionTo = MoveTo::create(useTime, point);
-//    ActionInterval *actionTo = MoveBy::create(useTime, Vec2(10, 10));
-//    CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this, false));
-//    Sequence *seq = Sequence::create(actionTo,fun,NULL);
-//    this->runAction(seq);
 
     Vector<FiniteTimeAction *> listAction;
 
     int count = distance / move_step;
-
-    CCLog("catch==========%f======%f$$$$$%f^^^^^%f====%d", point.x, point.y,startX,startY,count);
 
 	for(int i = 0;i<count;i++){
 		DelayTime * dTime = DelayTime::create(move_step_time);
@@ -134,24 +134,27 @@ void AirShipRope::catchRock(Vec2 point, Ore * ore){
 
 	DelayTime * endTime = DelayTime::create(0.5f);
 	listAction.pushBack(endTime);
-	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this, false,point));
+	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this,point, ore));
 	listAction.pushBack(endFun);
 
 	Sequence *seq = Sequence::create(listAction);
 	this->runAction(seq);
 }
 
-void AirShipRope::hookBack(bool isCatch, Vec2 point) {
+void AirShipRope::hookBack(Vec2 point, Ore * catchOre) {
     this->stopAllActions();
 
+    if(isCatch){
+        targetOre = catchOre;
+    }
+    
     Vec2 start = Vec2(startX, startY);
     float distance = point.distance(start);
 
     Vector<FiniteTimeAction *> listAction;
 
 	int count = distance / move_step;
-	CCLog("$$$$$$$$$%f######%f$$$$$$$$$$$$$%f==%d" , start.x,start.y, distance, count);
-
+	
 	for(int i = 0;i<count;i++){
 		DelayTime * dTime = DelayTime::create(move_step_time);
 		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::shrinkRope, this, Vec2(0, move_step)));
@@ -167,18 +170,12 @@ void AirShipRope::hookBack(bool isCatch, Vec2 point) {
 
 	Sequence *seq = Sequence::create(listAction);
 	this->runAction(seq);
-
-//    Size winSize = Director::getInstance()->getWinSize();
-//    ActionInterval *action4 = MoveTo::create(useTime, Vec2(startX, startY));
-//    CallFunc *func = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
-//    Sequence *seq = Sequence::create(action4,func,NULL);
-//    this->runAction(seq);
 }
 
 
 Point AirShipRope::grab(){
 	if(moving){
-		return nullptr;
+		return kPintNull;
 	}
     CCLOG("%f=====%f", getRotation(), catchAngle);
 
@@ -205,8 +202,6 @@ Point AirShipRope::grab(){
     	Size visibleSize = Director::getInstance()->getVisibleSize();
         target = Vec2(visibleSize.height, 0);
     }
-
-    CCLOG("########%f#######%f",target.x, target.y);
 
     return Point(target.x, target.y);
 }
@@ -252,6 +247,5 @@ Vec2 AirShipRope::getTargetPoint(float rotation,bool threeQuadrant){
     float yMargin = sin(radian) * 1;
     Vec2 target = Vec2(startX + xMargin,startY + yMargin);
 
-	CCLog("target==========%f======%f$$$$$%f^^^^^%f", target.x, target.y,startX,startY);
 	return target;
 }

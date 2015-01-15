@@ -9,6 +9,7 @@
 #include "TransitionUtil.h"
 #include "MainViewScene.h"
 #include "AirShipSprite.h"
+#include "Constants.h"
 
 
 USING_NS_CC;
@@ -134,7 +135,7 @@ void GameView::showItem(){
 	float catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
 
-	airShipRopeSprite = new AirShipRope(ropeStartPoint.x, ropeStartPoint.y,catchAngle);
+	airShipRopeSprite = new AirShipRope(this,ropeStartPoint.x, ropeStartPoint.y,catchAngle);
 	this->addChild(airShipRopeSprite,3);
 
 	airShipRopeSprite->reachProbe();
@@ -142,6 +143,8 @@ void GameView::showItem(){
 	ropeCloneSpite = Sprite::create("line.png");
 	ropeCloneSpite->setPosition(ropeStartPoint.x, ropeStartPoint.y);
 	this->addChild(ropeCloneSpite, -1);
+    
+    isReady = true;
 }
 
 
@@ -154,7 +157,7 @@ void GameView::menuBackCallback(Ref* pSender){
 
 bool GameView::onTouchBegan(Touch *touch, Event *unused_event) {
     CCLOG("===========onTouchBegan");
-    return true;
+    return isReady;
 }
 
 
@@ -163,17 +166,18 @@ void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
 }
 
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
-	CCLOG("^^^^^^^^^^^^onTouchEnded====%s", typeid(nullptr).name());
 
     Point target = airShipRopeSprite->grab();
     CCLog("%f$$$$$$$$$%f", target.x, target.y);
-    if(typeid(target).name() != "Dn"){
-    	CCLog("===================%f",ropeCloneSpite->getRotation());
+    if(!target.equals(kPintNull)){
     	ropeCloneSpite->setRotation(airShipRopeSprite->getRotation());
     	for(Ore* item : itemArr){
+            
+            CCLOG("@@@@@@@@@@@@@@@%f",ropeCloneSpite->getRotation());
+            
     		if(item->boundingBox().intersectsRect(ropeCloneSpite->getBoundingBox())){
-    			CCLog("@@@@@@@@@@@@@@@@@@@@@");
-    			airShipRopeSprite->catchRock(item->getPosition(), item);
+    			CCLOG("******************");
+                airShipRopeSprite->catchRock(item->getPosition(), item);
     			return;
     		}
     	}
@@ -181,3 +185,30 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     }
 }
 
+
+void GameView::catchBack(Ore * ore) {
+    ore->removeFromParentAndCleanup(true);
+    itemArr.eraseObject(ore);
+    
+    CCLOG("add score===%i", ore->getScore());
+
+    std::stringstream ss;
+    ss<<"+";
+    ss<<ore->getScore();
+    std::string text = ss.str();
+    
+    Label *scoreLable = Label::createWithSystemFont(text, "Marker Felt", 21);
+    scoreLable->setColor(Color3B::RED);
+    scoreLable->setPosition(airshipSprite->getPosition().x, airshipSprite->getPosition().y + 100);
+    this->addChild(scoreLable);
+    
+    MoveTo * moveTo = MoveTo::create(2.0f, Vec2(scoreLable->getPosition().x, scoreLable->getPosition().y + 100));
+    FadeOut * fadeOut = FadeOut::create(2.0f);
+    CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::removeScoreLabel, this, scoreLable));
+	Sequence *seq = Sequence::create(moveTo,fadeOut,fun,NULL);
+    scoreLable->runAction(seq);
+}
+
+void GameView::removeScoreLabel(Label * scoreLabel) {
+    scoreLabel->removeFromParentAndCleanup(true);
+}

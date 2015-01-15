@@ -90,6 +90,8 @@
 		9F3EA67F1A6539BE00F5996E /* airship_game.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA67E1A6539BE00F5996E /* airship_game.png */; };
 		9F3EA6821A6539CA00F5996E /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA6801A6539CA00F5996E /* line.png */; };
 		9F3EA6831A6539CA00F5996E /* target_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA6811A6539CA00F5996E /* target_point.png */; };
+		9F498C541A67E351006E2A0D /* OreSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F498C521A67E351006E2A0D /* OreSprite.cpp */; };
+		9F498C551A67E351006E2A0D /* OreSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F498C521A67E351006E2A0D /* OreSprite.cpp */; };
 		9F8825D51A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
 		9F8825D61A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
 		9F8825D71A61373A000067F1 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CE1A61373A000067F1 /* main_bg.jpg */; };
@@ -327,6 +329,9 @@
 		9F3EA67E1A6539BE00F5996E /* airship_game.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airship_game.png; sourceTree = "<group>"; };
 		9F3EA6801A6539CA00F5996E /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		9F3EA6811A6539CA00F5996E /* target_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = target_point.png; sourceTree = "<group>"; };
+		9F498C521A67E351006E2A0D /* OreSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OreSprite.cpp; path = ../Classes/OreSprite.cpp; sourceTree = "<group>"; };
+		9F498C531A67E351006E2A0D /* OreSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OreSprite.h; path = ../Classes/OreSprite.h; sourceTree = "<group>"; };
+		9F498C581A67EAD7006E2A0D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Classes/Constants.h; sourceTree = "<group>"; };
 		9F8825CD1A61373A000067F1 /* airship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airship.png; sourceTree = "<group>"; };
 		9F8825CE1A61373A000067F1 /* main_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_bg.jpg; sourceTree = "<group>"; };
 		9F8825CF1A61373A000067F1 /* shareBtn_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareBtn_selected.png; sourceTree = "<group>"; };
@@ -413,6 +418,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9F498C521A67E351006E2A0D /* OreSprite.cpp */,
+				9F498C531A67E351006E2A0D /* OreSprite.h */,
 				9F3EA67B1A6539B500F5996E /* Vec2Util.cpp */,
 				9F3EA67C1A6539B500F5996E /* Vec2Util.h */,
 				9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */,
@@ -427,6 +434,7 @@
 				9F8825E71A6138AF000067F1 /* MainViewScene.h */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
+				9F498C581A67EAD7006E2A0D /* Constants.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -822,6 +830,7 @@
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				9F0D067B1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				9F3EA67D1A6539B500F5996E /* Vec2Util.cpp in Sources */,
+				9F498C541A67E351006E2A0D /* OreSprite.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				9F0D06771A63EF900044089E /* GameViewScene.cpp in Sources */,
 			);
@@ -836,6 +845,7 @@
 				9F0D067C1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				9F498C551A67E351006E2A0D /* OreSprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
