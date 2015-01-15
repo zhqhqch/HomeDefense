@@ -10,6 +10,7 @@
 
 
 #include "cocos2d.h"
+#include "OreSptite.h"
 
 class AirShipRope : public cocos2d::Sprite {
 
@@ -20,14 +21,15 @@ public:
     
     void sawy();
     
-    void grab();
+    cocos2d::Point grab();
 
     void hookBack(bool isCatch, cocos2d::Point point);
 
-    void catchRock(cocos2d::Point point);
-
+    void catchRock(cocos2d::Point point, Ore * ore);
 private:
 	cocos2d::Sprite * targetPoint;
+
+	Ore * targetOre;
 
 	void stretchRope(cocos2d::Vec2 add);
 	void shrinkRope(cocos2d::Vec2 subtract);

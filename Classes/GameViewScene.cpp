@@ -129,15 +129,19 @@ void GameView::showItem(){
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
     
-    Point ropePoint = Point(visibleSize.width / 2, airshipSprite->getPosition().y - airshipSprite->getContentSize().height / 3);
+	ropeStartPoint = Point(visibleSize.width / 2, airshipSprite->getPosition().y - airshipSprite->getContentSize().height / 3);
     
-	float catchAngle = atan2(ropePoint.x,ropePoint.y);
+	float catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
 
-	airShipRopeSprite = new AirShipRope(ropePoint.x, ropePoint.y,catchAngle);
+	airShipRopeSprite = new AirShipRope(ropeStartPoint.x, ropeStartPoint.y,catchAngle);
 	this->addChild(airShipRopeSprite,3);
 
 	airShipRopeSprite->reachProbe();
+
+	ropeCloneSpite = Sprite::create("line.png");
+	ropeCloneSpite->setPosition(ropeStartPoint.x, ropeStartPoint.y);
+	this->addChild(ropeCloneSpite, -1);
 }
 
 
@@ -159,9 +163,21 @@ void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
 }
 
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
-    CCLOG("^^^^^^^^^^^^onTouchEnded");
-    
-    airShipRopeSprite->grab();
-    
+	CCLOG("^^^^^^^^^^^^onTouchEnded====%s", typeid(nullptr).name());
+
+    Point target = airShipRopeSprite->grab();
+    CCLog("%f$$$$$$$$$%f", target.x, target.y);
+    if(typeid(target).name() != "Dn"){
+    	CCLog("===================%f",ropeCloneSpite->getRotation());
+    	ropeCloneSpite->setRotation(airShipRopeSprite->getRotation());
+    	for(Ore* item : itemArr){
+    		if(item->boundingBox().intersectsRect(ropeCloneSpite->getBoundingBox())){
+    			CCLog("@@@@@@@@@@@@@@@@@@@@@");
+    			airShipRopeSprite->catchRock(item->getPosition(), item);
+    			return;
+    		}
+    	}
+    	airShipRopeSprite->catchRock(target, nullptr);
+    }
 }
 

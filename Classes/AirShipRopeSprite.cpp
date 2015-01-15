@@ -14,6 +14,8 @@ const float move_step = 3.0f;
 const float move_step_time = 0.05f;
 const float init_rope_len = 50.0f;
 
+#define NULLRef(type) (*((type*)(NULL)))
+
 AirShipRope::AirShipRope(float x, float y,float ca) {
 
     startX = 0;
@@ -39,7 +41,10 @@ AirShipRope::AirShipRope(float x, float y,float ca) {
 //	targetPoint->setAnchorPoint(Vec2(0.5, 0));
 //	targetPoint->setOpacity(0);
 //	targetPoint->setScaleY(1.0f);
-	this->addChild(targetPoint);
+	this->addChild(targetPoint, 2);
+
+	targetOre = new Ore("item_a_3.png", ropeSize.width / 2, targetPoint->getContentSize().height,0,0);
+	this->addChild(targetOre, 1);
 }
 
 void AirShipRope::reachProbe() {
@@ -78,6 +83,7 @@ void AirShipRope::shrinkRope(Vec2 sub){
 }
 
 void AirShipRope::sawy() {
+	moving = false;
     ActionInterval *action1 = RotateTo::create(2,-90.0);
     ActionInterval *action2 = RotateTo::create(2, 90.0);
     float rotate = this->getRotation();
@@ -92,8 +98,13 @@ void AirShipRope::sawy() {
 }
 
 
-void AirShipRope::catchRock(Vec2 point){
+void AirShipRope::catchRock(Vec2 point, Ore * ore){
+	moving = true;
     this->stopAllActions();
+    if(typeid(ore).name() != "Dn"){
+    	targetOre = ore;
+    	CCLog("^^^^^^^^^^^^^^");
+    }
 
     //    setAnchorPoint(Vec2(0.5, 0));
 
@@ -165,7 +176,10 @@ void AirShipRope::hookBack(bool isCatch, Vec2 point) {
 }
 
 
-void AirShipRope::grab(){
+Point AirShipRope::grab(){
+	if(moving){
+		return nullptr;
+	}
     CCLOG("%f=====%f", getRotation(), catchAngle);
 
     Vec2 target;
@@ -194,9 +208,7 @@ void AirShipRope::grab(){
 
     CCLOG("########%f#######%f",target.x, target.y);
 
-    moving = true;
-
-    catchRock(Vec2(target.x, target.y));
+    return Point(target.x, target.y);
 }
 
 Vec2 AirShipRope::getIntersectPoint(Vec2 start, bool isVertical, bool threeQuadrant) {

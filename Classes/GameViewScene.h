@@ -31,7 +31,10 @@ public:
 private:
 	AirShip *airshipSprite;
 	AirShipRope *airShipRopeSprite;
+	cocos2d::Sprite * ropeCloneSpite;
 	cocos2d::Vector<Ore*> itemArr;
+
+	cocos2d::Point ropeStartPoint;
 
 	void showItem();
 };
