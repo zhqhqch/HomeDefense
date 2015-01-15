@@ -60,58 +60,49 @@ bool GameView::init(){
 	airshipSprite->setVisible(false);
 	this->addChild(airshipSprite, 2);
 
-	auto itemA1 = Sprite::create("item_a_1.png");
-	itemA1->setPosition(Vec2(100, 150));
+	Ore* itemA1 = new Ore("item_a_1.png", 100, 150, 20, 30);
 	itemA1->setOpacity(0);
 	this->addChild(itemA1, 1);
 	itemArr.pushBack(itemA1);
 
-	auto itemA2 = Sprite::create("item_a_2.png");
-	itemA2->setPosition(Vec2(400, 80));
+	Ore* itemA2 = new Ore("item_a_2.png", 400, 80, 30, 40);
 	itemA2->setOpacity(0);
 	this->addChild(itemA2, 1);
 	itemArr.pushBack(itemA2);
 
-	auto itemA3 = Sprite::create("item_a_3.png");
-	itemA3->setPosition(Vec2(500, 140));
+	Ore* itemA3 = new Ore("item_a_3.png", 500, 140, 50, 50);
 	itemA3->setOpacity(0);
 	this->addChild(itemA3, 1);
 	itemArr.pushBack(itemA3);
 
 
-	auto itemB1 = Sprite::create("item_b_1.png");
-	itemB1->setPosition(Vec2(300, 50));
+	Ore* itemB1 = new Ore("item_b_1.png", 300, 50, 30, 40);
 	itemB1->setOpacity(0);
 	this->addChild(itemB1, 1);
 	itemArr.pushBack(itemB1);
 
-	auto itemB2 = Sprite::create("item_b_2.png");
-	itemB2->setPosition(Vec2(300, 180));
+	Ore* itemB2 = new Ore("item_b_2.png", 300, 180, 40, 50);
 	itemB2->setOpacity(0);
 	this->addChild(itemB2, 1);
 	itemArr.pushBack(itemB2);
 
-	auto itemB3 = Sprite::create("item_b_3.png");
-	itemB3->setPosition(Vec2(720, 200));
+	Ore* itemB3 = new Ore("item_b_3.png", 720, 200, 50, 60);
 	itemB3->setOpacity(0);
 	this->addChild(itemB3, 1);
 	itemArr.pushBack(itemB3);
 
 
-	auto itemC1 = Sprite::create("item_c_1.png");
-	itemC1->setPosition(Vec2(1100, 10));
+	Ore* itemC1 = new Ore("item_c_1.png", 1100, 10, 20, 30);
 	itemC1->setOpacity(0);
 	this->addChild(itemC1, 1);
 	itemArr.pushBack(itemC1);
 
-	auto itemC2 = Sprite::create("item_c_2.png");
-	itemC2->setPosition(Vec2(970, 180));
+	Ore* itemC2 = new Ore("item_c_2.png", 970, 180, 30, 40);
 	itemC2->setOpacity(0);
 	this->addChild(itemC2, 1);
 	itemArr.pushBack(itemC2);
 
-	auto itemC3 = Sprite::create("item_c_3.png");
-	itemC3->setPosition(Vec2(900, 140));
+	Ore* itemC3 = new Ore("item_c_3.png", 900, 140, 40, 50);
 	itemC3->setOpacity(0);
 	this->addChild(itemC3, 1);
 	itemArr.pushBack(itemC3);
@@ -131,7 +122,7 @@ void GameView::onEnterTransitionDidFinish(){
 }
 
 void GameView::showItem(){
-	for(auto item : itemArr){
+	for(Ore* item : itemArr){
 		float time = CCRANDOM_0_1() * 3 + 0.5f;
 		FadeIn *itemA1FadeIn = FadeIn::create(time);
 		item->runAction(itemA1FadeIn);

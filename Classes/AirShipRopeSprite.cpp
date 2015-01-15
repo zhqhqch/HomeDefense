@@ -10,6 +10,10 @@
 
 USING_NS_CC;
 
+const float move_step = 3.0f;
+const float move_step_time = 0.05f;
+const float init_rope_len = 50.0f;
+
 AirShipRope::AirShipRope(float x, float y,float ca) {
 
     startX = 0;
@@ -42,9 +46,9 @@ void AirShipRope::reachProbe() {
 
     Vector<FiniteTimeAction *> listAction;
 
-	for(int i = 0;i<10;i++){
-		DelayTime * dTime = DelayTime::create(0.1f);
-		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::stretchRope, this, Vec2(0, 5)));
+	for(int i = 0;i<init_rope_len / move_step;i++){
+		DelayTime * dTime = DelayTime::create(move_step_time);
+		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::stretchRope, this, Vec2(0, move_step)));
 
         listAction.pushBack(dTime);
         listAction.pushBack(fun);
@@ -64,7 +68,13 @@ void AirShipRope::reachProbe() {
 void AirShipRope::stretchRope(Vec2 add){
 	Vec2 curRope = Vec2(getTextureRect().size.width, getTextureRect().size.height);
 	Vec2 newRope = Vec2Util::add(curRope, add);
-    setTextureRect(Rect(0, 0, newRope.x, newRope.y));
+	setTextureRect(Rect(0, 0, newRope.x, newRope.y));
+}
+
+void AirShipRope::shrinkRope(Vec2 sub){
+	Vec2 curRope = Vec2(getTextureRect().size.width, getTextureRect().size.height);
+	Vec2 newRope = Vec2Util::subtract(curRope, sub);
+	setTextureRect(Rect(0, 0, newRope.x, newRope.y));
 }
 
 void AirShipRope::sawy() {
@@ -89,24 +99,69 @@ void AirShipRope::catchRock(Vec2 point){
 
     Vec2 start = Vec2(startX, startY);
     float distance = point.distance(start);
-    useTime = distance * 0.01;
+//    useTime = distance * 0.01;
+//
+//    ActionInterval *actionTo = MoveTo::create(useTime, point);
+//    ActionInterval *actionTo = MoveBy::create(useTime, Vec2(10, 10));
+//    CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this, false));
+//    Sequence *seq = Sequence::create(actionTo,fun,NULL);
+//    this->runAction(seq);
 
-    ActionInterval *actionTo = MoveTo::create(useTime, point);
-    //    ActionInterval *actionTo = MoveBy::create(useTime, Vec2(10, 10));
-    CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this, false));
-    Sequence *seq = Sequence::create(actionTo,fun,NULL);
-    this->runAction(seq);
+    Vector<FiniteTimeAction *> listAction;
+
+    int count = distance / move_step;
+
+    CCLog("catch==========%f======%f$$$$$%f^^^^^%f====%d", point.x, point.y,startX,startY,count);
+
+	for(int i = 0;i<count;i++){
+		DelayTime * dTime = DelayTime::create(move_step_time);
+		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::stretchRope, this, Vec2(0, move_step)));
+
+		listAction.pushBack(dTime);
+		listAction.pushBack(fun);
+	}
+
+	DelayTime * endTime = DelayTime::create(0.5f);
+	listAction.pushBack(endTime);
+	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this, false,point));
+	listAction.pushBack(endFun);
+
+	Sequence *seq = Sequence::create(listAction);
+	this->runAction(seq);
 }
 
-void AirShipRope::hookBack(bool isCatch) {
-
+void AirShipRope::hookBack(bool isCatch, Vec2 point) {
     this->stopAllActions();
 
-    Size winSize = Director::getInstance()->getWinSize();
-    ActionInterval *action4 = MoveTo::create(useTime, Vec2(startX, startY));
-    CallFunc *func = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
-    Sequence *seq = Sequence::create(action4,func,NULL);
-    this->runAction(seq);
+    Vec2 start = Vec2(startX, startY);
+    float distance = point.distance(start);
+
+    Vector<FiniteTimeAction *> listAction;
+
+	int count = distance / move_step;
+	CCLog("$$$$$$$$$%f######%f$$$$$$$$$$$$$%f==%d" , start.x,start.y, distance, count);
+
+	for(int i = 0;i<count;i++){
+		DelayTime * dTime = DelayTime::create(move_step_time);
+		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::shrinkRope, this, Vec2(0, move_step)));
+
+		listAction.pushBack(dTime);
+		listAction.pushBack(fun);
+	}
+
+	DelayTime * endTime = DelayTime::create(0.5f);
+	listAction.pushBack(endTime);
+	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
+	listAction.pushBack(endFun);
+
+	Sequence *seq = Sequence::create(listAction);
+	this->runAction(seq);
+
+//    Size winSize = Director::getInstance()->getWinSize();
+//    ActionInterval *action4 = MoveTo::create(useTime, Vec2(startX, startY));
+//    CallFunc *func = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
+//    Sequence *seq = Sequence::create(action4,func,NULL);
+//    this->runAction(seq);
 }
 
 

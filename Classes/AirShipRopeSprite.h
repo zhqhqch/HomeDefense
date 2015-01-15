@@ -22,7 +22,7 @@ public:
     
     void grab();
 
-    void hookBack(bool isCatch);
+    void hookBack(bool isCatch, cocos2d::Point point);
 
     void catchRock(cocos2d::Point point);
 
@@ -30,6 +30,7 @@ private:
 	cocos2d::Sprite * targetPoint;
 
 	void stretchRope(cocos2d::Vec2 add);
+	void shrinkRope(cocos2d::Vec2 subtract);
 
     float useTime;
     bool moving;

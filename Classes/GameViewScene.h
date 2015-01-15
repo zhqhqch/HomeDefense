@@ -10,6 +10,7 @@
 
 #include "cocos2d.h"
 #include "AirShipSprite.h"
+#include "OreSptite.h"
 
 class GameView : public cocos2d::Layer {
 public:
@@ -30,7 +31,7 @@ public:
 private:
 	AirShip *airshipSprite;
 	AirShipRope *airShipRopeSprite;
-	cocos2d::Vector<cocos2d::Sprite*> itemArr;
+	cocos2d::Vector<Ore*> itemArr;
 
 	void showItem();
 };

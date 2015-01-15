@@ -7,6 +7,7 @@ import sys
 import os, os.path
 import shutil
 from optparse import OptionParser
+import time
 
 def get_num_of_cpu():
 	''' The build process can be accelerated by running multiple concurrent job processes using the -j-option.
@@ -119,6 +120,8 @@ def copy_resources(app_android_root):
         copy_files(resources_dir, assets_dir)
 
 def build(ndk_build_param,android_platform,build_mode):
+
+    print "Complie time:" + time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()));
 
     ndk_root = check_environment_variables()
     sdk_root = None
