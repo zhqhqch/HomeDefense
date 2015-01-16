@@ -90,6 +90,8 @@
 		9F3EA67F1A6539BE00F5996E /* airship_game.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA67E1A6539BE00F5996E /* airship_game.png */; };
 		9F3EA6821A6539CA00F5996E /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA6801A6539CA00F5996E /* line.png */; };
 		9F3EA6831A6539CA00F5996E /* target_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3EA6811A6539CA00F5996E /* target_point.png */; };
+		9F472EB11A6944580054B114 /* MagnetiteSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F472EB01A6944580054B114 /* MagnetiteSprite.cpp */; };
+		9F472EB21A6944580054B114 /* MagnetiteSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F472EB01A6944580054B114 /* MagnetiteSprite.cpp */; };
 		9F498C541A67E351006E2A0D /* OreSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F498C521A67E351006E2A0D /* OreSprite.cpp */; };
 		9F498C551A67E351006E2A0D /* OreSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F498C521A67E351006E2A0D /* OreSprite.cpp */; };
 		9F8825D51A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
@@ -329,6 +331,8 @@
 		9F3EA67E1A6539BE00F5996E /* airship_game.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airship_game.png; sourceTree = "<group>"; };
 		9F3EA6801A6539CA00F5996E /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		9F3EA6811A6539CA00F5996E /* target_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = target_point.png; sourceTree = "<group>"; };
+		9F472EAF1A69444F0054B114 /* MagnetiteSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagnetiteSprite.h; path = ../Classes/MagnetiteSprite.h; sourceTree = "<group>"; };
+		9F472EB01A6944580054B114 /* MagnetiteSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MagnetiteSprite.cpp; path = ../Classes/MagnetiteSprite.cpp; sourceTree = "<group>"; };
 		9F498C521A67E351006E2A0D /* OreSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OreSprite.cpp; path = ../Classes/OreSprite.cpp; sourceTree = "<group>"; };
 		9F498C531A67E351006E2A0D /* OreSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OreSprite.h; path = ../Classes/OreSprite.h; sourceTree = "<group>"; };
 		9F498C581A67EAD7006E2A0D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Classes/Constants.h; sourceTree = "<group>"; };
@@ -435,6 +439,8 @@
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 				9F498C581A67EAD7006E2A0D /* Constants.h */,
+				9F472EAF1A69444F0054B114 /* MagnetiteSprite.h */,
+				9F472EB01A6944580054B114 /* MagnetiteSprite.cpp */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -831,6 +837,7 @@
 				9F0D067B1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				9F3EA67D1A6539B500F5996E /* Vec2Util.cpp in Sources */,
 				9F498C541A67E351006E2A0D /* OreSprite.cpp in Sources */,
+				9F472EB11A6944580054B114 /* MagnetiteSprite.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				9F0D06771A63EF900044089E /* GameViewScene.cpp in Sources */,
 			);
@@ -844,6 +851,7 @@
 				9F0D06781A63EF900044089E /* GameViewScene.cpp in Sources */,
 				9F0D067C1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
+				9F472EB21A6944580054B114 /* MagnetiteSprite.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				9F498C551A67E351006E2A0D /* OreSprite.cpp in Sources */,
 			);

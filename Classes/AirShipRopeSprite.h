@@ -11,12 +11,13 @@
 
 #include "cocos2d.h"
 #include "OreSprite.h"
+#include "MagnetiteSprite.h"
 class GameView;
 
 class AirShipRope : public cocos2d::Sprite {
 
 public:
-	AirShipRope(GameView * gameView, float x, float y,float catchAngle, bool isReal);
+	AirShipRope(GameView * gameView, Magnetite * magnetite,float x, float y,float catchAngle, bool isReal);
 
 	void reachProbe();
     
@@ -25,10 +26,15 @@ public:
     void hookBack(cocos2d::Point point, Ore * catchOre);
 
     void catchRock(cocos2d::Point point);
+    //刷新绳子的长度
+    void refreshRopeLen(cocos2d::Point targetPoint);
+    //绳子左右摇摆
+    void sway();
 private:
-	cocos2d::Sprite * targetPoint;
+//	cocos2d::Sprite * targetPoint;
 
 	Ore * targetOre;
+    Magnetite * magnetite;
     GameView * gameView;
 
 	void stretchRope(cocos2d::Vec2 add);
@@ -40,8 +46,8 @@ private:
     float startX;
     float startY;
     bool isCatch;
+    cocos2d::Vec2 targetPointVelocity;
     
-    void sawy();
     void move();
     cocos2d::Vec2 getTargetPoint(float rotation,bool threeQuadrant);
 

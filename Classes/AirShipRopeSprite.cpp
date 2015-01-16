@@ -18,12 +18,13 @@ const float init_rope_len = 50.0f;
 
 #define NULLRef(type) (*((type*)(NULL)))
 
-AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca, bool isReal) {
+AirShipRope::AirShipRope(GameView * gw, Magnetite * m, float x, float y,float ca, bool isReal) {
 
     gameView = gw;
     startX = x;
     startY = y;
     catchAngle = ca;
+    magnetite = m;
     
 	Sprite::initWithFile("line.png");
 	setPosition(x, y);
@@ -35,47 +36,57 @@ AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca, bool isReal) 
 		setTextureRect(Rect(0, 0, ropeSize.width, 0));
 	}
 
-	targetPoint = Sprite::create("target_point.png");
-	targetPoint->setPosition(ropeSize.width / 2, 0);
-	this->addChild(targetPoint, 2);
+//	targetPoint = Sprite::create("target_point.png");
+//	targetPoint->setPosition(ropeSize.width / 2, 0);
+//    auto body = PhysicsBody::createCircle(targetPoint->getContentSize().width / 2);
+//	body->setDynamic(true);
+//	body->setContactTestBitmask(0x0001);
+//	body->setCategoryBitmask(0x0001);
+//	body->setCollisionBitmask(0x0001);
+//	body->setGravityEnable(false);
+//	targetPoint->setPhysicsBody(body);
+//	this->addChild(targetPoint, 2);
 
 //	targetOre = new Ore("item_a_3.png", ropeSize.width / 2, targetPoint->getContentSize().height,0,0);
 //	targetOre->setVisible(false);
 //    this->addChild(targetOre, 1);
     
     
+    targetPointVelocity = Vec2(0, -20);
+    
     isCatch = false;
 }
 
 void AirShipRope::reachProbe() {
 
-    Vector<FiniteTimeAction *> listAction;
-
-	for(int i = 0;i<init_rope_len / move_step;i++){
-		DelayTime * dTime = DelayTime::create(move_step_time);
-		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::stretchRope, this, Vec2(0, move_step)));
-
-        listAction.pushBack(dTime);
-        listAction.pushBack(fun);
-	}
-
-    DelayTime * endTime = DelayTime::create(0.5f);
-    listAction.pushBack(endTime);
-    CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
-    listAction.pushBack(endFun);
-
-    Sequence *seq = Sequence::create(listAction);
-    this->runAction(seq);
+//    Vector<FiniteTimeAction *> listAction;
+    moving = true;
+//    targetPoint->getPhysicsBody()->setVelocity(targetPointVelocity);
+    
+//	for(int i = 0;i<init_rope_len / move_step;i++){
+//		DelayTime * dTime = DelayTime::create(move_step_time);
+//		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::stretchRope, this, Vec2(0, move_step)));
+//
+//        listAction.pushBack(dTime);
+//        listAction.pushBack(fun);
+//	}
+//
+//    DelayTime * endTime = DelayTime::create(2.5f);
+//    Point target = Point(targetPoint->getPosition().x, -50);
+//    MoveTo * moveTo = MoveTo::create(2.0f, target);
+//    listAction.pushBack(endTime);
+//    CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
+//    listAction.pushBack(endFun);
+//
+//    Sequence *seq = Sequence::create(moveTo, endFun, NULL);
+//    targetPoint->runAction(seq);
 
 }
 
-
-void AirShipRope::stretchRope(Vec2 add){
-	Vec2 curRope = Vec2(getTextureRect().size.width, getTextureRect().size.height);
-	Vec2 newRope = Vec2Util::add(curRope, add);
-	setTextureRect(Rect(0, 0, newRope.x, newRope.y));
-
-	gameView->checkCollision();
+void AirShipRope::refreshRopeLen(Point targetPoint) {
+    Vec2 start = Vec2(startX, startY);
+    float len = targetPoint.distance(start);
+    setTextureRect(Rect(0, 0, getTextureRect().size.width, len));
 }
 
 void AirShipRope::shrinkRope(Vec2 sub){
@@ -84,15 +95,17 @@ void AirShipRope::shrinkRope(Vec2 sub){
 	setTextureRect(Rect(0, 0, newRope.x, newRope.y));
     
     if(isCatch){
-    	Point curPoint = convertToWorldSpace(targetPoint->getPosition());
-    	targetOre->setPosition(curPoint.x, curPoint.y);
+//    	Point curPoint = convertToWorldSpace(targetPoint->getPosition());
+//    	targetOre->setPosition(curPoint.x, curPoint.y);
     }
 }
 
-void AirShipRope::sawy() {
+void AirShipRope::sway() {
     if(isCatch){
         gameView->catchBack(targetOre);
     }
+    
+    
     isCatch = false;
 	moving = false;
     ActionInterval *action1 = RotateTo::create(2,-90.0);
@@ -113,23 +126,29 @@ void AirShipRope::catchRock(Vec2 point){
 	moving = true;
     this->stopAllActions();
 
-    Vec2 start = Vec2(startX, startY);
-    float distance = point.distance(start);
-
+//    Vec2 start = Vec2(startX, startY);
+//    float distance = point.distance(start);
+//
     Vector<FiniteTimeAction *> listAction;
+//
+//    int count = distance / move_step;
+//
+//    
+//    targetPoint->getPhysicsBody()->setVelocity(targetPointVelocity);
+//    targetPoint->getPhysicsBody()->setRotationOffset(getRotation());
+//    
+//	for(int i = 0;i<count;i++){
+//		DelayTime * dTime = DelayTime::create(move_step_time);
+//		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::stretchRope, this, Vec2(0, move_step)));
+//
+//		listAction.pushBack(dTime);
+//		listAction.pushBack(fun);
+//	}
 
-    int count = distance / move_step;
-
-	for(int i = 0;i<count;i++){
-		DelayTime * dTime = DelayTime::create(move_step_time);
-		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipRope::stretchRope, this, Vec2(0, move_step)));
-
-		listAction.pushBack(dTime);
-		listAction.pushBack(fun);
-	}
-
-	DelayTime * endTime = DelayTime::create(0.5f);
-	listAction.pushBack(endTime);
+//	DelayTime * endTime = DelayTime::create(0.5f);
+//  listAction.pushBack(endTime);
+    MoveTo *moveTo = MoveTo::create(3.0f, point);
+	listAction.pushBack(moveTo);
 	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this,point, nullptr));
 	listAction.pushBack(endFun);
 
@@ -161,7 +180,7 @@ void AirShipRope::hookBack(Vec2 point, Ore * catchOre) {
 
 	DelayTime * endTime = DelayTime::create(0.5f);
 	listAction.pushBack(endTime);
-	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::sawy, this));
+	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::sway, this));
 	listAction.pushBack(endFun);
 
 	Sequence *seq = Sequence::create(listAction);

@@ -10,7 +10,9 @@
 
 #include "cocos2d.h"
 #include "AirShipSprite.h"
+#include "AirShipRopeSprite.h"
 #include "OreSprite.h"
+#include "MagnetiteSprite.h"
 
 class GameView : public cocos2d::Layer {
 public:
@@ -24,12 +26,13 @@ public:
 	void menuBackCallback(cocos2d::Ref* pSender);
     
     void catchBack(Ore * ore);
-
-    void checkCollision();
+    void startSway();
 
 private:
 	AirShip *airshipSprite;
 	AirShipRope *airShipRopeSprite;
+    Magnetite * magnetite;
+    
 	cocos2d::Sprite * ropeCloneSpite;
 
 	cocos2d::Vector<Ore *> itemArr;
@@ -42,7 +45,9 @@ private:
 
 	void showItem();
     void removeScoreLabel(cocos2d::Label * scoreLabel);
-
+    
+    
+    void update(float dTime);
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
     virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);

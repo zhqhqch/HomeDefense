@@ -10,6 +10,7 @@
 #include "MainViewScene.h"
 #include "AirShipSprite.h"
 #include "Constants.h"
+#include "MagnetiteSprite.h"
 
 #include "iostream"
 
@@ -134,6 +135,8 @@ bool GameView::init(){
 	this->addChild(itemC3, 1);
 	itemArr.pushBack(itemC3);
 
+    this->scheduleUpdate();
+    
 	return true;
 }
 
@@ -149,6 +152,20 @@ void GameView::onEnterTransitionDidFinish(){
 	airshipSprite->runAction(seq);
 }
 
+void GameView::update(float dTime){
+//    CCLOG("****************");
+    if(isReady){
+        if(magnetite->isMove()){
+            airShipRopeSprite->refreshRopeLen(magnetite->getPosition());
+        }
+    }
+    
+}
+
+void GameView::startSway(){
+    airShipRopeSprite->sway();
+}
+
 void GameView::showItem(){
 	for(Ore* item : itemArr){
 		float time = CCRANDOM_0_1() * 3 + 0.5f;
@@ -162,23 +179,31 @@ void GameView::showItem(){
     
 	float catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
+    
+    
+    magnetite = new Magnetite(this, ropeStartPoint.x, ropeStartPoint.y);
+    this->addChild(magnetite,3);
+    
+    airShipRopeSprite = new AirShipRope(this,magnetite,ropeStartPoint.x, ropeStartPoint.y,catchAngle,true);
+    this->addChild(airShipRopeSprite,3);
+    
+    magnetite->reach();
+    
+//    airShipRopeSprite = new AirShipRope(this,magnetite,ropeStartPoint.x, ropeStartPoint.y,catchAngle,true);
+//	this->addChild(airShipRopeSprite,3);
+    
+//	airShipRopeSprite->reachProbe();
 
-	airShipRopeSprite = new AirShipRope(this,ropeStartPoint.x, ropeStartPoint.y,catchAngle,true);
-	this->addChild(airShipRopeSprite,3);
-
-	airShipRopeSprite->reachProbe();
-
-	ropeCloneSpite = Sprite::create("line.png");
-	ropeCloneSpite->setPosition(ropeStartPoint.x, ropeStartPoint.y);
-	auto body = PhysicsBody::createBox(ropeCloneSpite->getContentSize());
-	body->setDynamic(false);
-	body->setContactTestBitmask(0x0001);
-	body->setCategoryBitmask(0x0001);
-	body->setCollisionBitmask(0x0001);
-	body->setGravityEnable(false);
-	ropeCloneSpite->setPhysicsBody(body);
-//	ropeCloneSpite->setAnchorPoint(Vec2(0.5f,1.0f));
-	this->addChild(ropeCloneSpite, 3);
+//	ropeCloneSpite = Sprite::create("line.png");
+//	ropeCloneSpite->setPosition(ropeStartPoint.x, ropeStartPoint.y);
+//	auto body = PhysicsBody::createBox(ropeCloneSpite->getContentSize());
+//	body->setDynamic(false);
+//	body->setContactTestBitmask(0x0001);
+//	body->setCategoryBitmask(0x0001);
+//	body->setCollisionBitmask(0x0001);
+//	body->setGravityEnable(false);
+//	ropeCloneSpite->setPhysicsBody(body);
+//	this->addChild(ropeCloneSpite, 3);
     
     isReady = true;
 }
@@ -210,7 +235,7 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     Point target = airShipRopeSprite->grab();
     CCLog("%f$$$$$$$$$%f", target.x, target.y);
     if(!target.equals(kPintNull)){
-    	ropeCloneSpite->setRotation(airShipRopeSprite->getRotation());
+//    	ropeCloneSpite->setRotation(airShipRopeSprite->getRotation());
     	airShipRopeSprite->catchRock(target);
     }
 }
@@ -243,8 +268,4 @@ void GameView::catchBack(Ore * ore) {
 
 void GameView::removeScoreLabel(Label * scoreLabel) {
     scoreLabel->removeFromParentAndCleanup(true);
-}
-
-void GameView::checkCollision(){
-
 }
