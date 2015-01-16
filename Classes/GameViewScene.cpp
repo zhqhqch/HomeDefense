@@ -158,12 +158,18 @@ void GameView::update(float dTime){
         if(magnetite->isMove()){
             airShipRopeSprite->refreshRopeLen(magnetite->getPosition());
         }
+        CCLOG("%f@@@@@@@@@@@%f",
+              airShipRopeSprite->getRopeEndPoint().x,
+              airShipRopeSprite->getRopeEndPoint().y);
+        
+        ropeEndPointSpite->setPosition(airShipRopeSprite->getRopeEndPoint());
     }
     
 }
 
 void GameView::startSway(){
     airShipRopeSprite->sway();
+    magnetite->startFollow();
 }
 
 void GameView::showItem(){
@@ -180,12 +186,16 @@ void GameView::showItem(){
 	float catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
     
+    ropeEndPointSpite = Sprite::create("target_point.png");
+    ropeEndPointSpite->setPosition(ropeStartPoint);
+    this->addChild(ropeEndPointSpite,3);
     
-    magnetite = new Magnetite(this, ropeStartPoint.x, ropeStartPoint.y);
-    this->addChild(magnetite,3);
-    
-    airShipRopeSprite = new AirShipRope(this,magnetite,ropeStartPoint.x, ropeStartPoint.y,catchAngle,true);
+    airShipRopeSprite = new AirShipRope(this, ropeStartPoint.x, ropeStartPoint.y,catchAngle,true);
     this->addChild(airShipRopeSprite,3);
+    
+    magnetite = new Magnetite(this, ropeEndPointSpite, ropeStartPoint.x, ropeStartPoint.y);
+    this->addChild(magnetite,3);
+
     
     magnetite->reach();
     

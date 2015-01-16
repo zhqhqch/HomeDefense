@@ -8,13 +8,17 @@
 
 #include "MagnetiteSprite.h"
 #include "GameViewScene.h"
+#include "AirShipRopeSprite.h"
 
 USING_NS_CC;
 
-Magnetite::Magnetite(GameView *gw, float x, float y){
+#define kFollowTag 88
+
+Magnetite::Magnetite(GameView *gw, Sprite * rope, float x, float y){
     startX = x;
     startY = y;
     gameView = gw;
+    ropeSprite = rope;
     
     Sprite::initWithFile("target_point.png");
 	setPosition(x, y);
@@ -50,4 +54,15 @@ void Magnetite::finishMove() {
 
 void Magnetite::readySway() {
     gameView->startSway();
+}
+
+void Magnetite::startFollow() {
+    Follow * follow = Follow::create(ropeSprite,Rect(0, 0, 960, 320));
+    follow->setTag(kFollowTag);
+    this->runAction(follow);
+}
+
+void Magnetite::stopFollow() {
+    Action* follow = this->getActionByTag(kFollowTag);
+    follow->stop();
 }

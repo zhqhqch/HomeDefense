@@ -32,6 +32,7 @@ private:
 	AirShip *airshipSprite;
 	AirShipRope *airShipRopeSprite;
     Magnetite * magnetite;
+    cocos2d::Sprite * ropeEndPointSpite;
     
 	cocos2d::Sprite * ropeCloneSpite;
 

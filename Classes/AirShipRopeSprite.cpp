@@ -18,13 +18,12 @@ const float init_rope_len = 50.0f;
 
 #define NULLRef(type) (*((type*)(NULL)))
 
-AirShipRope::AirShipRope(GameView * gw, Magnetite * m, float x, float y,float ca, bool isReal) {
+AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca, bool isReal) {
 
     gameView = gw;
     startX = x;
     startY = y;
     catchAngle = ca;
-    magnetite = m;
     
 	Sprite::initWithFile("line.png");
 	setPosition(x, y);
@@ -36,16 +35,8 @@ AirShipRope::AirShipRope(GameView * gw, Magnetite * m, float x, float y,float ca
 		setTextureRect(Rect(0, 0, ropeSize.width, 0));
 	}
 
-//	targetPoint = Sprite::create("target_point.png");
-//	targetPoint->setPosition(ropeSize.width / 2, 0);
-//    auto body = PhysicsBody::createCircle(targetPoint->getContentSize().width / 2);
-//	body->setDynamic(true);
-//	body->setContactTestBitmask(0x0001);
-//	body->setCategoryBitmask(0x0001);
-//	body->setCollisionBitmask(0x0001);
-//	body->setGravityEnable(false);
-//	targetPoint->setPhysicsBody(body);
-//	this->addChild(targetPoint, 2);
+	targetPoint = Sprite::create("target_point.png");
+	this->addChild(targetPoint, 2);
 
 //	targetOre = new Ore("item_a_3.png", ropeSize.width / 2, targetPoint->getContentSize().height,0,0);
 //	targetOre->setVisible(false);
