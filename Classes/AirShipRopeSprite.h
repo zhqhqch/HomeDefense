@@ -24,7 +24,7 @@ public:
 
     void hookBack(cocos2d::Point point, Ore * catchOre);
 
-    void catchRock(cocos2d::Point point, Ore * ore);
+    void catchRock(cocos2d::Point point);
 private:
 	cocos2d::Sprite * targetPoint;
 

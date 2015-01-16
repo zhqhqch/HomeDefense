@@ -43,7 +43,6 @@ private:
 	void showItem();
     void removeScoreLabel(cocos2d::Label * scoreLabel);
 
-    void update();
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
     virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);

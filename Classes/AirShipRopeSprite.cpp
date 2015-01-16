@@ -109,12 +109,9 @@ void AirShipRope::sawy() {
 }
 
 
-void AirShipRope::catchRock(Vec2 point, Ore * ore){
+void AirShipRope::catchRock(Vec2 point){
 	moving = true;
     this->stopAllActions();
-    if(ore != nullptr){
-        isCatch = true;
-    }
 
     Vec2 start = Vec2(startX, startY);
     float distance = point.distance(start);
@@ -133,7 +130,7 @@ void AirShipRope::catchRock(Vec2 point, Ore * ore){
 
 	DelayTime * endTime = DelayTime::create(0.5f);
 	listAction.pushBack(endTime);
-	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this,point, ore));
+	CallFunc * endFun = CallFunc::create(CC_CALLBACK_0(AirShipRope::hookBack, this,point, nullptr));
 	listAction.pushBack(endFun);
 
 	Sequence *seq = Sequence::create(listAction);
@@ -142,10 +139,10 @@ void AirShipRope::catchRock(Vec2 point, Ore * ore){
 
 void AirShipRope::hookBack(Vec2 point, Ore * catchOre) {
     this->stopAllActions();
-
-    if(isCatch){
-        targetOre = catchOre;
-    }
+    if(catchOre != nullptr){
+		isCatch = true;
+		targetOre = catchOre;
+	}
 
     Vec2 start = Vec2(startX, startY);
     float distance = point.distance(start);

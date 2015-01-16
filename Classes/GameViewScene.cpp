@@ -116,7 +116,6 @@ bool GameView::init(){
 	this->addChild(itemB3, 1);
 	itemArr.pushBack(itemB3);
 
-
 	Ore* itemC1 = new Ore("item_c_1.png", 1100, 10, 20, 30);
 	itemC1->setOpacity(0);
 	itemC1->setTag(16);
@@ -182,13 +181,8 @@ void GameView::showItem(){
 	this->addChild(ropeCloneSpite, 3);
     
     isReady = true;
-
-    this->scheduleUpdate();//启动默认更新
 }
 
-void GameView::update(){
-	CCLog("$$$$$$^^^^^^^^^^^^");
-}
 
 void GameView::menuBackCallback(Ref* pSender){
 	auto mainView = MainView::createScene();
@@ -198,6 +192,9 @@ void GameView::menuBackCallback(Ref* pSender){
 
 bool GameView::onContactBegin(const PhysicsContact& contact){
 	CCLog("=========================$$$$$$$$$$$$$$");
+	Ore * target = (Ore  *)contact.getShapeA()->getBody()->getNode();
+	CCLog("$$$$$$$%d", target->getTag());
+	airShipRopeSprite->hookBack(target->getPosition(), target);
 	return true;
 }
 
@@ -214,21 +211,7 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     CCLog("%f$$$$$$$$$%f", target.x, target.y);
     if(!target.equals(kPintNull)){
     	ropeCloneSpite->setRotation(airShipRopeSprite->getRotation());
-
-//    	for(Ore* item : itemArr){
-//            CCLOG("%d@@@@@@@@@@@@@@@%f",item->getTag(),ropeCloneSpite->getRotation());
-//
-//            if(item->getParent() == ropeCloneSpite->getParent()){
-//            	CCLog("==============");
-//            }
-//
-//    		if(item->getBoundingBox().intersectsRect(ropeCloneSpite->getBoundingBox())){
-//    			CCLOG("@@@@@@@@@@@@@@@%i",item->getTag());
-//                airShipRopeSprite->catchRock(item->getPosition(), item);
-//    			return;
-//    		}
-//    	}
-    	airShipRopeSprite->catchRock(target, nullptr);
+    	airShipRopeSprite->catchRock(target);
     }
 }
 
