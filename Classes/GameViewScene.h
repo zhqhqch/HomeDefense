@@ -18,30 +18,36 @@ public:
 	virtual bool init();
 	CREATE_FUNC(GameView);
 
+	void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};
 
-	void onEnterTransitionDidFinish();
+	virtual void onEnterTransitionDidFinish();
 	void menuBackCallback(cocos2d::Ref* pSender);
     
     void catchBack(Ore * ore);
-    
-    
-    virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-    virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-    virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 
+    void checkCollision();
 
 private:
 	AirShip *airshipSprite;
 	AirShipRope *airShipRopeSprite;
 	cocos2d::Sprite * ropeCloneSpite;
-	cocos2d::Vector<Ore*> itemArr;
+
+	cocos2d::Vector<Ore *> itemArr;
 
 	cocos2d::Point ropeStartPoint;
-    
-    bool isReady;
+
+	cocos2d::PhysicsWorld* m_world;
+
+	bool isReady;
 
 	void showItem();
     void removeScoreLabel(cocos2d::Label * scoreLabel);
+
+    void update();
+    bool onContactBegin(const cocos2d::PhysicsContact& contact);
+    virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+    virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+    virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 };
 
 

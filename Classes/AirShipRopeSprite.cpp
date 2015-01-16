@@ -18,7 +18,7 @@ const float init_rope_len = 50.0f;
 
 #define NULLRef(type) (*((type*)(NULL)))
 
-AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca) {
+AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca, bool isReal) {
 
     gameView = gw;
     startX = x;
@@ -31,18 +31,17 @@ AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca) {
 
 	Size ropeSize = getContentSize();
 
-	setTextureRect(Rect(0, 0, ropeSize.width, 0));
+	if(isReal){
+		setTextureRect(Rect(0, 0, ropeSize.width, 0));
+	}
 
 	targetPoint = Sprite::create("target_point.png");
 	targetPoint->setPosition(ropeSize.width / 2, 0);
-//	targetPoint->setAnchorPoint(Vec2(0.5, 0));
-//	targetPoint->setOpacity(0);
-//	targetPoint->setScaleY(1.0f);
 	this->addChild(targetPoint, 2);
 
-	targetOre = new Ore("item_a_3.png", ropeSize.width / 2, targetPoint->getContentSize().height,0,0);
-	targetOre->setVisible(false);
-    this->addChild(targetOre, 1);
+//	targetOre = new Ore("item_a_3.png", ropeSize.width / 2, targetPoint->getContentSize().height,0,0);
+//	targetOre->setVisible(false);
+//    this->addChild(targetOre, 1);
     
     
     isCatch = false;
@@ -75,6 +74,8 @@ void AirShipRope::stretchRope(Vec2 add){
 	Vec2 curRope = Vec2(getTextureRect().size.width, getTextureRect().size.height);
 	Vec2 newRope = Vec2Util::add(curRope, add);
 	setTextureRect(Rect(0, 0, newRope.x, newRope.y));
+
+	gameView->checkCollision();
 }
 
 void AirShipRope::shrinkRope(Vec2 sub){
@@ -82,15 +83,14 @@ void AirShipRope::shrinkRope(Vec2 sub){
 	Vec2 newRope = Vec2Util::subtract(curRope, sub);
 	setTextureRect(Rect(0, 0, newRope.x, newRope.y));
     
-    
-    Point curPoint = convertToWorldSpace(targetPoint->getPosition());
-    
-    targetOre->setPosition(curPoint.x, curPoint.y);
+    if(isCatch){
+    	Point curPoint = convertToWorldSpace(targetPoint->getPosition());
+    	targetOre->setPosition(curPoint.x, curPoint.y);
+    }
 }
 
 void AirShipRope::sawy() {
     if(isCatch){
-        targetOre->setVisible(false);
         gameView->catchBack(targetOre);
     }
     isCatch = false;
@@ -111,7 +111,6 @@ void AirShipRope::sawy() {
 
 void AirShipRope::catchRock(Vec2 point, Ore * ore){
 	moving = true;
-    isCatch = false;
     this->stopAllActions();
     if(ore != nullptr){
         isCatch = true;
@@ -147,7 +146,7 @@ void AirShipRope::hookBack(Vec2 point, Ore * catchOre) {
     if(isCatch){
         targetOre = catchOre;
     }
-    
+
     Vec2 start = Vec2(startX, startY);
     float distance = point.distance(start);
 

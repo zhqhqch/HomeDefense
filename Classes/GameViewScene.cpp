@@ -11,14 +11,18 @@
 #include "AirShipSprite.h"
 #include "Constants.h"
 
+#include "iostream"
+
 
 USING_NS_CC;
 
 
 Scene * GameView::createScene() {
-	auto scene = Scene::create();
-	auto layer = GameView::create();
+	auto scene = Scene::createWithPhysics();
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
+	auto layer = GameView::create();
+	layer->setPhyWorld(scene->getPhysicsWorld());
 	scene->addChild(layer);
 
 	return scene;
@@ -35,16 +39,30 @@ bool GameView::init(){
     //auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸
     //setTouchEnabled(true);        //3.0版本已经被弃用
     
+    //触屏事件
     listener->onTouchBegan = CC_CALLBACK_2(GameView::onTouchBegan, this);
     listener->onTouchMoved = CC_CALLBACK_2(GameView::onTouchMoved, this);
     listener->onTouchEnded = CC_CALLBACK_2(GameView::onTouchEnded, this);
-    
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	//碰撞事件
+	auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = CC_CALLBACK_1(GameView::onContactBegin, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
-	auto backItem = MenuItemLabel::create(Label::create("返回", "宋体", 48),
+	auto body = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
+	auto edgeNode = Node::create();
+	edgeNode->setPosition(Point(visibleSize.width/2,visibleSize.height/2));
+	edgeNode->setPhysicsBody(body);
+	this->addChild(edgeNode);
+
+	Label * backLable = Label::create();
+	backLable->setString("返回");
+	backLable->setSystemFontSize(48);
+
+	auto backItem = MenuItemLabel::create(backLable,
 			CC_CALLBACK_1(GameView::menuBackCallback, this));
 	backItem->setPosition(Vec2(backItem->getContentSize().width / 2 + 38,
 			visibleSize.height - backItem->getContentSize().height / 2 - 33));
@@ -63,48 +81,57 @@ bool GameView::init(){
 
 	Ore* itemA1 = new Ore("item_a_1.png", 100, 150, 20, 30);
 	itemA1->setOpacity(0);
+	itemA1->setTag(10);
 	this->addChild(itemA1, 1);
 	itemArr.pushBack(itemA1);
 
 	Ore* itemA2 = new Ore("item_a_2.png", 400, 80, 30, 40);
 	itemA2->setOpacity(0);
+	itemA2->setTag(11);
 	this->addChild(itemA2, 1);
 	itemArr.pushBack(itemA2);
 
 	Ore* itemA3 = new Ore("item_a_3.png", 500, 140, 50, 50);
 	itemA3->setOpacity(0);
+	itemA3->setTag(12);
 	this->addChild(itemA3, 1);
 	itemArr.pushBack(itemA3);
 
 
 	Ore* itemB1 = new Ore("item_b_1.png", 300, 50, 30, 40);
 	itemB1->setOpacity(0);
+	itemB1->setTag(13);
 	this->addChild(itemB1, 1);
 	itemArr.pushBack(itemB1);
 
 	Ore* itemB2 = new Ore("item_b_2.png", 300, 180, 40, 50);
 	itemB2->setOpacity(0);
+	itemB2->setTag(14);
 	this->addChild(itemB2, 1);
 	itemArr.pushBack(itemB2);
 
 	Ore* itemB3 = new Ore("item_b_3.png", 720, 200, 50, 60);
 	itemB3->setOpacity(0);
+	itemB3->setTag(15);
 	this->addChild(itemB3, 1);
 	itemArr.pushBack(itemB3);
 
 
 	Ore* itemC1 = new Ore("item_c_1.png", 1100, 10, 20, 30);
 	itemC1->setOpacity(0);
+	itemC1->setTag(16);
 	this->addChild(itemC1, 1);
 	itemArr.pushBack(itemC1);
 
 	Ore* itemC2 = new Ore("item_c_2.png", 970, 180, 30, 40);
 	itemC2->setOpacity(0);
+	itemC2->setTag(17);
 	this->addChild(itemC2, 1);
 	itemArr.pushBack(itemC2);
 
 	Ore* itemC3 = new Ore("item_c_3.png", 900, 140, 40, 50);
 	itemC3->setOpacity(0);
+	itemC3->setTag(18);
 	this->addChild(itemC3, 1);
 	itemArr.pushBack(itemC3);
 
@@ -116,6 +143,7 @@ void GameView::onEnterTransitionDidFinish(){
 	airshipSprite->setVisible(true);
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
+
 	ActionInterval *moveTo = MoveTo::create(2.0f, Vec2(visibleSize.width/2, visibleSize.height * 0.7));
 	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::showItem, this));
 	Sequence *seq = Sequence::create(moveTo,fun,NULL);
@@ -128,6 +156,7 @@ void GameView::showItem(){
 		FadeIn *itemA1FadeIn = FadeIn::create(time);
 		item->runAction(itemA1FadeIn);
 	}
+
 	Size visibleSize = Director::getInstance()->getVisibleSize();
     
 	ropeStartPoint = Point(visibleSize.width / 2, airshipSprite->getPosition().y - airshipSprite->getContentSize().height / 3);
@@ -135,18 +164,31 @@ void GameView::showItem(){
 	float catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
 
-	airShipRopeSprite = new AirShipRope(this,ropeStartPoint.x, ropeStartPoint.y,catchAngle);
+	airShipRopeSprite = new AirShipRope(this,ropeStartPoint.x, ropeStartPoint.y,catchAngle,true);
 	this->addChild(airShipRopeSprite,3);
 
 	airShipRopeSprite->reachProbe();
 
 	ropeCloneSpite = Sprite::create("line.png");
 	ropeCloneSpite->setPosition(ropeStartPoint.x, ropeStartPoint.y);
-	this->addChild(ropeCloneSpite, -1);
+	auto body = PhysicsBody::createBox(ropeCloneSpite->getContentSize());
+	body->setDynamic(false);
+	body->setContactTestBitmask(0x0001);
+	body->setCategoryBitmask(0x0001);
+	body->setCollisionBitmask(0x0001);
+	body->setGravityEnable(false);
+	ropeCloneSpite->setPhysicsBody(body);
+//	ropeCloneSpite->setAnchorPoint(Vec2(0.5f,1.0f));
+	this->addChild(ropeCloneSpite, 3);
     
     isReady = true;
+
+    this->scheduleUpdate();//启动默认更新
 }
 
+void GameView::update(){
+	CCLog("$$$$$$^^^^^^^^^^^^");
+}
 
 void GameView::menuBackCallback(Ref* pSender){
 	auto mainView = MainView::createScene();
@@ -154,15 +196,16 @@ void GameView::menuBackCallback(Ref* pSender){
 }
 
 
+bool GameView::onContactBegin(const PhysicsContact& contact){
+	CCLog("=========================$$$$$$$$$$$$$$");
+	return true;
+}
 
 bool GameView::onTouchBegan(Touch *touch, Event *unused_event) {
-    CCLOG("===========onTouchBegan");
     return isReady;
 }
 
-
 void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
-    CCLOG("@@@@@@@@@@@@@onTouchMoved");
 }
 
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
@@ -171,16 +214,20 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     CCLog("%f$$$$$$$$$%f", target.x, target.y);
     if(!target.equals(kPintNull)){
     	ropeCloneSpite->setRotation(airShipRopeSprite->getRotation());
-    	for(Ore* item : itemArr){
-            
-            CCLOG("@@@@@@@@@@@@@@@%f",ropeCloneSpite->getRotation());
-            
-    		if(item->boundingBox().intersectsRect(ropeCloneSpite->getBoundingBox())){
-    			CCLOG("******************");
-                airShipRopeSprite->catchRock(item->getPosition(), item);
-    			return;
-    		}
-    	}
+
+//    	for(Ore* item : itemArr){
+//            CCLOG("%d@@@@@@@@@@@@@@@%f",item->getTag(),ropeCloneSpite->getRotation());
+//
+//            if(item->getParent() == ropeCloneSpite->getParent()){
+//            	CCLog("==============");
+//            }
+//
+//    		if(item->getBoundingBox().intersectsRect(ropeCloneSpite->getBoundingBox())){
+//    			CCLOG("@@@@@@@@@@@@@@@%i",item->getTag());
+//                airShipRopeSprite->catchRock(item->getPosition(), item);
+//    			return;
+//    		}
+//    	}
     	airShipRopeSprite->catchRock(target, nullptr);
     }
 }
@@ -197,7 +244,9 @@ void GameView::catchBack(Ore * ore) {
     ss<<ore->getScore();
     std::string text = ss.str();
     
-    Label *scoreLable = Label::createWithSystemFont(text, "Marker Felt", 21);
+    Label *scoreLable = Label::create();
+    scoreLable->setString(text);
+    scoreLable->setSystemFontSize(21);
     scoreLable->setColor(Color3B::RED);
     scoreLable->setPosition(airshipSprite->getPosition().x, airshipSprite->getPosition().y + 100);
     this->addChild(scoreLable);
@@ -211,4 +260,8 @@ void GameView::catchBack(Ore * ore) {
 
 void GameView::removeScoreLabel(Label * scoreLabel) {
     scoreLabel->removeFromParentAndCleanup(true);
+}
+
+void GameView::checkCollision(){
+
 }

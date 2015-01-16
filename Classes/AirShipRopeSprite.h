@@ -16,7 +16,7 @@ class GameView;
 class AirShipRope : public cocos2d::Sprite {
 
 public:
-	AirShipRope(GameView * gameView, float x, float y,float catchAngle);
+	AirShipRope(GameView * gameView, float x, float y,float catchAngle, bool isReal);
 
 	void reachProbe();
     
