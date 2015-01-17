@@ -167,7 +167,7 @@ void GameView::update(float dTime){
         }
 
         if(isCatch){
-        	targetOre->startFollow(magnetite);
+        	targetOre->startFollow(magnetite, airShipRopeSprite->getRotation());
         }
     }
     
@@ -212,6 +212,9 @@ void GameView::menuBackCallback(Ref* pSender){
 
 bool GameView::onContactBegin(const PhysicsContact& contact){
 	CCLog("=========================$$$$$$$$$$$$$$");
+	if(isCatch){
+		return true;
+	}
 	auto sp1 = (Sprite *)contact.getShapeA()->getBody()->getNode();
 	auto sp2 = (Sprite *)contact.getShapeB()->getBody()->getNode();
 	CCLog("%d$$$$$$$%d", sp1->getTag(), sp2->getTag());
@@ -236,7 +239,7 @@ void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
 }
 
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
-
+	isCatch = false;
     Point target = airShipRopeSprite->grab();
     CCLog("%f$$$$$$$$$%f", target.x, target.y);
     if(!target.equals(kPintNull)){

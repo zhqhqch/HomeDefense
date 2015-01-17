@@ -13,7 +13,6 @@
 
 #define kMagnetiteFinishMove_Sway 1
 #define kMagnetiteFinishMove_Back 2
-#define kMagnetiteFinishMove_BackWithOre 3
 
 
 #endif

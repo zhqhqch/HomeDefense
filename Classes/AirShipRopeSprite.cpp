@@ -123,18 +123,7 @@ Vec2 AirShipRope::getIntersectPoint(Vec2 start, bool isVertical, bool threeQuadr
 }
 
 Vec2 AirShipRope::getTargetPoint(float rotation,bool threeQuadrant){
+    float len = Director::getInstance()->getVisibleSize().width;
 
-    if(threeQuadrant){
-        rotation = 270 - rotation;
-    } else {
-        rotation = -(90 + rotation);
-    }
-    
-    
-    float radian = rotation * M_PI / 180;
-    float xMargin = cos(radian) * 1;
-    float yMargin = sin(radian) * 1;
-    Vec2 target = Vec2(startX + xMargin,startY + yMargin);
-
-	return target;
+	return Vec2Util::getTargetPoint(Point(startX, startY), len, rotation, threeQuadrant);
 }

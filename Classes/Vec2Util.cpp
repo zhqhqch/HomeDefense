@@ -53,3 +53,19 @@ Vec2 Vec2Util::getIntersectPoint(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
     
     return Vec2(x, y);
 }
+
+
+Vec2 Vec2Util::getTargetPoint(Point p, float len, float rotation,bool threeQuadrant){
+    if(threeQuadrant){
+        rotation = 270 - rotation;
+    } else {
+        rotation = -(90 + rotation);
+    }
+
+    float radian = rotation * M_PI / 180;
+    float xMargin = cos(radian) * len;
+    float yMargin = sin(radian) * len;
+    Vec2 target = Vec2(p.x + xMargin,p.y + yMargin);
+
+	return target;
+}

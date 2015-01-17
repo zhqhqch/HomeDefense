@@ -36,16 +36,21 @@ int Ore::getScore() {
 }
 
 
-void Ore::startFollow(Magnetite * m) {
+void Ore::startFollow(Magnetite * m, float rotation) {
 	if(isFollow){
 		return;
 	}
 	isFollow = true;
 
-	Vec2 selfSize = Vec2(getContentSize().width / 2, getContentSize().height / 2);
-	Vec2 mSize = Vec2(m->getContentSize().width / 2, m->getContentSize().height / 2);
+	Point mPoint = m->getPosition();
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	bool threeQuadrant = false;
+	if(rotation > 0){
+		threeQuadrant = true;
+	}
 
-	Vec2 point = Vec2Util::subtract(m->getStartPoint(), Vec2Util::add(selfSize, mSize));
+	float len = getContentSize().width / 2 + m->getContentSize().width / 2;
+	Vec2 point = Vec2Util::getTargetPoint(m->getStartPoint(), len, rotation, threeQuadrant);
 	MoveTo * moveTo = MoveTo::create(2.0f, point);
 	this->runAction(moveTo);
 }

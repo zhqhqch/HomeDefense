@@ -17,7 +17,7 @@ public:
 	Ore(const std::string& fileName, float x, float y, int score, int weight);
     int getScore();
     
-    void startFollow(Magnetite * m);
+    void startFollow(Magnetite * m, float rotation);
 private:
 	float startX;
 	float startY;
