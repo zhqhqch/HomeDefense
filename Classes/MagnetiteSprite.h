@@ -33,6 +33,9 @@ public:
     //回到起点
     void backWithOreToStartPoint();
 
+    //回到起点
+    void backToStartPoint();
+    
     cocos2d::Point getStartPoint(){return startPoint;}
 private:
     bool move;
@@ -45,9 +48,7 @@ private:
     
     //磁铁石准备左右摇摆
     void readySway();
-
-    //回到起点
-    void backToStartPoint();
+    
 };
 
 #endif

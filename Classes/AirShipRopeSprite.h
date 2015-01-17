@@ -40,9 +40,7 @@ private:
     float startY;
     bool _sway;
     
-    cocos2d::Vec2 getTargetPoint(float rotation,bool threeQuadrant);
-
-    cocos2d::Vec2 getIntersectPoint(cocos2d::Vec2 start, bool isVertical, bool threeQuadrant);
+    cocos2d::Vec2 getTargetPoint(float rotation);
 
 };
 

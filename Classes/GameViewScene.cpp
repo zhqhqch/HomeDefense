@@ -54,9 +54,13 @@ bool GameView::init(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	auto body = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
-	auto edgeNode = Node::create();
+	body->setContactTestBitmask(0x0001);
+	body->setCategoryBitmask(0x0001);
+	body->setCollisionBitmask(0x0001);
+    auto edgeNode = Node::create();
 	edgeNode->setPosition(Point(visibleSize.width/2,visibleSize.height/2));
 	edgeNode->setPhysicsBody(body);
+    edgeNode->setTag(kWallTag);
 	this->addChild(edgeNode);
 
 	Label * backLable = Label::create();
@@ -156,15 +160,12 @@ void GameView::onEnterTransitionDidFinish(){
 }
 
 void GameView::update(float dTime){
-//    CCLOG("****************");
     if(isReady){
         if(magnetite->isMove()){
             airShipRopeSprite->refreshRopeLen(magnetite->getPosition());
         }
 
-        if(airShipRopeSprite->isSway()){
-        	magnetite->startFollow(airShipRopeSprite->getRopeEndPoint());
-        }
+        magnetite->startFollow(airShipRopeSprite->getRopeEndPoint());
 
         if(isCatch){
         	targetOre->startFollow(magnetite, airShipRopeSprite->getRotation());
@@ -211,22 +212,24 @@ void GameView::menuBackCallback(Ref* pSender){
 
 
 bool GameView::onContactBegin(const PhysicsContact& contact){
-	CCLog("=========================$$$$$$$$$$$$$$");
+	log("=========================$$$$$$$$$$$$$$");
 	if(isCatch){
 		return true;
 	}
 	auto sp1 = (Sprite *)contact.getShapeA()->getBody()->getNode();
 	auto sp2 = (Sprite *)contact.getShapeB()->getBody()->getNode();
-	CCLog("%d$$$$$$$%d", sp1->getTag(), sp2->getTag());
-	if(sp1->getTag() > 0){
+	log("%d$$$$$$$%d", sp1->getTag(), sp2->getTag());
+	if(sp1->getTag() > 0 && sp1->getTag() != kWallTag){
 		targetOre = (Ore *) sp1;
 		isCatch = true;
 		magnetite->backWithOreToStartPoint();
-	} else if(sp2->getTag() > 0){
+	} else if(sp2->getTag() > 0 && sp2->getTag() != kWallTag){
 		targetOre = (Ore *) sp2;
 		isCatch = true;
 		magnetite->backWithOreToStartPoint();
-	}
+	} else if(sp1->getTag() == kWallTag || sp2->getTag() == kWallTag){
+        magnetite->backToStartPoint();
+    }
 
 	return true;
 }
@@ -241,7 +244,7 @@ void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
 	isCatch = false;
     Point target = airShipRopeSprite->grab();
-    CCLog("%f$$$$$$$$$%f", target.x, target.y);
+    log("%f$$$$$$$$$%f", target.x, target.y);
     if(!target.equals(kPintNull)){
     	magnetite->moveToPoint(airShipRopeSprite->getRopeEndPoint(), target);
     }
@@ -252,7 +255,7 @@ void GameView::catchBack() {
     targetOre->removeFromParentAndCleanup(true);
     itemArr.eraseObject(targetOre);
     
-    CCLOG("add score===%i", targetOre->getScore());
+    log("add score===%i", targetOre->getScore());
 
     std::stringstream ss;
     ss<<"+";

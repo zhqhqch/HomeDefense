@@ -75,9 +75,9 @@ void Magnetite::moveToPoint(Point curPoint, Point targetPoint) {
 	startPoint = curPoint;
 	showScore = false;
 
-	CCLog("start^^^^^%f===%f", startPoint.x, startPoint.y);
+	log("start^^^^^%f===%f", startPoint.x, startPoint.y);
 
-	MoveTo * moveTo = MoveTo::create(2.0f, targetPoint);
+	MoveTo * moveTo = MoveTo::create(5.0f, targetPoint);
 	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Back));
 	Sequence * seq = Sequence::create(moveTo, fun, NULL);
 
@@ -86,7 +86,8 @@ void Magnetite::moveToPoint(Point curPoint, Point targetPoint) {
 
 void Magnetite::backToStartPoint(){
 	move = true;
-	MoveTo * moveTo = MoveTo::create(2.0f, startPoint);
+    this->stopAllActions();
+	MoveTo * moveTo = MoveTo::create(kMoveBackTime, startPoint);
 	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Sway));
 	Sequence * seq = Sequence::create(moveTo, fun, NULL);
 
@@ -98,8 +99,8 @@ void Magnetite::backWithOreToStartPoint(){
 	showScore = true;
 	this->stopAllActions();
 
-	CCLog("end^^^^^%f===%f", startPoint.x, startPoint.y);
-	MoveTo * moveTo = MoveTo::create(2.0f, startPoint);
+	log("end^^^^^%f===%f", startPoint.x, startPoint.y);
+	MoveTo * moveTo = MoveTo::create(kMoveBackTime, startPoint);
 	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Sway));
 	Sequence * seq = Sequence::create(moveTo, fun, NULL);
 

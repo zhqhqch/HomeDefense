@@ -7,6 +7,7 @@
 
 #include "OreSprite.h"
 #include "Vec2Util.h"
+#include "Constants.h"
 
 USING_NS_CC;
 
@@ -43,14 +44,9 @@ void Ore::startFollow(Magnetite * m, float rotation) {
 	isFollow = true;
 
 	Point mPoint = m->getPosition();
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	bool threeQuadrant = false;
-	if(rotation > 0){
-		threeQuadrant = true;
-	}
 
 	float len = getContentSize().width / 2 + m->getContentSize().width / 2;
-	Vec2 point = Vec2Util::getTargetPoint(m->getStartPoint(), len, rotation, threeQuadrant);
-	MoveTo * moveTo = MoveTo::create(2.0f, point);
+	Vec2 point = Vec2Util::getTargetPoint(m->getStartPoint(), len, rotation);
+	MoveTo * moveTo = MoveTo::create(kMoveBackTime, point);
 	this->runAction(moveTo);
 }

@@ -11,8 +11,12 @@
 
 #define kPintNull Point(9999,9999)
 
+#define kWallTag 99
+
 #define kMagnetiteFinishMove_Sway 1
 #define kMagnetiteFinishMove_Back 2
+
+#define kMoveBackTime 3.0f
 
 
 #endif

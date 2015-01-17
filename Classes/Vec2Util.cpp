@@ -10,14 +10,6 @@
 USING_NS_CC;
 
 
-const float PIF = 3.141592654;
-const float KmPerDegree = 111.12000071117;
-const float DegreesPerKm = 1.0 / KmPerDegree;
-const float RadiansPerDegree = (PIF / 180.0);
-const float DegreesPerRadian = (180.0 / PIF);
-const float HalfPI = PIF / 2;
-const float TwoPI = PIF * 2;
-
 
 Vec2 Vec2Util::add(Vec2 add1, Vec2 value){
 	Vec2 retVec2 = Vec2(add1.x, add1.y);
@@ -43,7 +35,7 @@ Vec2 Vec2Util::subtract(Vec2 point, Vec2 value) {
 	return retVec2;
 }
 
-Vec2 Vec2Util::getIntersectPoint(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
+Vec2 getIntersectPoint(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
     float x = ((b.x - a.x) * (c.x - d.x) * (c.y - a.y) -
                       c.x * (b.x - a.x) * (c.y - d.y) + a.x * (b.y - a.y) * (c.x - d.x)) /
                     ((b.y - a.y) * (c.x - d.x) - (b.x - a.x) * (c.y - d.y));
@@ -55,7 +47,12 @@ Vec2 Vec2Util::getIntersectPoint(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
 }
 
 
-Vec2 Vec2Util::getTargetPoint(Point p, float len, float rotation,bool threeQuadrant){
+Vec2 Vec2Util::getTargetPoint(Point p, float len, float rotation){
+    bool threeQuadrant = false;
+	if(rotation > 0){
+		threeQuadrant = true;
+	}
+    
     if(threeQuadrant){
         rotation = 270 - rotation;
     } else {
