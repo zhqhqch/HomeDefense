@@ -135,6 +135,9 @@ bool GameView::init(){
 	this->addChild(itemC3, 1);
 	itemArr.pushBack(itemC3);
 
+
+	isCatch = false;
+
     this->scheduleUpdate();
     
 	return true;
@@ -158,18 +161,20 @@ void GameView::update(float dTime){
         if(magnetite->isMove()){
             airShipRopeSprite->refreshRopeLen(magnetite->getPosition());
         }
-        CCLOG("%f@@@@@@@@@@@%f",
-              airShipRopeSprite->getRopeEndPoint().x,
-              airShipRopeSprite->getRopeEndPoint().y);
-        
-        ropeEndPointSpite->setPosition(airShipRopeSprite->getRopeEndPoint());
+
+        if(airShipRopeSprite->isSway()){
+        	magnetite->startFollow(airShipRopeSprite->getRopeEndPoint());
+        }
+
+        if(isCatch){
+        	targetOre->startFollow(magnetite);
+        }
     }
     
 }
 
 void GameView::startSway(){
     airShipRopeSprite->sway();
-    magnetite->startFollow();
 }
 
 void GameView::showItem(){
@@ -186,35 +191,15 @@ void GameView::showItem(){
 	float catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
     
-    ropeEndPointSpite = Sprite::create("target_point.png");
-    ropeEndPointSpite->setPosition(ropeStartPoint);
-    this->addChild(ropeEndPointSpite,3);
-    
-    airShipRopeSprite = new AirShipRope(this, ropeStartPoint.x, ropeStartPoint.y,catchAngle,true);
+    airShipRopeSprite = new AirShipRope(ropeStartPoint.x, ropeStartPoint.y,catchAngle);
     this->addChild(airShipRopeSprite,3);
     
-    magnetite = new Magnetite(this, ropeEndPointSpite, ropeStartPoint.x, ropeStartPoint.y);
+    magnetite = new Magnetite(this, ropeStartPoint.x, ropeStartPoint.y);
     this->addChild(magnetite,3);
 
     
     magnetite->reach();
-    
-//    airShipRopeSprite = new AirShipRope(this,magnetite,ropeStartPoint.x, ropeStartPoint.y,catchAngle,true);
-//	this->addChild(airShipRopeSprite,3);
-    
-//	airShipRopeSprite->reachProbe();
 
-//	ropeCloneSpite = Sprite::create("line.png");
-//	ropeCloneSpite->setPosition(ropeStartPoint.x, ropeStartPoint.y);
-//	auto body = PhysicsBody::createBox(ropeCloneSpite->getContentSize());
-//	body->setDynamic(false);
-//	body->setContactTestBitmask(0x0001);
-//	body->setCategoryBitmask(0x0001);
-//	body->setCollisionBitmask(0x0001);
-//	body->setGravityEnable(false);
-//	ropeCloneSpite->setPhysicsBody(body);
-//	this->addChild(ropeCloneSpite, 3);
-    
     isReady = true;
 }
 
@@ -227,9 +212,19 @@ void GameView::menuBackCallback(Ref* pSender){
 
 bool GameView::onContactBegin(const PhysicsContact& contact){
 	CCLog("=========================$$$$$$$$$$$$$$");
-	Ore * target = (Ore  *)contact.getShapeA()->getBody()->getNode();
-	CCLog("$$$$$$$%d", target->getTag());
-	airShipRopeSprite->hookBack(target->getPosition(), target);
+	auto sp1 = (Sprite *)contact.getShapeA()->getBody()->getNode();
+	auto sp2 = (Sprite *)contact.getShapeB()->getBody()->getNode();
+	CCLog("%d$$$$$$$%d", sp1->getTag(), sp2->getTag());
+	if(sp1->getTag() > 0){
+		targetOre = (Ore *) sp1;
+		isCatch = true;
+		magnetite->backWithOreToStartPoint();
+	} else if(sp2->getTag() > 0){
+		targetOre = (Ore *) sp2;
+		isCatch = true;
+		magnetite->backWithOreToStartPoint();
+	}
+
 	return true;
 }
 
@@ -245,21 +240,20 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     Point target = airShipRopeSprite->grab();
     CCLog("%f$$$$$$$$$%f", target.x, target.y);
     if(!target.equals(kPintNull)){
-//    	ropeCloneSpite->setRotation(airShipRopeSprite->getRotation());
-    	airShipRopeSprite->catchRock(target);
+    	magnetite->moveToPoint(airShipRopeSprite->getRopeEndPoint(), target);
     }
 }
 
 
-void GameView::catchBack(Ore * ore) {
-    ore->removeFromParentAndCleanup(true);
-    itemArr.eraseObject(ore);
+void GameView::catchBack() {
+    targetOre->removeFromParentAndCleanup(true);
+    itemArr.eraseObject(targetOre);
     
-    CCLOG("add score===%i", ore->getScore());
+    CCLOG("add score===%i", targetOre->getScore());
 
     std::stringstream ss;
     ss<<"+";
-    ss<<ore->getScore();
+    ss<<targetOre->getScore();
     std::string text = ss.str();
     
     Label *scoreLable = Label::create();

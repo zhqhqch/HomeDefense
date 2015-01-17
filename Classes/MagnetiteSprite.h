@@ -17,7 +17,7 @@ class AirShipRope;
 
 class Magnetite : public cocos2d::Sprite {
 public:
-    Magnetite(GameView *gw, cocos2d::Sprite * rope, float x, float y);
+    Magnetite(GameView *gw, float x, float y);
     
     //将磁铁石伸出飞船
     void reach();
@@ -26,23 +26,28 @@ public:
     bool isMove(){return move;};
     
     //开始跟随绳子摆动
-    void startFollow();
+    void startFollow(cocos2d::Point point);
     
-    //停止跟随绳子摆动
-    void stopFollow();
-    
+    //移动到指定点
+    void moveToPoint(cocos2d::Point curPoint, cocos2d::Point targetPoint);
+    //回到起点
+    void backWithOreToStartPoint();
+
+    cocos2d::Point getStartPoint(){return startPoint;}
 private:
-    cocos2d::Sprite * ropeSprite;
-    float startX;
-    float startY;
     bool move;
+    bool showScore;
     GameView *gameView;
+    cocos2d::Point startPoint;
     
     //结束移动
-    void finishMove();
+    void finishMove(int nextActionType);
     
     //磁铁石准备左右摇摆
     void readySway();
+
+    //回到起点
+    void backToStartPoint();
 };
 
 #endif

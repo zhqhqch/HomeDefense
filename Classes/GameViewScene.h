@@ -25,14 +25,13 @@ public:
 	virtual void onEnterTransitionDidFinish();
 	void menuBackCallback(cocos2d::Ref* pSender);
     
-    void catchBack(Ore * ore);
+    void catchBack();
     void startSway();
 
 private:
 	AirShip *airshipSprite;
 	AirShipRope *airShipRopeSprite;
     Magnetite * magnetite;
-    cocos2d::Sprite * ropeEndPointSpite;
     
 	cocos2d::Sprite * ropeCloneSpite;
 
@@ -43,6 +42,8 @@ private:
 	cocos2d::PhysicsWorld* m_world;
 
 	bool isReady;
+	bool isCatch;
+	Ore * targetOre;
 
 	void showItem();
     void removeScoreLabel(cocos2d::Label * scoreLabel);

@@ -16,15 +16,11 @@ class GameView;
 class AirShipRope : public cocos2d::Sprite {
 
 public:
-	AirShipRope(GameView * gameView, float x, float y,float catchAngle, bool isReal);
-
-	void reachProbe();
+	AirShipRope(float x, float y,float catchAngle);
     
+	//获取绳子延伸方向上，在屏幕边缘上的点
     cocos2d::Point grab();
 
-    void hookBack(cocos2d::Point point, Ore * catchOre);
-
-    void catchRock(cocos2d::Point point);
     //刷新绳子的长度
     void refreshRopeLen(cocos2d::Point targetPoint);
     //绳子左右摇摆
@@ -33,24 +29,17 @@ public:
     //获取绳子的终点
     cocos2d::Point getRopeEndPoint() {return convertToWorldSpace(targetPoint->getPosition());}
     
+    //判断绳子是否在摇摆
+    bool isSway(){return _sway;}
 private:
 	cocos2d::Sprite * targetPoint;
 
-	Ore * targetOre;
-    GameView * gameView;
-
-	void stretchRope(cocos2d::Vec2 add);
-	void shrinkRope(cocos2d::Vec2 subtract);
-
-    float useTime;
     bool moving;
     float catchAngle;
     float startX;
     float startY;
-    bool isCatch;
-    cocos2d::Vec2 targetPointVelocity;
+    bool _sway;
     
-    void move();
     cocos2d::Vec2 getTargetPoint(float rotation,bool threeQuadrant);
 
     cocos2d::Vec2 getIntersectPoint(cocos2d::Vec2 start, bool isVertical, bool threeQuadrant);
