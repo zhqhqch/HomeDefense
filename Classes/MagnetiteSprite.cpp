@@ -60,6 +60,7 @@ void Magnetite::finishMove(int nextActionType) {
 
 
 void Magnetite::readySway() {
+    log("$$$$$$$$$$$$$$$$");
     gameView->startSway();
     if(showScore){
     	gameView->catchBack();

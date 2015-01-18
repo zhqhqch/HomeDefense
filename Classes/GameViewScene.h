@@ -42,6 +42,7 @@ private:
 	cocos2d::PhysicsWorld* m_world;
 
 	bool isReady;
+    bool isStart;
 	bool isCatch;
 	Ore * targetOre;
 

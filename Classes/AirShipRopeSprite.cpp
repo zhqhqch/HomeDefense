@@ -28,16 +28,17 @@ AirShipRope::AirShipRope(float x, float y,float ca) {
 
 	targetPoint = Sprite::create("item_c_2.png");
 	targetPoint->setPosition(ropeSize.width / 2, 0);
+//    targetPoint->setAnchorPoint(Vec2(0.0f, 0.0f));
 //	targetPoint->setVisible(false);
-	this->addChild(targetPoint, 2);
+	this->addChild(targetPoint);
 }
 
-void AirShipRope::refreshRopeLen(Point targetPoint) {
+void AirShipRope::refreshRopeLen(Point point) {
 	_sway = false;
 	moving = true;
 	this->stopAllActions();
     Vec2 start = Vec2(startX, startY);
-    float len = targetPoint.distance(start);
+    float len = point.distance(start);
     setTextureRect(Rect(0, 0, getTextureRect().size.width, len));
 }
 
@@ -58,6 +59,18 @@ void AirShipRope::sway() {
     this->runAction(repeat);
 }
 
+Point AirShipRope::getRopeEndPoint(bool useForStartPoint){
+    if (useForStartPoint) {
+//        setAnchorPoint(Vec2(0.0f,0.0f));
+    }
+    
+    Point retPoint = convertToWorldSpace(targetPoint->getPosition());
+    if (useForStartPoint) {
+//        setAnchorPoint(Vec2(0.5f,1.0f));
+    }
+    
+    return retPoint;
+}
 
 Point AirShipRope::grab(){
 	if(moving){

@@ -165,7 +165,10 @@ void GameView::update(float dTime){
             airShipRopeSprite->refreshRopeLen(magnetite->getPosition());
         }
 
-        magnetite->startFollow(airShipRopeSprite->getRopeEndPoint());
+        if(airShipRopeSprite->isSway()){
+            magnetite->startFollow(airShipRopeSprite->getRopeEndPoint(false));
+        }
+        
 
         if(isCatch){
         	targetOre->startFollow(magnetite, airShipRopeSprite->getRotation());
@@ -175,6 +178,8 @@ void GameView::update(float dTime){
 }
 
 void GameView::startSway(){
+    isStart = true;
+    log("rope end##########%f", airShipRopeSprite->getContentSize().height);
     airShipRopeSprite->sway();
 }
 
@@ -218,7 +223,6 @@ bool GameView::onContactBegin(const PhysicsContact& contact){
 	}
 	auto sp1 = (Sprite *)contact.getShapeA()->getBody()->getNode();
 	auto sp2 = (Sprite *)contact.getShapeB()->getBody()->getNode();
-	log("%d$$$$$$$%d", sp1->getTag(), sp2->getTag());
 	if(sp1->getTag() > 0 && sp1->getTag() != kWallTag){
 		targetOre = (Ore *) sp1;
 		isCatch = true;
@@ -246,7 +250,8 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     Point target = airShipRopeSprite->grab();
     log("%f$$$$$$$$$%f", target.x, target.y);
     if(!target.equals(kPintNull)){
-    	magnetite->moveToPoint(airShipRopeSprite->getRopeEndPoint(), target);
+        log("rope start##########%f", airShipRopeSprite->getContentSize().height);
+    	magnetite->moveToPoint(airShipRopeSprite->getRopeEndPoint(true), target);
     }
 }
 
@@ -255,8 +260,6 @@ void GameView::catchBack() {
     targetOre->removeFromParentAndCleanup(true);
     itemArr.eraseObject(targetOre);
     
-    log("add score===%i", targetOre->getScore());
-
     std::stringstream ss;
     ss<<"+";
     ss<<targetOre->getScore();
