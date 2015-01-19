@@ -13,6 +13,8 @@
 
 #define kWallTag 99
 
+#define kLightLineTag 100
+
 #define kMagnetiteFinishMove_Sway 1
 #define kMagnetiteFinishMove_Back 2
 

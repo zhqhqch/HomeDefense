@@ -34,6 +34,8 @@ Magnetite::Magnetite(GameView *gw, float x, float y){
 //将磁铁石伸出飞船
 void Magnetite::reach() {
     move = true;
+    reachRope = true;
+    backRope = false;
     Point target = Point(getPosition().x, getPosition().y - 50);
     MoveTo * moveTo = MoveTo::create(2.0f, target);
     CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Sway));
@@ -44,7 +46,7 @@ void Magnetite::reach() {
 
 
 void Magnetite::finishMove(int nextActionType) {
-    move = false;
+	reachRope = false;
     if(nextActionType == kMagnetiteFinishMove_Sway){
     	DelayTime * sleepTime = DelayTime::create(0.5f);
 		CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::readySway, this));
@@ -60,6 +62,7 @@ void Magnetite::finishMove(int nextActionType) {
 
 
 void Magnetite::readySway() {
+	move = false;
     log("$$$$$$$$$$$$$$$$");
     gameView->startSway();
     if(showScore){
@@ -75,6 +78,7 @@ void Magnetite::moveToPoint(Point curPoint, Point targetPoint) {
 	move = true;
 	startPoint = curPoint;
 	showScore = false;
+	backRope = false;
 
 	log("start^^^^^%f===%f", startPoint.x, startPoint.y);
 
@@ -87,6 +91,7 @@ void Magnetite::moveToPoint(Point curPoint, Point targetPoint) {
 
 void Magnetite::backToStartPoint(){
 	move = true;
+	backRope = true;
     this->stopAllActions();
 	MoveTo * moveTo = MoveTo::create(kMoveBackTime, startPoint);
 	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Sway));
@@ -98,6 +103,7 @@ void Magnetite::backToStartPoint(){
 void Magnetite::backWithOreToStartPoint(){
 	move = true;
 	showScore = true;
+	backRope = true;
 	this->stopAllActions();
 
 	log("end^^^^^%f===%f", startPoint.x, startPoint.y);

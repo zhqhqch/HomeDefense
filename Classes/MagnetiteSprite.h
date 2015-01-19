@@ -23,7 +23,10 @@ public:
     void reach();
     
     //磁铁石是否在移动
-    bool isMove(){return move;};
+    bool isMove(){return move;}
+
+    bool isReach(){return reachRope;}
+    bool isBack(){return backRope;}
     
     //开始跟随绳子摆动
     void startFollow(cocos2d::Point point);
@@ -40,6 +43,8 @@ public:
 private:
     bool move;
     bool showScore;
+    bool reachRope;
+    bool backRope;
     GameView *gameView;
     cocos2d::Point startPoint;
     

@@ -22,7 +22,7 @@ public:
     cocos2d::Point grab();
 
     //刷新绳子的长度
-    void refreshRopeLen(cocos2d::Point targetPoint);
+    void refreshRopeLen(cocos2d::Point targetPoint, bool isReach, bool isBack);
     //绳子左右摇摆
     void sway();
     
@@ -39,6 +39,7 @@ private:
     float startX;
     float startY;
     bool _sway;
+    float roepLen;
     
     cocos2d::Vec2 getTargetPoint(float rotation);
 

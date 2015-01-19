@@ -33,12 +33,18 @@ AirShipRope::AirShipRope(float x, float y,float ca) {
 	this->addChild(targetPoint);
 }
 
-void AirShipRope::refreshRopeLen(Point point) {
+void AirShipRope::refreshRopeLen(Point point, bool isReach, bool isBack) {
 	_sway = false;
 	moving = true;
 	this->stopAllActions();
     Vec2 start = Vec2(startX, startY);
     float len = point.distance(start);
+    if(isReach){
+    	roepLen = len;
+    } else if(!isReach && isBack && len < roepLen){
+    	setTextureRect(Rect(0, 0, getTextureRect().size.width, roepLen));
+    	return;
+    }
     setTextureRect(Rect(0, 0, getTextureRect().size.width, len));
 }
 
