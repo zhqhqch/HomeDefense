@@ -45,10 +45,11 @@ private:
     bool isStart;
 	bool isCatch;
 	Ore * targetOre;
+	float catchAngle;
 
 	void showItem();
     void removeScoreLabel(cocos2d::Label * scoreLabel);
-    
+    cocos2d::Vec2 getIntersectPoint(cocos2d::Vec2 target);
     
     void update(float dTime);
     bool onContactBegin(const cocos2d::PhysicsContact& contact);

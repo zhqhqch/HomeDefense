@@ -29,6 +29,8 @@ public:
     //获取绳子的终点
     cocos2d::Point getRopeEndPoint(bool useForStartPoint);
     
+    cocos2d::Point getRopeStartPoint(){return cocos2d::Point(startX, startY);}
+
     //判断绳子是否在摇摆
     bool isSway(){return _sway;}
 private:

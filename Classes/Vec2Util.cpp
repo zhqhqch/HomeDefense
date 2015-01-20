@@ -35,7 +35,7 @@ Vec2 Vec2Util::subtract(Vec2 point, Vec2 value) {
 	return retVec2;
 }
 
-Vec2 getIntersectPoint(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
+Vec2 Vec2Util::getIntersectPoint(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
     float x = ((b.x - a.x) * (c.x - d.x) * (c.y - a.y) -
                       c.x * (b.x - a.x) * (c.y - d.y) + a.x * (b.y - a.y) * (c.x - d.x)) /
                     ((b.y - a.y) * (c.x - d.x) - (b.x - a.x) * (c.y - d.y));

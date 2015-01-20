@@ -12,6 +12,7 @@
 #include "Constants.h"
 #include "MagnetiteSprite.h"
 #include "LightLineRender.h"
+#include "Vec2Util.h"
 
 #include "iostream"
 
@@ -253,7 +254,7 @@ void GameView::showItem(){
     
 	ropeStartPoint = Point(visibleSize.width / 2, airshipSprite->getPosition().y - airshipSprite->getContentSize().height / 3);
     
-	float catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
+	catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
     
     airShipRopeSprite = new AirShipRope(ropeStartPoint.x, ropeStartPoint.y,catchAngle);
@@ -315,8 +316,6 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     magnetite->moveToPoint(airShipRopeSprite->getRopeEndPoint(true), target);
 
 
-	// 获取点在视图中的坐标
-    Vec2 touchLocation = touch->getLocation();
 	auto    visibleSize = Director::getInstance()->getVisibleSize();
 	auto	origin = Director::getInstance()->getVisibleOrigin();
 	//线条容器
@@ -327,7 +326,13 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
 	Vec2	tFishPos(Vec2(visibleSize / 2) + origin);
 	tFishPos = airShipRopeSprite->getPosition() + origin;
 	Vec3 segStart = Vec3(0,0,-8);
-	Vec3 segEnd   = Vec3(touchLocation.x - tFishPos.x ,touchLocation.y - tFishPos.y ,-8);
+//	Vec2 touchLocation = touch->getLocation();
+//	Vec3 segEnd   = Vec3(touchLocation.x - tFishPos.x ,touchLocation.y - tFishPos.y ,-8);
+	Vec2 temp = getIntersectPoint(target);
+	Vec3 segEnd = Vec3(temp.x - tFishPos.x, temp.y - tFishPos.y, -8);
+
+	log("%f^^^^^^%f^^^^^%f^^^^%f", target.x, target.y,temp.x, temp.y);
+
 	//取得方向
 	Vec3  dir = segEnd - segStart ;
 	float fLength = dir.length();
@@ -367,6 +372,54 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
 	_lighting->setPosition(tFishPos);
 	//这一句可以让闪电链在1秒内渐渐消隐。它通过调节Shader中的u_color值从1变为0来实现。
 	_lighting->OpenAlphaToZero(1.0);
+}
+
+
+Vec2 GameView::getIntersectPoint(Vec2 target) {
+	float rotation = airShipRopeSprite->getRotation();
+	bool threeQuadrant;
+	bool isVertical;
+
+	if(rotation > 0){
+		threeQuadrant = true;
+		if(rotation <= catchAngle){
+			isVertical = false;
+		} else {
+			isVertical = true;
+		}
+	} else if(rotation < 0){
+		threeQuadrant = false;
+		if(rotation <= -catchAngle){
+			isVertical = true;
+		}else{
+			isVertical = false;
+		}
+	}
+
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+
+	Vec2 start = airShipRopeSprite->getRopeStartPoint();
+	Vec2 end1 = Vec2(0,0);
+	Vec2 end2 = Vec2(0,0);
+	if (threeQuadrant) {
+		if(isVertical){
+            end1 = Vec2(0,visibleSize.height);
+			end2 = Vec2(0,0);
+		} else {
+            end1 = Vec2(0, 0);
+			end2 = Vec2(visibleSize.width,0);
+		}
+	} else {
+		if(isVertical){
+			end1 = Vec2(visibleSize.width,0);
+			end2 = Vec2(visibleSize.width, visibleSize.height);
+		} else {
+			end1 = Vec2(0, 0);
+			end2 = Vec2(visibleSize.width, 0);
+		}
+	}
+
+    return Vec2Util::getIntersectPoint(start, target, end1, end2);
 }
 
 

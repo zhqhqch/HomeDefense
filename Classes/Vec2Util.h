@@ -14,7 +14,8 @@ class Vec2Util {
 public:
 	static cocos2d::Vec2 add(cocos2d::Vec2 point, cocos2d::Vec2 value);
 	static cocos2d::Vec2 subtract(cocos2d::Vec2 point, cocos2d::Vec2 value);
-
+	static cocos2d::Vec2 getIntersectPoint(cocos2d::Vec2 start1, cocos2d::Vec2 start2,
+			cocos2d::Vec2 end1, cocos2d::Vec2 end2);
     static cocos2d::Vec2 getTargetPoint(cocos2d::Point p, float len, float rotation);
 };
 
