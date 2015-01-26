@@ -27,6 +27,7 @@ public:
     
     void catchBack();
     void startSway();
+    void stopMagnetite();
 
 private:
 	AirShip *airshipSprite;

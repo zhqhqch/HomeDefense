@@ -86,56 +86,56 @@ bool GameView::init(){
 	airshipSprite->setVisible(false);
 	this->addChild(airshipSprite, 2);
 
-	Ore* itemA1 = new Ore("item_a_1.png", 100, 150, 20, 30);
+	Ore* itemA1 = new Ore("item_a_1.png", 100, 150, 20, 3);
 	itemA1->setOpacity(0);
 	itemA1->setTag(10);
 	this->addChild(itemA1, 1);
 	itemArr.pushBack(itemA1);
 
-	Ore* itemA2 = new Ore("item_a_2.png", 400, 80, 30, 40);
+	Ore* itemA2 = new Ore("item_a_2.png", 400, 80, 30, 4);
 	itemA2->setOpacity(0);
 	itemA2->setTag(11);
 	this->addChild(itemA2, 1);
 	itemArr.pushBack(itemA2);
 
-	Ore* itemA3 = new Ore("item_a_3.png", 500, 140, 50, 50);
+	Ore* itemA3 = new Ore("item_a_3.png", 500, 140, 50, 5);
 	itemA3->setOpacity(0);
 	itemA3->setTag(12);
 	this->addChild(itemA3, 1);
 	itemArr.pushBack(itemA3);
 
 
-	Ore* itemB1 = new Ore("item_b_1.png", 300, 50, 30, 40);
+	Ore* itemB1 = new Ore("item_b_1.png", 300, 50, 30, 4);
 	itemB1->setOpacity(0);
 	itemB1->setTag(13);
 	this->addChild(itemB1, 1);
 	itemArr.pushBack(itemB1);
 
-	Ore* itemB2 = new Ore("item_b_2.png", 300, 180, 40, 50);
+	Ore* itemB2 = new Ore("item_b_2.png", 300, 180, 40, 5);
 	itemB2->setOpacity(0);
 	itemB2->setTag(14);
 	this->addChild(itemB2, 1);
 	itemArr.pushBack(itemB2);
 
-	Ore* itemB3 = new Ore("item_b_3.png", 720, 200, 50, 60);
+	Ore* itemB3 = new Ore("item_b_3.png", 720, 200, 50, 6);
 	itemB3->setOpacity(0);
 	itemB3->setTag(15);
 	this->addChild(itemB3, 1);
 	itemArr.pushBack(itemB3);
 
-	Ore* itemC1 = new Ore("item_c_1.png", 1100, 10, 20, 30);
+	Ore* itemC1 = new Ore("item_c_1.png", 1100, 10, 20, 3);
 	itemC1->setOpacity(0);
 	itemC1->setTag(16);
 	this->addChild(itemC1, 1);
 	itemArr.pushBack(itemC1);
 
-	Ore* itemC2 = new Ore("item_c_2.png", 970, 180, 30, 40);
+	Ore* itemC2 = new Ore("item_c_2.png", 970, 180, 30, 4);
 	itemC2->setOpacity(0);
 	itemC2->setTag(17);
 	this->addChild(itemC2, 1);
 	itemArr.pushBack(itemC2);
 
-	Ore* itemC3 = new Ore("item_c_3.png", 900, 140, 40, 50);
+	Ore* itemC3 = new Ore("item_c_3.png", 900, 140, 40, 5);
 	itemC3->setOpacity(0);
 	itemC3->setTag(18);
 	this->addChild(itemC3, 1);
@@ -226,7 +226,7 @@ void GameView::update(float dTime){
         }
 
 //        if(airShipRopeSprite->isSway()){
-            magnetite->startFollow(airShipRopeSprite->getRopeEndPoint(false));
+            magnetite->startFollow(airShipRopeSprite->getRopeEndPoint());
 //        }
         
 
@@ -257,7 +257,7 @@ void GameView::showItem(){
 	catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
     
-    airShipRopeSprite = new AirShipRope(ropeStartPoint.x, ropeStartPoint.y,catchAngle);
+    airShipRopeSprite = new AirShipRope(this, ropeStartPoint.x, ropeStartPoint.y,catchAngle);
     this->addChild(airShipRopeSprite,3);
     
     magnetite = new Magnetite(this, ropeStartPoint.x, ropeStartPoint.y);
@@ -313,7 +313,7 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
     }
 
     log("rope start##########%f", airShipRopeSprite->getContentSize().height);
-    magnetite->moveToPoint(airShipRopeSprite->getRopeEndPoint(true), target);
+    magnetite->moveToPoint(airShipRopeSprite->getRopeEndPoint(), target);
 
 
 	auto    visibleSize = Director::getInstance()->getVisibleSize();
@@ -448,4 +448,8 @@ void GameView::catchBack() {
 
 void GameView::removeScoreLabel(Label * scoreLabel) {
     scoreLabel->removeFromParentAndCleanup(true);
+}
+
+void GameView::stopMagnetite() {
+	magnetite->stopMove();
 }

@@ -16,7 +16,7 @@ class GameView;
 class AirShipRope : public cocos2d::Sprite {
 
 public:
-	AirShipRope(float x, float y,float catchAngle);
+	AirShipRope(GameView * gw, float x, float y,float catchAngle);
     
 	//获取绳子延伸方向上，在屏幕边缘上的点
     cocos2d::Point grab();
@@ -27,7 +27,7 @@ public:
     void sway();
     
     //获取绳子的终点
-    cocos2d::Point getRopeEndPoint(bool useForStartPoint);
+    cocos2d::Point getRopeEndPoint();
     
     cocos2d::Point getRopeStartPoint(){return cocos2d::Point(startX, startY);}
 
@@ -43,6 +43,8 @@ private:
     bool _sway;
     float roepLen;
     
+    GameView *gameView;
+
     cocos2d::Vec2 getTargetPoint(float rotation);
 
 };

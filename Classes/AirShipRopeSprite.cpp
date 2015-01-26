@@ -13,10 +13,11 @@
 USING_NS_CC;
 
 
-AirShipRope::AirShipRope(float x, float y,float ca) {
+AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca) {
     startX = x;
     startY = y;
     catchAngle = ca;
+    gameView = gw;
     
 	Sprite::initWithFile("line.png");
 	setPosition(x, y);
@@ -43,6 +44,7 @@ void AirShipRope::refreshRopeLen(Point point, bool isReach, bool isBack) {
     	roepLen = len;
     } else if(!isReach && isBack && len < roepLen){
     	setTextureRect(Rect(0, 0, getTextureRect().size.width, roepLen));
+    	gameView->stopMagnetite();
     	return;
     }
     setTextureRect(Rect(0, 0, getTextureRect().size.width, len));
@@ -65,16 +67,10 @@ void AirShipRope::sway() {
     this->runAction(repeat);
 }
 
-Point AirShipRope::getRopeEndPoint(bool useForStartPoint){
-    if (useForStartPoint) {
-//        setAnchorPoint(Vec2(0.0f,0.0f));
-    }
-    
+Point AirShipRope::getRopeEndPoint(){
+
     Point retPoint = convertToWorldSpace(targetPoint->getPosition());
-    if (useForStartPoint) {
-//        setAnchorPoint(Vec2(0.5f,1.0f));
-    }
-    
+
     return retPoint;
 }
 

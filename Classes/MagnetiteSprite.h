@@ -39,6 +39,9 @@ public:
     //回到起点
     void backToStartPoint();
     
+    //停止移动，将Velocity设置为0
+    void stopMove();
+
     cocos2d::Point getStartPoint(){return startPoint;}
 private:
     bool move;
@@ -47,6 +50,7 @@ private:
     bool backRope;
     GameView *gameView;
     cocos2d::Point startPoint;
+    cocos2d::Vec2 moveVelocity;
     
     //结束移动
     void finishMove(int nextActionType);

@@ -63,6 +63,7 @@ void Magnetite::finishMove(int nextActionType) {
 
 void Magnetite::readySway() {
 	move = false;
+	reachRope = false;
     log("$$$$$$$$$$$$$$$$");
     gameView->startSway();
     if(showScore){
@@ -74,6 +75,11 @@ void Magnetite::startFollow(Point point) {
     setPosition(point);
 }
 
+void Magnetite::stopMove(){
+	getPhysicsBody()->setVelocity(Vec2::ZERO);
+	readySway();
+}
+
 void Magnetite::moveToPoint(Point curPoint, Point targetPoint) {
 	move = true;
 	startPoint = curPoint;
@@ -82,34 +88,45 @@ void Magnetite::moveToPoint(Point curPoint, Point targetPoint) {
 
 	log("start^^^^^%f===%f", startPoint.x, startPoint.y);
 
-	MoveTo * moveTo = MoveTo::create(5.0f, targetPoint);
-	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Back));
-	Sequence * seq = Sequence::create(moveTo, fun, NULL);
+//	MoveTo * moveTo = MoveTo::create(5.0f, targetPoint);
+//	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Back));
+//	Sequence * seq = Sequence::create(moveTo, fun, NULL);
+//	this->runAction(seq);
 
-	this->runAction(seq);
+	Vec2 tmp = Vec2(targetPoint.x, targetPoint.y);
+	tmp.subtract(getPosition());
+	tmp.normalize();
+	moveVelocity = tmp.operator *=(200);
+	getPhysicsBody()->setVelocity(moveVelocity);
 }
 
 void Magnetite::backToStartPoint(){
 	move = true;
 	backRope = true;
-    this->stopAllActions();
-	MoveTo * moveTo = MoveTo::create(kMoveBackTime, startPoint);
-	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Sway));
-	Sequence * seq = Sequence::create(moveTo, fun, NULL);
 
-	this->runAction(seq);
+//  this->stopAllActions();
+//	MoveTo * moveTo = MoveTo::create(kMoveBackTime, startPoint);
+//	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Sway));
+//	Sequence * seq = Sequence::create(moveTo, fun, NULL);
+//	this->runAction(seq);
+
+	moveVelocity.negate();
+	getPhysicsBody()->setVelocity(moveVelocity);
 }
 
 void Magnetite::backWithOreToStartPoint(){
 	move = true;
 	showScore = true;
 	backRope = true;
-	this->stopAllActions();
-
 	log("end^^^^^%f===%f", startPoint.x, startPoint.y);
-	MoveTo * moveTo = MoveTo::create(kMoveBackTime, startPoint);
-	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Sway));
-	Sequence * seq = Sequence::create(moveTo, fun, NULL);
 
-	this->runAction(seq);
+//	this->stopAllActions();
+//	MoveTo * moveTo = MoveTo::create(kMoveBackTime, startPoint);
+//	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Sway));
+//	Sequence * seq = Sequence::create(moveTo, fun, NULL);
+//	this->runAction(seq);
+
+	moveVelocity.negate();
+	moveVelocity = moveVelocity.operator /(10);
+	getPhysicsBody()->setVelocity(moveVelocity);
 }

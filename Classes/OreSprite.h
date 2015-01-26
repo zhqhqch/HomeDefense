@@ -23,6 +23,7 @@ private:
 	float startY;
 	int weight;
     int score;
+    float scopeRadius;
     bool isFollow;
 };
 
