@@ -8,12 +8,12 @@
 #include "AirShipRopeSprite.h"
 #include "Vec2Util.h"
 #include "Constants.h"
-#include "GameViewScene.h"
+#include "GameViewOldScene.h"
 
 USING_NS_CC;
 
 
-AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca) {
+AirShipRope::AirShipRope(GameViewOld * gw, float x, float y,float ca) {
     startX = x;
     startY = y;
     catchAngle = ca;

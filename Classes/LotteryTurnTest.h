@@ -1,4 +1,4 @@
-#ifndef _LOTTERY_TURN_TEST_H_
+﻿#ifndef _LOTTERY_TURN_TEST_H_
 #define _LOTTERY_TURN_TEST_H_
 
 #include "cocos2d.h"

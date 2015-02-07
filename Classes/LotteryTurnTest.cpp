@@ -1,5 +1,7 @@
-#include "LotteryTurnTest.h"
+ï»¿#include "LotteryTurnTest.h"
 #include "EllipseBy.h"
+
+USING_NS_CC;
 
 LotteryTurnTest::LotteryTurnTest()
 : m_turnBg(nullptr)
@@ -48,17 +50,17 @@ bool LotteryTurnTest::init()
 	m_pBg->setPosition(Vec2(bgSize.width / 2,bgSize.height / 2));
 	this->addChild(m_pBg);
 
-	//Ìí¼Ó±êÌâ
+	//æ·»åŠ æ ‡é¢˜
 	auto plabel = Label::createWithTTF("LotteryTurnTest","fonts/Marker Felt.ttf",30);
 	plabel->setPosition(Vec2(bgSize.width / 2,bgSize.height * 0.9));
 	m_pBg->addChild(plabel);
 
-	//Ìí¼Ó×ªÅÌ
+	//æ·»åŠ è½¬ç›˜
 	m_turnBg = Sprite::create("LotteryTurn/turn_bg.png");
 	m_turnBg->setPosition(Vec2(bgSize.width / 2,bgSize.height / 2));
 	m_pBg->addChild(m_turnBg);
 
-	//Ìí¼ÓÖ¸Õë
+	//æ·»åŠ æŒ‡é’ˆ
 	auto arrNor = Sprite::create("LotteryTurn/turn_arrow.png");
 	auto arrSel = Sprite::create("LotteryTurn/turn_arrow.png");
 	arrSel->setColor(Color3B(190,190,190));
@@ -69,7 +71,7 @@ bool LotteryTurnTest::init()
 	pMenu->setPosition(Vec2::ZERO);
 	m_pBg->addChild(pMenu);
 
-	//Ìí¼ÓÖÐ½±Ö®ºóµÄ¼òµ¥½çÃæ
+	//æ·»åŠ ä¸­å¥–ä¹‹åŽçš„ç®€å•ç•Œé¢
 	auto awardLayer = LayerColor::create(Color4B(0,0,0,100));
 	awardLayer->setPosition(Point::ZERO);
 	awardLayer->setTag(100);
@@ -81,7 +83,7 @@ bool LotteryTurnTest::init()
 
 void LotteryTurnTest::onBtnCallback(Ref * obj)
 {
-	//·ÀÖ¹¶à´Îµã»÷
+	//é˜²æ­¢å¤šæ¬¡ç‚¹å‡»
 	m_turnArr->setEnabled(false);
 
 	srand(unsigned(time(NULL)));
@@ -89,13 +91,13 @@ void LotteryTurnTest::onBtnCallback(Ref * obj)
 	auto pAction = EaseExponentialOut::create(RotateBy::create(4,Vec3(0,0,angleZ)));
 	m_turnBg->runAction(Sequence::create(pAction,CallFunc::create(CC_CALLBACK_0(LotteryTurnTest::onTurnEnd,this)),NULL));
 
-	//Ìí¼ÓÍÖÔ²Ðý×ªÁ£×ÓÐ§¹û
+	//æ·»åŠ æ¤­åœ†æ—‹è½¬ç²’å­æ•ˆæžœ
 	m_pElliRtt_1 = ParticleSystemQuad::create("LotteryTurn/whiteBall.plist");
 	m_pBg->addChild(m_pElliRtt_1);
 	m_pElliRtt_2 = ParticleSystemQuad::create("LotteryTurn/yellowBall.plist");
 	m_pBg->addChild(m_pElliRtt_2);
 
-	//ÍÖÔ²Ðý×ª
+	//æ¤­åœ†æ—‹è½¬
 	EllipseConfig config;
 	config.ellipseA = 100;
 	config.ellipseB = 50;
@@ -111,7 +113,7 @@ void LotteryTurnTest::onBtnCallback(Ref * obj)
 
 	m_pElliRtt_2->runAction(RepeatForever::create(EllipseBy::create(2.5,config)));
 
-	//È¦È¦ÉÁË¸Á£×ÓÐ§¹û
+	//åœˆåœˆé—ªçƒç²’å­æ•ˆæžœ
 	m_pCircle_1 = ParticleSystemQuad::create("LotteryTurn/bigCircle.plist");
 	m_pCircle_1->setPosition(m_turnBg->getPosition());
 	m_pBg->addChild(m_pCircle_1);
@@ -131,7 +133,7 @@ void LotteryTurnTest::onTurnEnd()
 	m_pCircle_1->removeFromParentAndCleanup(true);
 	m_pCircle_2->removeFromParentAndCleanup(true);
 	
-	//µ¯³ö³éÖÐ½±Æ·
+	//å¼¹å‡ºæŠ½ä¸­å¥–å“
 	((LayerColor *)m_pBg->getChildByTag(100))->setVisible(true);
 	auto award = Sprite::create("LotteryTurn/award.png");
 	award->setAnchorPoint(Vec2(0.5,0));

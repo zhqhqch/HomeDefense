@@ -1,6 +1,7 @@
 #include "MainViewScene.h"
-#include "GameViewScene.h"
+#include "GameViewOldScene.h"
 #include "TransitionUtil.h"
+#include "GameViewScene.h"
 
 USING_NS_CC;
 
@@ -77,6 +78,7 @@ bool MainView::init()
 }
 
 void MainView::menuStartCallback(Ref* pSender) {
+//	auto gameView = GameViewOld::createScene();
 	auto gameView = GameView::createScene();
 	TransitionUtil::enterScene(gameView);
 }

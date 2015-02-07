@@ -1,4 +1,4 @@
-#ifndef _ELLIPSEBY_H_
+ï»¿#ifndef _ELLIPSEBY_H_
 #define _ELLIPSEBY_H_
 
 #include "cocos2d.h"
@@ -7,20 +7,20 @@ USING_NS_CC;
 
 #define PI 3.14159
 
-//ÍÖÔ²µÄ²ÎÊıĞÅÏ¢
+//æ¤­åœ†çš„å‚æ•°ä¿¡æ¯
 struct EllipseConfig 
 {
-	//ÍÖÔ²aµÄ³¤¶È
+	//æ¤­åœ†açš„é•¿åº¦
 	float ellipseA;
-	//ÍÖÔ²bµÄ³¤¶È
+	//æ¤­åœ†bçš„é•¿åº¦
 	float ellipseB;
-	//ÍÖÔ²µÄÖĞĞÄ×ø±ê
+	//æ¤­åœ†çš„ä¸­å¿ƒåæ ‡
 	Vec2 cenPos;
-	//ÊÇ·ñÄæÊ±ÕëĞı×ª
+	//æ˜¯å¦é€†æ—¶é’ˆæ—‹è½¬
 	bool isAntiClockwise;
-	//Ä¿±ê¿ªÊ¼Ğı×ªµÄÎ»ÖÃ£¬Ä¬ÈÏÎ»ÖÃÊÇÔÚÍÖÔ²³¤ÖáÓÒ·½,¼´ÖµÎª0
+	//ç›®æ ‡å¼€å§‹æ—‹è½¬çš„ä½ç½®ï¼Œé»˜è®¤ä½ç½®æ˜¯åœ¨æ¤­åœ†é•¿è½´å³æ–¹,å³å€¼ä¸º0
 	float startAngle;
-	//Ä¿±ê×ÔÉíµÄ½Ç¶È
+	//ç›®æ ‡è‡ªèº«çš„è§’åº¦
 	float selfAngle;
 };
 
@@ -30,22 +30,22 @@ public:
 	EllipseBy();
 	~EllipseBy();
 
-	//³õÊ¼»¯º¯Êı£¬²ÎÊıtÎª³ÖĞøÊ±¼ä£¬configÎªÍÖÔ²²ÎÊı
+	//åˆå§‹åŒ–å‡½æ•°ï¼Œå‚æ•°tä¸ºæŒç»­æ—¶é—´ï¼Œconfigä¸ºæ¤­åœ†å‚æ•°
 	static EllipseBy * create(float t,const EllipseConfig & config);
 	bool initWithDuration(float t,const EllipseConfig & config);
 
-	//Ã¿Ö¡¸üĞÂµ±Ç°ÍÖÔ²×ø±ê
+	//æ¯å¸§æ›´æ–°å½“å‰æ¤­åœ†åæ ‡
 	virtual void update(float time) override;
-	//ÔÚ¶¯×÷¿ªÊ¼Ç°µ÷ÓÃ
+	//åœ¨åŠ¨ä½œå¼€å§‹å‰è°ƒç”¨
 	virtual void startWithTarget(Node *target) override;
-	//¶¯×÷µÄ¿½±´
+	//åŠ¨ä½œçš„æ‹·è´
 	virtual EllipseBy * clone() const override;
-	//¶¯×÷µÄÄæĞò
+	//åŠ¨ä½œçš„é€†åº
 	virtual EllipseBy * reverse() const override;
 
 protected:
-	//»ñµÃÍÖÔ²ÉÏµ±Ç°µã×ø±ê
-	inline Vec2 & getPosWithEllipse(float t)
+	//è·å¾—æ¤­åœ†ä¸Šå½“å‰ç‚¹åæ ‡
+	inline Vec2 getPosWithEllipse(float t)
 	{
 		float angle = 2 * PI * ((m_config.isAntiClockwise ? t : (1 - t)) + m_config.startAngle / 360);
 		return Vec2(m_config.ellipseA * cos(angle),m_config.ellipseB * sin(angle));

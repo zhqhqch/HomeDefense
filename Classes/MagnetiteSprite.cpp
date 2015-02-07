@@ -7,13 +7,13 @@
 //
 
 #include "MagnetiteSprite.h"
-#include "GameViewScene.h"
+#include "GameViewOldScene.h"
 #include "AirShipRopeSprite.h"
 #include "Constants.h"
 
 USING_NS_CC;
 
-Magnetite::Magnetite(GameView *gw, float x, float y){
+Magnetite::Magnetite(GameViewOld *gw, float x, float y){
     gameView = gw;
     
     Sprite::initWithFile("target_point.png");

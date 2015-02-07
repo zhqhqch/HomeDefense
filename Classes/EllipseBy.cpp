@@ -1,4 +1,6 @@
-#include "EllipseBy.h"
+﻿#include "EllipseBy.h"
+
+USING_NS_CC;
 
 EllipseBy::EllipseBy()
 {

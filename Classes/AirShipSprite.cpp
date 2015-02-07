@@ -13,6 +13,7 @@ USING_NS_CC;
 AirShip::AirShip(float x, float y){
 
 	Sprite::initWithFile("airship_game.png");
+	y = y + getContentSize().height;
 	setPosition(x, y);
     
     startX = x;

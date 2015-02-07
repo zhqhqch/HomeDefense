@@ -1,64 +1,45 @@
 /*
  * GameViewScene.h
  *
- *  Created on: 2015年1月12日
+ *  Created on: 2015年2月7日
  *      Author: hqch
  */
 
-#ifndef __GAMEVIEW_SCENE_H__
-#define __GAMEVIEW_SCENE_H__
+#ifndef GAMEVIEWSCENE_H_
+#define GAMEVIEWSCENE_H_
 
 #include "cocos2d.h"
 #include "AirShipSprite.h"
-#include "AirShipRopeSprite.h"
-#include "OreSprite.h"
-#include "MagnetiteSprite.h"
+#include "EarthLayer.h"
 
-class GameView : public cocos2d::Layer {
+class GameView : public cocos2d::Scene {
 public:
 	static cocos2d::Scene * createScene();
 	virtual bool init();
 	CREATE_FUNC(GameView);
 
+private:
+	cocos2d::PhysicsWorld* m_world;
+	AirShip *airshipSprite;
+	Earth *earthLayer;
+
+
 	void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};
 
+	//过场动画结束后调用
 	virtual void onEnterTransitionDidFinish();
+	//刷新界面
+	void update(float dTime);
+	//触发碰撞时调用
+	bool onContactBegin(const cocos2d::PhysicsContact& contact);
+	//屏幕触屏事件
+	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+
+	//返回按钮事件
 	void menuBackCallback(cocos2d::Ref* pSender);
-    
-    void catchBack();
-    void startSway();
-    void stopMagnetite();
-
-private:
-	AirShip *airshipSprite;
-	AirShipRope *airShipRopeSprite;
-    Magnetite * magnetite;
-    
-	cocos2d::Sprite * ropeCloneSpite;
-
-	cocos2d::Vector<Ore *> itemArr;
-
-	cocos2d::Point ropeStartPoint;
-
-	cocos2d::PhysicsWorld* m_world;
-
-	bool isReady;
-    bool isStart;
-	bool isCatch;
-	Ore * targetOre;
-	float catchAngle;
-
-	void showItem();
-    void removeScoreLabel(cocos2d::Label * scoreLabel);
-    cocos2d::Vec2 getIntersectPoint(cocos2d::Vec2 target);
-    
-    void update(float dTime);
-    bool onContactBegin(const cocos2d::PhysicsContact& contact);
-    virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-    virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-    virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 };
 
 
-
-#endif /* __GAMEVIEW_SCENE_H__ */
+#endif /* GAMEVIEWSCENE_H_ */
