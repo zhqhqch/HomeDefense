@@ -9,6 +9,7 @@
 #include "TransitionUtil.h"
 #include "MainViewScene.h"
 #include "Constants.h"
+#include "EllipseBy.h"
 
 
 USING_NS_CC;
@@ -79,7 +80,8 @@ bool GameView::init(){
 	airshipSprite->setVisible(false);
 	this->addChild(airshipSprite, 2);
 
-	earthLayer = new Earth(visibleSize.width/2, visibleSize.height * 0.05f);
+	earthLayer = new Earth();
+	earthLayer->setPosition(visibleSize.width / 2 - earthLayer->getContentSize().width / 2 , -earthLayer->getContentSize().height / 2);
 	this->addChild(earthLayer, 1);
 
 	return true;
@@ -101,6 +103,19 @@ void GameView::onEnterTransitionDidFinish(){
 
 	MoveTo *moveTo = MoveTo::create(2.0f, Vec2(visibleSize.width / 2, visibleSize.height * 0.7));
 	airshipSprite->runAction(moveTo);
+
+	earthLayer->runAction(RepeatForever::create(RotateBy::create(2.5,45)));
+
+	//椭圆旋转
+//	EllipseConfig config;
+//	config.ellipseA = 100;
+//	config.ellipseB = 100;
+//	config.cenPos = earthLayer->getCenterPoint();
+//	config.isAntiClockwise = true;
+//	config.startAngle = 0;
+//	config.selfAngle = 45;
+//
+//	earthLayer->runAction(RepeatForever::create(EllipseBy::create(2.5,config)));
 }
 
 void GameView::update(float dTime){

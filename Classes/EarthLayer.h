@@ -13,11 +13,9 @@
 
 class Earth : public cocos2d::Layer {
 public:
-	Earth(float x, float y);
+	Earth();
 
 private:
-	float startX, startY;
-
 	bool init();
 };
 
