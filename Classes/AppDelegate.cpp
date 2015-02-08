@@ -21,7 +21,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     Size referenceSize = Size(640,960);
-    glview->setDesignResolutionSize(referenceSize.width,referenceSize.height, ResolutionPolicy::SHOW_ALL);
+    glview->setDesignResolutionSize(referenceSize.width,referenceSize.height, ResolutionPolicy::FIXED_WIDTH);
     
     // turn on display FPS
     director->setDisplayStats(true);
