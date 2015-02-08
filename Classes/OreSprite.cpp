@@ -20,16 +20,23 @@ Ore::Ore(const std::string& fileName, float x, float y, int s, int w) {
 	Sprite::initWithFile(fileName);
 	setPosition(x,y);
 
-	auto body = PhysicsBody::createCircle(getContentSize().width / 2);
-	body->setDynamic(true);
-	body->setContactTestBitmask(0x0001);
-	body->setCategoryBitmask(0x0001);
-	body->setCollisionBitmask(0x0001);
-	body->setGravityEnable(false);
-	body->getFirstShape()->setRestitution(0);
-	setPhysicsBody(body);
+//	isFollow = false;
+}
 
-	isFollow = false;
+
+void Ore::changeToPhysicsBody() {
+    auto body = PhysicsBody::createCircle(getContentSize().width / 2);
+    body->setDynamic(true);
+    body->setContactTestBitmask(0x0001);
+    body->setCategoryBitmask(0x0001);
+    body->setCollisionBitmask(0x0001);
+    body->setGravityEnable(false);
+    body->getFirstShape()->setRestitution(0);
+    setPhysicsBody(body);
+}
+
+void Ore::changeToNormalBody() {
+    setPhysicsBody(nullptr);
 }
 
 int Ore::getScore() {

@@ -20,7 +20,6 @@
 		1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
 		1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B916D35E4900DB1158 /* CloseNormal.png */; };
 		1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
-		1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -33,7 +32,6 @@
 		503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11A17EB9C5A00D1A890 /* IOKit.framework */; };
 		5087E75317EB910900C73F5D /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B916D35E4900DB1158 /* CloseNormal.png */; };
 		5087E75417EB910900C73F5D /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
-		5087E75517EB910900C73F5D /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
 		5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
 		5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		5087E76517EB910900C73F5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -94,6 +92,30 @@
 		9F472EB21A6944580054B114 /* MagnetiteSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F472EB01A6944580054B114 /* MagnetiteSprite.cpp */; };
 		9F498C541A67E351006E2A0D /* OreSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F498C521A67E351006E2A0D /* OreSprite.cpp */; };
 		9F498C551A67E351006E2A0D /* OreSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F498C521A67E351006E2A0D /* OreSprite.cpp */; };
+		9F56025E1A74DFB700A50D5F /* LightLineRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F56025A1A74DFB700A50D5F /* LightLineRender.cpp */; };
+		9F56025F1A74DFB700A50D5F /* LightLineRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F56025A1A74DFB700A50D5F /* LightLineRender.cpp */; };
+		9F5602601A74DFB700A50D5F /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F56025C1A74DFB700A50D5F /* Noise.cpp */; };
+		9F5602611A74DFB700A50D5F /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F56025C1A74DFB700A50D5F /* Noise.cpp */; };
+		9F5602671A74DFC600A50D5F /* lighting.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5602641A74DFC600A50D5F /* lighting.png */; };
+		9F5602681A74DFC600A50D5F /* lighting.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F5602641A74DFC600A50D5F /* lighting.png */; };
+		9F5602691A74DFC600A50D5F /* LightLineRender.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F5602651A74DFC600A50D5F /* LightLineRender.fsh */; };
+		9F56026A1A74DFC600A50D5F /* LightLineRender.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F5602651A74DFC600A50D5F /* LightLineRender.fsh */; };
+		9F56026B1A74DFC600A50D5F /* LightLineRender.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F5602661A74DFC600A50D5F /* LightLineRender.vsh */; };
+		9F56026C1A74DFC600A50D5F /* LightLineRender.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F5602661A74DFC600A50D5F /* LightLineRender.vsh */; };
+		9F56026F1A74DFE200A50D5F /* VertexVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F56026D1A74DFE200A50D5F /* VertexVector.cpp */; };
+		9F5602701A74DFE200A50D5F /* VertexVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F56026D1A74DFE200A50D5F /* VertexVector.cpp */; };
+		9F567A3D1A866BC9005CEC71 /* EarthLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F567A391A866BC9005CEC71 /* EarthLayer.cpp */; };
+		9F567A3E1A866BC9005CEC71 /* EarthLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F567A391A866BC9005CEC71 /* EarthLayer.cpp */; };
+		9F567A3F1A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */; };
+		9F567A401A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */; };
+		9F567A471A866BE4005CEC71 /* earth_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F567A431A866BE4005CEC71 /* earth_1.png */; };
+		9F567A481A866BE4005CEC71 /* earth_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F567A431A866BE4005CEC71 /* earth_1.png */; };
+		9F567A491A866BE4005CEC71 /* earth_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F567A441A866BE4005CEC71 /* earth_2.png */; };
+		9F567A4A1A866BE4005CEC71 /* earth_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F567A441A866BE4005CEC71 /* earth_2.png */; };
+		9F567A4B1A866BE4005CEC71 /* earth_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F567A451A866BE4005CEC71 /* earth_3.png */; };
+		9F567A4C1A866BE4005CEC71 /* earth_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F567A451A866BE4005CEC71 /* earth_3.png */; };
+		9F567A4D1A866BE4005CEC71 /* earth_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F567A461A866BE4005CEC71 /* earth_4.png */; };
+		9F567A4E1A866BE4005CEC71 /* earth_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F567A461A866BE4005CEC71 /* earth_4.png */; };
 		9F8825D51A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
 		9F8825D61A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
 		9F8825D71A61373A000067F1 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CE1A61373A000067F1 /* main_bg.jpg */; };
@@ -274,7 +296,6 @@
 		1AFAF8B416D35DE700DB1158 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
 		1AFAF8B916D35E4900DB1158 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
-		1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* HomeDefense iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HomeDefense iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -339,6 +360,23 @@
 		9F498C521A67E351006E2A0D /* OreSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OreSprite.cpp; path = ../Classes/OreSprite.cpp; sourceTree = "<group>"; };
 		9F498C531A67E351006E2A0D /* OreSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OreSprite.h; path = ../Classes/OreSprite.h; sourceTree = "<group>"; };
 		9F498C581A67EAD7006E2A0D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Classes/Constants.h; sourceTree = "<group>"; };
+		9F56025A1A74DFB700A50D5F /* LightLineRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightLineRender.cpp; path = ../Classes/LightLineRender.cpp; sourceTree = "<group>"; };
+		9F56025B1A74DFB700A50D5F /* LightLineRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LightLineRender.h; path = ../Classes/LightLineRender.h; sourceTree = "<group>"; };
+		9F56025C1A74DFB700A50D5F /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Noise.cpp; path = ../Classes/Noise.cpp; sourceTree = "<group>"; };
+		9F56025D1A74DFB700A50D5F /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Noise.h; path = ../Classes/Noise.h; sourceTree = "<group>"; };
+		9F5602641A74DFC600A50D5F /* lighting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lighting.png; sourceTree = "<group>"; };
+		9F5602651A74DFC600A50D5F /* LightLineRender.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = LightLineRender.fsh; sourceTree = "<group>"; };
+		9F5602661A74DFC600A50D5F /* LightLineRender.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = LightLineRender.vsh; sourceTree = "<group>"; };
+		9F56026D1A74DFE200A50D5F /* VertexVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VertexVector.cpp; path = ../Classes/VertexVector.cpp; sourceTree = "<group>"; };
+		9F56026E1A74DFE200A50D5F /* VertexVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VertexVector.h; path = ../Classes/VertexVector.h; sourceTree = "<group>"; };
+		9F567A391A866BC9005CEC71 /* EarthLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EarthLayer.cpp; path = ../Classes/EarthLayer.cpp; sourceTree = "<group>"; };
+		9F567A3A1A866BC9005CEC71 /* EarthLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EarthLayer.h; path = ../Classes/EarthLayer.h; sourceTree = "<group>"; };
+		9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameViewOldScene.cpp; path = ../Classes/GameViewOldScene.cpp; sourceTree = "<group>"; };
+		9F567A3C1A866BC9005CEC71 /* GameViewOldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewOldScene.h; path = ../Classes/GameViewOldScene.h; sourceTree = "<group>"; };
+		9F567A431A866BE4005CEC71 /* earth_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth_1.png; sourceTree = "<group>"; };
+		9F567A441A866BE4005CEC71 /* earth_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth_2.png; sourceTree = "<group>"; };
+		9F567A451A866BE4005CEC71 /* earth_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth_3.png; sourceTree = "<group>"; };
+		9F567A461A866BE4005CEC71 /* earth_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth_4.png; sourceTree = "<group>"; };
 		9F8825CD1A61373A000067F1 /* airship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airship.png; sourceTree = "<group>"; };
 		9F8825CE1A61373A000067F1 /* main_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_bg.jpg; sourceTree = "<group>"; };
 		9F8825CF1A61373A000067F1 /* shareBtn_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareBtn_selected.png; sourceTree = "<group>"; };
@@ -425,6 +463,16 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9F567A391A866BC9005CEC71 /* EarthLayer.cpp */,
+				9F567A3A1A866BC9005CEC71 /* EarthLayer.h */,
+				9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */,
+				9F567A3C1A866BC9005CEC71 /* GameViewOldScene.h */,
+				9F56026D1A74DFE200A50D5F /* VertexVector.cpp */,
+				9F56026E1A74DFE200A50D5F /* VertexVector.h */,
+				9F56025A1A74DFB700A50D5F /* LightLineRender.cpp */,
+				9F56025B1A74DFB700A50D5F /* LightLineRender.h */,
+				9F56025C1A74DFB700A50D5F /* Noise.cpp */,
+				9F56025D1A74DFB700A50D5F /* Noise.h */,
 				9F498C521A67E351006E2A0D /* OreSprite.cpp */,
 				9F498C531A67E351006E2A0D /* OreSprite.h */,
 				9F3EA67B1A6539B500F5996E /* Vec2Util.cpp */,
@@ -559,6 +607,13 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F567A431A866BE4005CEC71 /* earth_1.png */,
+				9F567A441A866BE4005CEC71 /* earth_2.png */,
+				9F567A451A866BE4005CEC71 /* earth_3.png */,
+				9F567A461A866BE4005CEC71 /* earth_4.png */,
+				9F5602641A74DFC600A50D5F /* lighting.png */,
+				9F5602651A74DFC600A50D5F /* LightLineRender.fsh */,
+				9F5602661A74DFC600A50D5F /* LightLineRender.vsh */,
 				9F3EA6801A6539CA00F5996E /* line.png */,
 				9F3EA6811A6539CA00F5996E /* target_point.png */,
 				9F3EA67E1A6539BE00F5996E /* airship_game.png */,
@@ -582,7 +637,6 @@
 				9F8825D41A61373A000067F1 /* startBtn.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
-				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -754,16 +808,19 @@
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				9F8825D91A61373A000067F1 /* shareBtn_selected.png in Resources */,
+				9F56026B1A74DFC600A50D5F /* LightLineRender.vsh in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				9F0D06581A63EF3F0044089E /* game_bg.jpg in Resources */,
 				9F0D06731A63EF490044089E /* item_c_3.png in Resources */,
+				9F5602691A74DFC600A50D5F /* LightLineRender.fsh in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				9F8825E31A61373A000067F1 /* startBtn.png in Resources */,
 				9F8825DB1A61373A000067F1 /* shareBtn.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
+				9F567A471A866BE4005CEC71 /* earth_1.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				9F0D066B1A63EF490044089E /* item_b_2.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
@@ -773,7 +830,8 @@
 				9F0D066F1A63EF490044089E /* item_c_1.png in Resources */,
 				9F3EA6831A6539CA00F5996E /* target_point.png in Resources */,
 				9F8825D71A61373A000067F1 /* main_bg.jpg in Resources */,
-				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
+				9F5602671A74DFC600A50D5F /* lighting.png in Resources */,
+				9F567A491A866BE4005CEC71 /* earth_2.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				9F8825DF1A61373A000067F1 /* shopBtn.png in Resources */,
 				9F3EA67F1A6539BE00F5996E /* airship_game.png in Resources */,
@@ -781,10 +839,12 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				9F8825E11A61373A000067F1 /* startBtn_selected.png in Resources */,
 				9F0D06651A63EF490044089E /* item_a_2.png in Resources */,
+				9F567A4D1A866BE4005CEC71 /* earth_4.png in Resources */,
 				9F0D06671A63EF490044089E /* item_a_3.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				9F567A4B1A866BE4005CEC71 /* earth_3.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				9F8825DD1A61373A000067F1 /* shopBtn_selected.png in Resources */,
 				9F0D066D1A63EF490044089E /* item_b_3.png in Resources */,
@@ -799,23 +859,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F56026C1A74DFC600A50D5F /* LightLineRender.vsh in Resources */,
 				9F0D06681A63EF490044089E /* item_a_3.png in Resources */,
+				9F567A481A866BE4005CEC71 /* earth_1.png in Resources */,
 				9F8825DE1A61373A000067F1 /* shopBtn_selected.png in Resources */,
 				5087E75317EB910900C73F5D /* CloseNormal.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				9F0D06741A63EF490044089E /* item_c_3.png in Resources */,
 				9F8825E21A61373A000067F1 /* startBtn_selected.png in Resources */,
+				9F567A4C1A866BE4005CEC71 /* earth_3.png in Resources */,
 				5087E75417EB910900C73F5D /* CloseSelected.png in Resources */,
 				9F8825DA1A61373A000067F1 /* shareBtn_selected.png in Resources */,
 				9F0D06661A63EF490044089E /* item_a_2.png in Resources */,
 				9F0D06641A63EF490044089E /* item_a_1.png in Resources */,
+				9F5602681A74DFC600A50D5F /* lighting.png in Resources */,
 				9F8825D61A61373A000067F1 /* airship.png in Resources */,
 				9F8825E01A61373A000067F1 /* shopBtn.png in Resources */,
-				5087E75517EB910900C73F5D /* HelloWorld.png in Resources */,
+				9F567A4E1A866BE4005CEC71 /* earth_4.png in Resources */,
 				9F0D06721A63EF490044089E /* item_c_2.png in Resources */,
+				9F567A4A1A866BE4005CEC71 /* earth_2.png in Resources */,
 				9F0D066C1A63EF490044089E /* item_b_2.png in Resources */,
 				9F0D066A1A63EF490044089E /* item_b_1.png in Resources */,
 				9F8825E41A61373A000067F1 /* startBtn.png in Resources */,
+				9F56026A1A74DFC600A50D5F /* LightLineRender.fsh in Resources */,
 				9F0D06591A63EF3F0044089E /* game_bg.jpg in Resources */,
 				9F0D06701A63EF490044089E /* item_c_1.png in Resources */,
 				9F8825DC1A61373A000067F1 /* shareBtn.png in Resources */,
@@ -831,17 +897,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F567A3D1A866BC9005CEC71 /* EarthLayer.cpp in Sources */,
 				9F8825E81A6138AF000067F1 /* MainViewScene.cpp in Sources */,
 				9F3EA6781A6539AC00F5996E /* AirShipSprite.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				9F56025E1A74DFB700A50D5F /* LightLineRender.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				9F3EA6771A6539AC00F5996E /* AirShipRopeSprite.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				9F567A3F1A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */,
+				9F56026F1A74DFE200A50D5F /* VertexVector.cpp in Sources */,
 				9F0D067B1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				9F3EA67D1A6539B500F5996E /* Vec2Util.cpp in Sources */,
 				9F498C541A67E351006E2A0D /* OreSprite.cpp in Sources */,
 				9F472EB11A6944580054B114 /* MagnetiteSprite.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				9F5602601A74DFB700A50D5F /* Noise.cpp in Sources */,
 				9F0D06771A63EF900044089E /* GameViewScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -850,13 +921,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F5602701A74DFE200A50D5F /* VertexVector.cpp in Sources */,
+				9F56025F1A74DFB700A50D5F /* LightLineRender.cpp in Sources */,
 				9F8825E91A6138AF000067F1 /* MainViewScene.cpp in Sources */,
 				9F0D06781A63EF900044089E /* GameViewScene.cpp in Sources */,
 				9F0D067C1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
+				9F5602611A74DFB700A50D5F /* Noise.cpp in Sources */,
+				9F567A401A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */,
 				9FC031C31A6BEC960084DF07 /* AirShipRopeSprite.cpp in Sources */,
 				9FC031C01A6BEC8E0084DF07 /* Vec2Util.cpp in Sources */,
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
 				9F472EB21A6944580054B114 /* MagnetiteSprite.cpp in Sources */,
+				9F567A3E1A866BC9005CEC71 /* EarthLayer.cpp in Sources */,
 				9FC031C41A6BEC990084DF07 /* AirShipSprite.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				9F498C551A67E351006E2A0D /* OreSprite.cpp in Sources */,

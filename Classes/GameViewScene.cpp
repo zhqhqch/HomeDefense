@@ -9,7 +9,6 @@
 #include "TransitionUtil.h"
 #include "MainViewScene.h"
 #include "Constants.h"
-#include "EllipseBy.h"
 
 
 USING_NS_CC;
@@ -79,11 +78,14 @@ bool GameView::init(){
 	airshipSprite = new AirShip(visibleSize.width / 2, visibleSize.height);
 	airshipSprite->setVisible(false);
 	this->addChild(airshipSprite, 2);
-
-	earthLayer = new Earth();
+    
+    earthLayer = new Earth();
 	earthLayer->setPosition(visibleSize.width / 2 - earthLayer->getContentSize().width / 2 , -earthLayer->getContentSize().height / 2);
-	this->addChild(earthLayer, 1);
-
+    earthLayer->setPhyWorld(this->getPhysicsWorld());
+    this->addChild(earthLayer, 1);
+    
+    earthTurn = false;
+    
 	return true;
 }
 
@@ -102,9 +104,12 @@ void GameView::onEnterTransitionDidFinish(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	MoveTo *moveTo = MoveTo::create(2.0f, Vec2(visibleSize.width / 2, visibleSize.height * 0.7));
-	airshipSprite->runAction(moveTo);
+	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::startGame, this));
+	Sequence *seq = Sequence::create(moveTo,fun,NULL);
+	airshipSprite->runAction(seq);
 
-	earthLayer->runAction(RepeatForever::create(RotateBy::create(2.5,45)));
+	earthLayer->startTurn();
+    earthTurn = true;
 
 	//椭圆旋转
 //	EllipseConfig config;
@@ -116,6 +121,11 @@ void GameView::onEnterTransitionDidFinish(){
 //	config.selfAngle = 45;
 //
 //	earthLayer->runAction(RepeatForever::create(EllipseBy::create(2.5,config)));
+}
+
+
+void GameView::startGame() {
+    earthLayer->showOre();
 }
 
 void GameView::update(float dTime){
@@ -137,4 +147,13 @@ void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
 
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
 	log("########$$$$$$$$$$$");
+    
+    if (earthTurn) {
+        earthLayer->stopTurn();
+        earthTurn = false;
+    } else {
+        earthLayer->startTurn();
+        earthTurn = true;
+    }
+    
 }

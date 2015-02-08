@@ -11,6 +11,7 @@
 #include "cocos2d.h"
 #include "AirShipSprite.h"
 #include "EarthLayer.h"
+#include "OreSprite.h"
 
 class GameView : public cocos2d::Scene {
 public:
@@ -22,6 +23,7 @@ private:
 	cocos2d::PhysicsWorld* m_world;
 	AirShip *airshipSprite;
 	Earth *earthLayer;
+    bool earthTurn;
 
 
 	void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};
@@ -39,6 +41,9 @@ private:
 
 	//返回按钮事件
 	void menuBackCallback(cocos2d::Ref* pSender);
+
+    //开始游戏
+    void startGame();
 };
 
 

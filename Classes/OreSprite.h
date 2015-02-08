@@ -18,6 +18,9 @@ public:
     int getScore();
     
     void startFollow(Magnetite * m, float rotation);
+    
+    void changeToPhysicsBody();
+    void changeToNormalBody();
 private:
 	float startX;
 	float startY;
