@@ -44,6 +44,12 @@ private:
 
     //开始游戏
     void startGame();
+    
+    //使用道具
+    void useProp(int propID);
+    
+    //抓取矿石
+    void catchOre();
 };
 
 

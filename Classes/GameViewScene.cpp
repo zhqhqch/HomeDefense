@@ -86,9 +86,58 @@ bool GameView::init(){
     
     earthTurn = false;
     
+    auto bottomSprite = Sprite::create("bottom.png");
+    bottomSprite->setAnchorPoint(Vec2(0 , 0));
+    bottomSprite->setPosition(0, 0);
+    this->addChild(bottomSprite, 2);
+
+    
+    auto goItem = MenuItemImage::create("go.png",
+                                        "go.png",
+                                        CC_CALLBACK_0(GameView::catchOre, this));
+    
+    float bottomY = goItem->getContentSize().height / 2 + 30;
+    
+    goItem->setPosition(Vec2(visibleSize.width - goItem->getContentSize().width / 2 - 30,
+                             bottomY));
+    
+    auto propItem1 = MenuItemImage::create("prop.png",
+                                          "prop.png",
+                                          CC_CALLBACK_0(GameView::useProp, this, 1));
+    float bottomX = propItem1->getContentSize().width / 2 + 30;
+    
+    propItem1->setPosition(Vec2(bottomX,
+                               bottomY));
+    
+    auto propItem2 = MenuItemImage::create("prop.png",
+                                           "prop.png",
+                                           CC_CALLBACK_0(GameView::useProp, this, 2));
+    bottomX += propItem2->getContentSize().width + 30;
+    propItem2->setPosition(Vec2(bottomX,
+                                bottomY));
+    
+    auto propItem3 = MenuItemImage::create("prop.png",
+                                           "prop.png",
+                                           CC_CALLBACK_0(GameView::useProp, this, 3));
+    bottomX += propItem3->getContentSize().width + 30;
+    propItem3->setPosition(Vec2(bottomX,
+                                bottomY));
+    
+    auto bottomMenu = Menu::create(propItem1,propItem2, propItem3,goItem, NULL);
+    bottomMenu->setPosition(Vec2::ZERO);
+    this->addChild(bottomMenu, 3);
+    
 	return true;
 }
 
+
+void GameView::useProp(int propID) {
+    log("useprop***********************%d", propID);
+}
+
+void GameView::catchOre() {
+    log("####################catchOre");
+}
 
 void GameView::menuBackCallback(Ref* pSender){
 	auto mainView = MainView::createScene();
