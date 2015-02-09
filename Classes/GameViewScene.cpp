@@ -80,7 +80,8 @@ bool GameView::init(){
 	this->addChild(airshipSprite, 2);
     
     earthLayer = new Earth();
-	earthLayer->setPosition(visibleSize.width / 2 - earthLayer->getContentSize().width / 2 , -earthLayer->getContentSize().height / 2);
+	earthLayer->setPosition(visibleSize.width / 2 - earthLayer->getContentSize().width / 2 ,
+			visibleSize.height * 0.6 - earthLayer->getContentSize().height);
     earthLayer->setPhyWorld(this->getPhysicsWorld());
     this->addChild(earthLayer, 1);
     
