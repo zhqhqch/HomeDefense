@@ -144,6 +144,8 @@
 		9F8825E41A61373A000067F1 /* startBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825D41A61373A000067F1 /* startBtn.png */; };
 		9F8825E81A6138AF000067F1 /* MainViewScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F8825E61A6138AF000067F1 /* MainViewScene.cpp */; };
 		9F8825E91A6138AF000067F1 /* MainViewScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F8825E61A6138AF000067F1 /* MainViewScene.cpp */; };
+		9FB429ED1A88E28C002DA991 /* EllipseBy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FB429EB1A88E28C002DA991 /* EllipseBy.cpp */; };
+		9FB429EE1A88E28C002DA991 /* EllipseBy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FB429EB1A88E28C002DA991 /* EllipseBy.cpp */; };
 		9FC031C01A6BEC8E0084DF07 /* Vec2Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA67B1A6539B500F5996E /* Vec2Util.cpp */; };
 		9FC031C31A6BEC960084DF07 /* AirShipRopeSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */; };
 		9FC031C41A6BEC990084DF07 /* AirShipSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA6751A6539AC00F5996E /* AirShipSprite.cpp */; };
@@ -402,6 +404,8 @@
 		9F8825D41A61373A000067F1 /* startBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startBtn.png; sourceTree = "<group>"; };
 		9F8825E61A6138AF000067F1 /* MainViewScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainViewScene.cpp; sourceTree = "<group>"; };
 		9F8825E71A6138AF000067F1 /* MainViewScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewScene.h; sourceTree = "<group>"; };
+		9FB429EB1A88E28C002DA991 /* EllipseBy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EllipseBy.cpp; sourceTree = "<group>"; };
+		9FB429EC1A88E28C002DA991 /* EllipseBy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EllipseBy.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -478,6 +482,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9FB429EB1A88E28C002DA991 /* EllipseBy.cpp */,
+				9FB429EC1A88E28C002DA991 /* EllipseBy.h */,
 				9F567A391A866BC9005CEC71 /* EarthLayer.cpp */,
 				9F567A3A1A866BC9005CEC71 /* EarthLayer.h */,
 				9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */,
@@ -930,6 +936,7 @@
 				9F567A3D1A866BC9005CEC71 /* EarthLayer.cpp in Sources */,
 				9F8825E81A6138AF000067F1 /* MainViewScene.cpp in Sources */,
 				9F3EA6781A6539AC00F5996E /* AirShipSprite.cpp in Sources */,
+				9FB429ED1A88E28C002DA991 /* EllipseBy.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				9F56025E1A74DFB700A50D5F /* LightLineRender.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -958,6 +965,7 @@
 				9F0D067C1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				9F5602611A74DFB700A50D5F /* Noise.cpp in Sources */,
 				9F567A401A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */,
+				9FB429EE1A88E28C002DA991 /* EllipseBy.cpp in Sources */,
 				9FC031C31A6BEC960084DF07 /* AirShipRopeSprite.cpp in Sources */,
 				9FC031C01A6BEC8E0084DF07 /* Vec2Util.cpp in Sources */,
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
