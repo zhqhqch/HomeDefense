@@ -118,7 +118,7 @@ void Earth::showOre(){
 }
 
 void Earth::startTurn(){
-    this->runAction(RepeatForever::create(RotateBy::create(2.5,45)));
+    this->runAction(RepeatForever::create(RotateBy::create(5.0f,45)));
     
     for(Ore* item : itemArr){
 		item->changeToNormalBody();

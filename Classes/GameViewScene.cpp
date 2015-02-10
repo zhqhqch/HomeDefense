@@ -169,44 +169,77 @@ void GameView::startGame() {
     
     //椭圆旋转
 	EllipseConfig config;
-	config.ellipseA = 20;
-	config.ellipseB = 40;
+	config.ellipseA = 5;
+	config.ellipseB = 15;
 	config.cenPos = airshipSprite->getPosition();
 	config.isAntiClockwise = true;
 	config.startAngle = 0;
 	config.selfAngle = 45;
     
-	airshipSprite->runAction(RepeatForever::create(EllipseBy::create(2.5,config)));
+	airshipSprite->runAction(RepeatForever::create(EllipseBy::create(2.5f,config)));
     
     Sprite *trackSprite = Sprite::create("track_arc.png");
     trackSprite->setPosition(airshipSprite->getPosition().x, airshipSprite->getPosition().y - 100);
     this->addChild(trackSprite, 2);
     
-    EllipseConfig config1;
-	config1.ellipseA = 20;
-	config1.ellipseB = 40;
-	config1.cenPos = trackSprite->getPosition();
-	config1.isAntiClockwise = true;
-	config1.startAngle = 0;
-	config1.selfAngle = 45;
-    
-	trackSprite->runAction(RepeatForever::create(EllipseBy::create(2.5,config1)));
+//  EllipseConfig config1;
+//	config1.ellipseA = 20;
+//	config1.ellipseB = 40;
+//	config1.cenPos = trackSprite->getPosition();
+//	config1.isAntiClockwise = true;
+//	config1.startAngle = 0;
+//	config1.selfAngle = 45;
+//	trackSprite->runAction(RepeatForever::create(EllipseBy::create(2.5,config1)));
     
     Sprite *trackPointSprite = Sprite::create("track_point.png");
-    trackPointSprite->setPosition(trackSprite->getPosition());
+    float x = trackSprite->getPosition().x;
+    float y = trackSprite->getPosition().y;
+    y -= 20;
+    trackPointSprite->setPosition(x, y);
     this->addChild(trackPointSprite, 3);
     
-    PointArray *array = PointArray::create(20);
-    array->addControlPoint(Vec2(0,0));
-    array->addControlPoint(Vec2(-trackSprite->getContentSize().width / 2,0));
-    array->addControlPoint(Vec2(0,-trackSprite->getContentSize().height / 2));
-    array->addControlPoint(Vec2(trackSprite->getContentSize().width / 2,0));
-    array->addControlPoint(Vec2(0,-trackSprite->getContentSize().height / 2));
-    array->addControlPoint(Vec2(0,0));
     
-    CardinalSplineBy *cardinalSplineBy = CardinalSplineBy::create(3.0f, array, 0);
+    float point1X = trackSprite->getPosition().x - trackSprite->getContentSize().width / 2;
+    float point1Y = trackSprite->getPosition().y + trackSprite->getContentSize().height - 22;
+    
+    float point2X = trackSprite->getPosition().x - trackSprite->getContentSize().width / 4;
+    float point2Y = trackSprite->getPosition().y + trackSprite->getContentSize().height / 2 - 35;
 
-    trackPointSprite->runAction(RepeatForever::create(cardinalSplineBy));
+    float point3X = point2X + trackSprite->getContentSize().width / 2;
+    float point3Y = point2Y;
+
+    
+    float endX = point1X + trackSprite->getContentSize().width;
+    float endY = point1Y;
+    
+    float curX = trackPointSprite->getPosition().x;
+    float curY = trackPointSprite->getPosition().y;
+    
+//    PointArray *array = PointArray::create(20);
+//    array->addControlPoint(Vec2(0,0));
+//    array->addControlPoint(Vec2(point2X - curX, point2Y - curY));
+//    array->addControlPoint(Vec2(point1X - curX, point1Y - curY));
+//    array->addControlPoint(Vec2(point2X - curX, point2Y - curY));
+//    array->addControlPoint(Vec2(0,0));
+//    array->addControlPoint(Vec2(point3X - curX, point3Y - curY));
+//    array->addControlPoint(Vec2(endX - curX, endY - curY));
+//    array->addControlPoint(Vec2(point3X - curX, point3Y - curY));
+//    array->addControlPoint(Vec2(0,0));
+//    CardinalSplineBy *cardinalSplineBy = CardinalSplineBy::create(8.0f, array, 0);
+//    trackPointSprite->runAction(RepeatForever::create(cardinalSplineBy));
+    
+    PointArray *array = PointArray::create(20);
+    array->addControlPoint(Vec2(curX,curY));
+    array->addControlPoint(Vec2(point2X, point2Y));
+    array->addControlPoint(Vec2(point1X, point1Y));
+    array->addControlPoint(Vec2(point2X, point2Y));
+    array->addControlPoint(Vec2(curX,curY));
+    array->addControlPoint(Vec2(point3X, point3Y));
+    array->addControlPoint(Vec2(endX, endY));
+    array->addControlPoint(Vec2(point3X, point3Y));
+    array->addControlPoint(Vec2(curX,curY));
+    CardinalSplineTo *cardinalSplineTo = CardinalSplineTo::create(8.0f, array, 0);
+    trackPointSprite->runAction(RepeatForever::create(cardinalSplineTo));
 }
 
 void GameView::update(float dTime){
