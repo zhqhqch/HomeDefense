@@ -7,6 +7,7 @@
 
 #include "AirShipSprite.h"
 #include "AirShipRopeSprite.h"
+#include "EllipseBy.h"
 
 USING_NS_CC;
 
@@ -16,6 +17,34 @@ AirShip::AirShip(float x, float y){
 	y = y + getContentSize().height;
 	setPosition(x, y);
     
-    startX = x;
-    startY = y;
+    isPause = false;
+}
+
+void AirShip::makeCurPosition() {
+    Point p = getPosition();
+    startX = p.x;
+    startY = p.y;
+}
+
+void AirShip::startMove() {
+
+    if (isPause) {
+        this->resume();
+    } else {
+        //椭圆旋转
+        EllipseConfig config;
+        config.ellipseA = 5;
+        config.ellipseB = 15;
+        config.cenPos = Vec2(startX, startY);
+        config.isAntiClockwise = true;
+        config.startAngle = 0;
+        config.selfAngle = 45;
+        
+        this->runAction(RepeatForever::create(EllipseBy::create(2.5f,config)));
+    }
+}
+
+void AirShip::stopMove() {
+    this->pause();
+    isPause = true;
 }

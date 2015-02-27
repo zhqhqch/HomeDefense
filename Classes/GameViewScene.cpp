@@ -86,7 +86,7 @@ bool GameView::init(){
     earthLayer->setPhyWorld(this->getPhysicsWorld());
     this->addChild(earthLayer, 1);
     
-    earthTurn = false;
+    shipMove = false;
     
     auto bottomSprite = Sprite::create("bottom.png");
     bottomSprite->setAnchorPoint(Vec2(0 , 0));
@@ -160,38 +160,22 @@ void GameView::onEnterTransitionDidFinish(){
 	airshipSprite->runAction(seq);
 
 	earthLayer->startTurn();
-    earthTurn = true;
 }
 
 
 void GameView::startGame() {
     earthLayer->showOre();
     
-    //椭圆旋转
-	EllipseConfig config;
-	config.ellipseA = 5;
-	config.ellipseB = 15;
-	config.cenPos = airshipSprite->getPosition();
-	config.isAntiClockwise = true;
-	config.startAngle = 0;
-	config.selfAngle = 45;
+    airshipSprite->makeCurPosition();
+	airshipSprite->startMove();
+    shipMove = true;
     
-	airshipSprite->runAction(RepeatForever::create(EllipseBy::create(2.5f,config)));
-    
-    Sprite *trackSprite = Sprite::create("track_arc.png");
+    trackSprite = Sprite::create("track_arc.png");
     trackSprite->setPosition(airshipSprite->getPosition().x, airshipSprite->getPosition().y - 100);
     this->addChild(trackSprite, 2);
+
     
-//  EllipseConfig config1;
-//	config1.ellipseA = 20;
-//	config1.ellipseB = 40;
-//	config1.cenPos = trackSprite->getPosition();
-//	config1.isAntiClockwise = true;
-//	config1.startAngle = 0;
-//	config1.selfAngle = 45;
-//	trackSprite->runAction(RepeatForever::create(EllipseBy::create(2.5,config1)));
-    
-    Sprite *trackPointSprite = Sprite::create("track_point.png");
+    trackPointSprite = Sprite::create("track_point.png");
     float x = trackSprite->getPosition().x;
     float y = trackSprite->getPosition().y;
     y -= 20;
@@ -260,14 +244,23 @@ void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
 }
 
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
+    
+    
 	log("########$$$$$$$$$$$");
     
-    if (earthTurn) {
-        earthLayer->stopTurn();
-        earthTurn = false;
+    if (shipMove) {
+//        earthLayer->stopTurn();
+        airshipSprite->stopMove();
+        shipMove = false;
+        trackSprite->setVisible(false);
+        trackPointSprite->setVisible(false);
+        
     } else {
-        earthLayer->startTurn();
-        earthTurn = true;
+//        earthLayer->startTurn();
+        airshipSprite->startMove();
+        shipMove = true;
+        trackSprite->setVisible(true);
+        trackPointSprite->setVisible(true);
     }
     
 }

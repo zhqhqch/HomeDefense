@@ -16,11 +16,15 @@ class AirShip : public cocos2d::Sprite {
 
 public:
 	AirShip(float x, float y);
+    void startMove();
+    void stopMove();
+    void makeCurPosition();
 
 private:
 	AirShipRope * ropeSprite;
     float startX;
     float startY;
+    bool isPause;
 };
 
 #endif /* AIRSHIPSPRITE_H_ */

@@ -23,7 +23,9 @@ private:
 	cocos2d::PhysicsWorld* m_world;
 	AirShip *airshipSprite;
 	Earth *earthLayer;
-    bool earthTurn;
+    bool shipMove;
+    cocos2d::Sprite *trackPointSprite;
+    cocos2d::Sprite *trackSprite;
 
 
 	void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};
