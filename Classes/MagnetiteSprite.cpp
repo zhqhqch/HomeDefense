@@ -130,6 +130,7 @@ void Magnetite::backWithOreToStartPoint(){
 
 
 void Magnetite::show() {
+    move = true;
     setVisible(true);
     
     auto body = PhysicsBody::createCircle(getContentSize().width / 2);
@@ -143,6 +144,7 @@ void Magnetite::show() {
 }
 
 void Magnetite::hide() {
+    move = false;
     setVisible(false);
     
     setPhysicsBody(nullptr);

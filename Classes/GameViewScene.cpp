@@ -169,8 +169,6 @@ void GameView::onEnterTransitionDidFinish(){
 	airshipSprite->runAction(seq);
 
 	earthLayer->startTurn();
-    
-    isReady = true;
 }
 
 
@@ -235,6 +233,8 @@ void GameView::startGame() {
     array->addControlPoint(Vec2(curX,curY));
     CardinalSplineTo *cardinalSplineTo = CardinalSplineTo::create(8.0f, array, 0);
     trackPointSprite->runAction(RepeatForever::create(cardinalSplineTo));
+    
+    isReady = true;
 }
 
 void GameView::update(float dTime){
@@ -281,14 +281,16 @@ bool GameView::onContactBegin(const PhysicsContact& contact){
 }
 
 bool GameView::onTouchBegan(Touch *touch, Event *unused_event) {
-    return true;
+    return isReady;
 }
 
 void GameView::onTouchMoved(Touch *touch, Event *unused_event) {
 }
 
 void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
-    
+    if(magnetite->isMove()){
+        return;
+    }
     
 	log("########$$$$$$$$$$$");
     
