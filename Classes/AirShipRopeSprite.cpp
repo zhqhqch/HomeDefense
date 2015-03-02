@@ -8,12 +8,12 @@
 #include "AirShipRopeSprite.h"
 #include "Vec2Util.h"
 #include "Constants.h"
-#include "GameViewOldScene.h"
+#include "GameViewScene.h"
 
 USING_NS_CC;
 
 
-AirShipRope::AirShipRope(GameViewOld * gw, float x, float y,float ca) {
+AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca) {
     startX = x;
     startY = y;
     catchAngle = ca;
@@ -38,13 +38,16 @@ void AirShipRope::refreshRopeLen(Point point, bool isReach, bool isBack) {
 	_sway = false;
 	moving = true;
 	this->stopAllActions();
+    
+    this->setRotation(catchAngle);
+    
     Vec2 start = Vec2(startX, startY);
     float len = point.distance(start);
     if(isReach){
     	roepLen = len;
     } else if(!isReach && isBack && len < roepLen){
     	setTextureRect(Rect(0, 0, getTextureRect().size.width, roepLen));
-    	gameView->stopMagnetite();
+//    	gameView->stopMagnetite();
     	return;
     }
     setTextureRect(Rect(0, 0, getTextureRect().size.width, len));

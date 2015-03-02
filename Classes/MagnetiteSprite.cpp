@@ -7,27 +7,21 @@
 //
 
 #include "MagnetiteSprite.h"
-#include "GameViewOldScene.h"
 #include "AirShipRopeSprite.h"
 #include "Constants.h"
+#include "GameViewScene.h"
 
 USING_NS_CC;
 
-Magnetite::Magnetite(GameViewOld *gw, float x, float y){
+Magnetite::Magnetite(GameView *gw, float x, float y){
     gameView = gw;
     
     Sprite::initWithFile("target_point.png");
 	setPosition(x, y);
-    auto body = PhysicsBody::createCircle(getContentSize().width / 2);
-	body->setDynamic(true);
-	body->setContactTestBitmask(0x0001);
-	body->setCategoryBitmask(0x0001);
-	body->setCollisionBitmask(0x0001);
-	body->setGravityEnable(false);
-	body->getFirstShape()->setRestitution(0.5f);
-	setPhysicsBody(body);
 
 	showScore = false;
+    move = false;
+    backRope = false;
 }
 
 
@@ -65,10 +59,10 @@ void Magnetite::readySway() {
 	move = false;
 	reachRope = false;
     log("$$$$$$$$$$$$$$$$");
-    gameView->startSway();
-    if(showScore){
-    	gameView->catchBack();
-    }
+//    gameView->startSway();
+//    if(showScore){
+//    	gameView->catchBack();
+//    }
 }
 
 void Magnetite::startFollow(Point point) {
@@ -81,14 +75,16 @@ void Magnetite::stopMove(){
 }
 
 void Magnetite::moveToPoint(Point curPoint, Point targetPoint) {
+    setPosition(curPoint);
+    
 	move = true;
 	startPoint = curPoint;
 	showScore = false;
 	backRope = false;
 
-	log("start^^^^^%f===%f", startPoint.x, startPoint.y);
+	log("start^^^^^%f===%f---%f---%f", startPoint.x, startPoint.y, targetPoint.x, targetPoint.y);
 
-//	MoveTo * moveTo = MoveTo::create(5.0f, targetPoint);
+//	MoveTo * moveTo = MoveTo::create(2.0f, targetPoint);
 //	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Magnetite::finishMove, this, kMagnetiteFinishMove_Back));
 //	Sequence * seq = Sequence::create(moveTo, fun, NULL);
 //	this->runAction(seq);
@@ -96,7 +92,8 @@ void Magnetite::moveToPoint(Point curPoint, Point targetPoint) {
 	Vec2 tmp = Vec2(targetPoint.x, targetPoint.y);
 	tmp.subtract(getPosition());
 	tmp.normalize();
-	moveVelocity = tmp.operator *=(200);
+    log("%f==$$$$%f", tmp.x, tmp.y);
+	moveVelocity = tmp.operator *=(100);
 	getPhysicsBody()->setVelocity(moveVelocity);
 }
 
@@ -129,4 +126,24 @@ void Magnetite::backWithOreToStartPoint(){
 	moveVelocity.negate();
 	moveVelocity = moveVelocity.operator /(10);
 	getPhysicsBody()->setVelocity(moveVelocity);
+}
+
+
+void Magnetite::show() {
+    setVisible(true);
+    
+    auto body = PhysicsBody::createCircle(getContentSize().width / 2);
+	body->setDynamic(true);
+	body->setContactTestBitmask(0x0001);
+	body->setCategoryBitmask(0x0001);
+	body->setCollisionBitmask(0x0001);
+	body->setGravityEnable(false);
+	body->getFirstShape()->setRestitution(0.5f);
+	setPhysicsBody(body);
+}
+
+void Magnetite::hide() {
+    setVisible(false);
+    
+    setPhysicsBody(nullptr);
 }

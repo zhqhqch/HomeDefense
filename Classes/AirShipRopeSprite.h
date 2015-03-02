@@ -11,12 +11,12 @@
 
 #include "cocos2d.h"
 #include "OreSprite.h"
-class GameViewOld;
+class GameView;
 
 class AirShipRope : public cocos2d::Sprite {
 
 public:
-	AirShipRope(GameViewOld * gw, float x, float y,float catchAngle);
+	AirShipRope(GameView * gw, float x, float y,float catchAngle);
     
 	//获取绳子延伸方向上，在屏幕边缘上的点
     cocos2d::Point grab();
@@ -43,7 +43,7 @@ private:
     bool _sway;
     float roepLen;
     
-    GameViewOld *gameView;
+    GameView *gameView;
 
     cocos2d::Vec2 getTargetPoint(float rotation);
 

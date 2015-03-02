@@ -12,6 +12,9 @@
 #include "AirShipSprite.h"
 #include "EarthLayer.h"
 #include "OreSprite.h"
+#include "MagnetiteSprite.h"
+#include "OreSprite.h"
+#include "AirShipRopeSprite.h"
 
 class GameView : public cocos2d::Scene {
 public:
@@ -26,6 +29,12 @@ private:
     bool shipMove;
     cocos2d::Sprite *trackPointSprite;
     cocos2d::Sprite *trackSprite;
+    Magnetite *magnetite;
+    bool isCatch;
+    Ore *targetOre;
+    AirShipRope *airShipRopeSprite;
+    bool isReady;
+    
 
 
 	void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};

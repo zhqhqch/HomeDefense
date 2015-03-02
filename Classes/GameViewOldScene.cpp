@@ -257,10 +257,10 @@ void GameViewOld::showItem(){
 	catchAngle = atan2(ropeStartPoint.x,ropeStartPoint.y);
 	catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
     
-    airShipRopeSprite = new AirShipRope(this, ropeStartPoint.x, ropeStartPoint.y,catchAngle);
+    airShipRopeSprite = new AirShipRope(nullptr, ropeStartPoint.x, ropeStartPoint.y,catchAngle);
     this->addChild(airShipRopeSprite,3);
     
-    magnetite = new Magnetite(this, ropeStartPoint.x, ropeStartPoint.y);
+    magnetite = new Magnetite(nullptr, ropeStartPoint.x, ropeStartPoint.y);
     this->addChild(magnetite,3);
 
     

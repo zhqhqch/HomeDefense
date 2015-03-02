@@ -12,12 +12,12 @@
 
 #include "cocos2d.h"
 
-class GameViewOld;
+class GameView;
 class AirShipRope;
 
 class Magnetite : public cocos2d::Sprite {
 public:
-    Magnetite(GameViewOld *gw, float x, float y);
+    Magnetite(GameView *gw, float x, float y);
     
     //将磁铁石伸出飞船
     void reach();
@@ -41,6 +41,9 @@ public:
     
     //停止移动，将Velocity设置为0
     void stopMove();
+    
+    void show();
+    void hide();
 
     cocos2d::Point getStartPoint(){return startPoint;}
 private:
@@ -48,7 +51,7 @@ private:
     bool showScore;
     bool reachRope;
     bool backRope;
-    GameViewOld *gameView;
+    GameView *gameView;
     cocos2d::Point startPoint;
     cocos2d::Vec2 moveVelocity;
     

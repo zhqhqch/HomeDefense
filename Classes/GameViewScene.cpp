@@ -29,6 +29,8 @@ bool GameView::init(){
 	if(!Scene::init()){
 		return false;
 	}
+    
+    isReady = false;
 
 	auto listener = EventListenerTouchOneByOne::create();       //单点触摸
 	//auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸
@@ -129,6 +131,13 @@ bool GameView::init(){
     bottomMenu->setPosition(Vec2::ZERO);
     this->addChild(bottomMenu, 3);
     
+    
+    magnetite = new Magnetite(this, 0, 0);
+    this->addChild(magnetite,3);
+    
+    
+    this->scheduleUpdate();
+    
 	return true;
 }
 
@@ -160,6 +169,8 @@ void GameView::onEnterTransitionDidFinish(){
 	airshipSprite->runAction(seq);
 
 	earthLayer->startTurn();
+    
+    isReady = true;
 }
 
 
@@ -227,12 +238,45 @@ void GameView::startGame() {
 }
 
 void GameView::update(float dTime){
-	log("@@@@@@@@@@@@@@@@@@@@@@@@@");
+    if (isReady) {
+        if(magnetite->isMove()){
+            airShipRopeSprite->refreshRopeLen(magnetite->getPosition(),
+                                              magnetite->isReach(), magnetite->isBack());
+        }
+        if (magnetite->isBack()) {
+            bool backEnd = airshipSprite->getBoundingBox().intersectsRect(magnetite->getBoundingBox());
+            if (backEnd) {
+                airShipRopeSprite->removeFromParentAndCleanup(true);
+                magnetite->hide();
+                
+                airshipSprite->startMove();
+                shipMove = true;
+                trackSprite->setVisible(true);
+                trackPointSprite->setVisible(true);
+            }
+        }
+    }
+	
 }
 
 bool GameView::onContactBegin(const PhysicsContact& contact){
+    if (isCatch) {
+        return true;
+    }
 	log("^^^^^^^^^^^^^^^^^^^^");
-
+	auto sp1 = (Sprite *)contact.getShapeA()->getBody()->getNode();
+	auto sp2 = (Sprite *)contact.getShapeB()->getBody()->getNode();
+	if(sp1->getTag() > 0 && sp1->getTag() != kWallTag){
+		targetOre = (Ore *) sp1;
+		isCatch = true;
+		magnetite->backWithOreToStartPoint();
+	} else if(sp2->getTag() > 0 && sp2->getTag() != kWallTag){
+		targetOre = (Ore *) sp2;
+		isCatch = true;
+		magnetite->backWithOreToStartPoint();
+	} else if(sp1->getTag() == kWallTag || sp2->getTag() == kWallTag){
+        magnetite->backToStartPoint();
+    }
 	return true;
 }
 
@@ -254,6 +298,21 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
         shipMove = false;
         trackSprite->setVisible(false);
         trackPointSprite->setVisible(false);
+        
+        Point curPoint = airshipSprite->getPosition();
+        magnetite->show();
+        magnetite->moveToPoint(curPoint, trackPointSprite->getPosition());
+
+        
+        
+        float catchAngle = atan2(curPoint.x,curPoint.y);
+        float pointX = trackPointSprite->getPosition().x;
+        if (pointX > curPoint.x) {
+            catchAngle = -catchAngle;
+        }
+        catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
+        airShipRopeSprite = new AirShipRope(this, curPoint.x,curPoint.y,catchAngle);
+        this->addChild(airShipRopeSprite,3);
         
     } else {
 //        earthLayer->startTurn();
