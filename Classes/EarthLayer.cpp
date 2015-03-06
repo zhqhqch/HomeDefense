@@ -25,25 +25,51 @@ bool Earth::init(){
 	float w = visibleSize.width / 2;
 	float h = visibleSize.height / 2;
 
-	Sprite * sprite1 = Sprite::create("earth_1.png");
-	sprite1->setAnchorPoint(Vec2(1, 0));
-	sprite1->setPosition(w, h);
-	this->addChild(sprite1, 1);
+    
+    Sprite *layer1 = Sprite::create();
+    
+	Sprite * earth1 = Sprite::createWithSpriteFrameName("earth-1.png");
+	earth1->setAnchorPoint(Vec2(1, 0));
+	earth1->setPosition(w, h);
+	layer1->addChild(earth1);
 
-	Sprite * sprite2 = Sprite::create("earth_2.png");
-	sprite2->setAnchorPoint(Vec2(0, 0));
-	sprite2->setPosition(w, h);
-	this->addChild(sprite2, 1);
+	Sprite * earth2 = Sprite::createWithSpriteFrameName("earth-2.png");
+	earth2->setAnchorPoint(Vec2(0, 0));
+	earth2->setPosition(w, h);
+	layer1->addChild(earth2);
 
-	Sprite * sprite3 = Sprite::create("earth_3.png");
-	sprite3->setAnchorPoint(Vec2(0, 1));
-	sprite3->setPosition(w, h);
-	this->addChild(sprite3, 1);
+	Sprite * earth3 = Sprite::createWithSpriteFrameName("earth-4.png");
+	earth3->setAnchorPoint(Vec2(0, 1));
+	earth3->setPosition(w, h);
+	layer1->addChild(earth3);
 
-	Sprite * sprite4 = Sprite::create("earth_4.png");
-	sprite4->setAnchorPoint(Vec2(1, 1));
-	sprite4->setPosition(w, h);
-	this->addChild(sprite4, 1);
+	Sprite * earth4 = Sprite::createWithSpriteFrameName("earth-3.png");
+	earth4->setAnchorPoint(Vec2(1, 1));
+	earth4->setPosition(w, h);
+	layer1->addChild(earth4);
+    
+    ParallaxNode *parallaxNode = ParallaxNode::create();
+    parallaxNode->addChild(layer1, 1, Vec2(1.0f, 1.0f), Vec2(0.0f, 0.0f));
+
+    
+    float xOffset = 0;
+
+    
+    Sprite *layer2 = Sprite::create();
+    
+    Sprite * plant1 = Sprite::createWithSpriteFrameName("plant1.png");
+    plant1->setRotation(65);
+    plant1->setPosition(earth1->getContentSize().width, earth1->getContentSize().height);
+    layer2->addChild(plant1);
+    
+    xOffset = w * 0.3f;
+    
+    parallaxNode->addChild(layer2, 2, Vec2(0.2f, 1.0f), Vec2(xOffset, 0.0f));
+    
+    
+    
+    
+    this->addChild(parallaxNode);
     
     
 //    Sprite * ore1 = Sprite::create("item_a_1.png");
@@ -53,7 +79,7 @@ bool Earth::init(){
     Ore* itemA1 = new Ore("item_a_1.png", 100, 150, 20, 3);
 	itemA1->setOpacity(0);
 	itemA1->setTag(10);
-	this->addChild(itemA1, 2);
+	this->addChild(itemA1, 1);
 	itemArr.pushBack(itemA1);
     
 	Ore* itemA2 = new Ore("item_a_2.png", 400, 80, 30, 4);

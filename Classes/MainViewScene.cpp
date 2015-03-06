@@ -2,6 +2,7 @@
 #include "GameViewOldScene.h"
 #include "TransitionUtil.h"
 #include "GameViewScene.h"
+#include "base/ZipUtils.h"
 
 USING_NS_CC;
 
@@ -29,6 +30,13 @@ bool MainView::init()
     {
         return false;
     }
+    
+    
+    //设置纹理解密key83a16bbf7480499fc4fc4c6349a381b8
+    ZipUtils::setPvrEncryptionKeyPart(0, 0x83a16bbf);
+    ZipUtils::setPvrEncryptionKeyPart(1, 0x7480499f);
+    ZipUtils::setPvrEncryptionKeyPart(2, 0xc4fc4c63);
+    ZipUtils::setPvrEncryptionKeyPart(3, 0x49a381b8);
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
 

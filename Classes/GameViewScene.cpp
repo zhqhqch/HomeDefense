@@ -10,6 +10,7 @@
 #include "MainViewScene.h"
 #include "Constants.h"
 #include "EllipseBy.h"
+#include "PropMenuItemSprite.h"
 
 
 USING_NS_CC;
@@ -31,6 +32,7 @@ bool GameView::init(){
 	}
     
     isReady = false;
+    isPause = false;
 
 	auto listener = EventListenerTouchOneByOne::create();       //单点触摸
 	//auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸
@@ -73,11 +75,13 @@ bool GameView::init(){
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
-	auto gameBgSprite = Sprite::create("game_bg.jpg");
+	auto gameBgSprite = Sprite::create("game-bg.jpg");
 	gameBgSprite->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2));
 	this->addChild(gameBgSprite, 0);
 
-
+    //加载纹理
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("level1.plist", "level1.pvr.ccz");
+    
 	airshipSprite = new AirShip(visibleSize.width / 2, visibleSize.height);
 	airshipSprite->setVisible(false);
 	this->addChild(airshipSprite, 2);
@@ -90,44 +94,38 @@ bool GameView::init(){
     
     shipMove = false;
     
-    auto bottomSprite = Sprite::create("bottom.png");
+    auto bottomSprite = Sprite::createWithSpriteFrameName("controlui-bottom.png");
     bottomSprite->setAnchorPoint(Vec2(0 , 0));
     bottomSprite->setPosition(0, 0);
     this->addChild(bottomSprite, 2);
 
+    auto pauseItem = MenuItemSprite::create(Sprite::createWithSpriteFrameName("pause.png"),
+                                 Sprite::createWithSpriteFrameName("pause-selected.png"),
+                                 CC_CALLBACK_0(GameView::pauseGame, this));
     
-    auto goItem = MenuItemImage::create("go.png",
-                                        "go.png",
-                                        CC_CALLBACK_0(GameView::catchOre, this));
+    float bottomX = pauseItem->getContentSize().width / 2 + 30;
+    float bottomY = pauseItem->getContentSize().height / 2 + 30;
     
-    float bottomY = goItem->getContentSize().height / 2 + 30;
+    pauseItem->setPosition(Vec2(bottomX, bottomY));
     
-    goItem->setPosition(Vec2(visibleSize.width - goItem->getContentSize().width / 2 - 30,
-                             bottomY));
+
     
-    auto propItem1 = MenuItemImage::create("prop.png",
-                                          "prop.png",
-                                          CC_CALLBACK_0(GameView::useProp, this, 1));
-    float bottomX = propItem1->getContentSize().width / 2 + 30;
+    PropSprite *speedItem = new PropSprite(kSpeedProp, 3, "speed");
+    bottomX += speedItem->getContentSize().width / 2 + 150;
+    speedItem->setPosition(Vec2(bottomX,bottomY));
     
-    propItem1->setPosition(Vec2(bottomX,
-                               bottomY));
     
-    auto propItem2 = MenuItemImage::create("prop.png",
-                                           "prop.png",
-                                           CC_CALLBACK_0(GameView::useProp, this, 2));
-    bottomX += propItem2->getContentSize().width + 30;
-    propItem2->setPosition(Vec2(bottomX,
+    PropSprite *bombItem = new PropSprite(kBombProp, 10, "bomb");
+    bottomX += bombItem->getContentSize().width + 30;
+    bombItem->setPosition(Vec2(bottomX,
                                 bottomY));
     
-    auto propItem3 = MenuItemImage::create("prop.png",
-                                           "prop.png",
-                                           CC_CALLBACK_0(GameView::useProp, this, 3));
-    bottomX += propItem3->getContentSize().width + 30;
-    propItem3->setPosition(Vec2(bottomX,
+    PropSprite *timeItem = new PropSprite(kTimeProp, 103, "time");
+    bottomX += timeItem->getContentSize().width + 30;
+    timeItem->setPosition(Vec2(bottomX,
                                 bottomY));
     
-    auto bottomMenu = Menu::create(propItem1,propItem2, propItem3,goItem, NULL);
+    auto bottomMenu = Menu::create(pauseItem, speedItem, bombItem, timeItem, NULL);
     bottomMenu->setPosition(Vec2::ZERO);
     this->addChild(bottomMenu, 3);
     
@@ -146,8 +144,15 @@ void GameView::useProp(int propID) {
     log("useprop***********************%d", propID);
 }
 
-void GameView::catchOre() {
-    log("####################catchOre");
+void GameView::pauseGame() {
+    log("####################pauseGame");
+    if (isPause) {
+        this->pause();
+        isPause = true;
+    } else {
+        this->resume();
+        isPause = false;
+    }
 }
 
 void GameView::menuBackCallback(Ref* pSender){

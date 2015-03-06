@@ -35,6 +35,8 @@ private:
     AirShipRope *airShipRopeSprite;
     bool isReady;
     
+    bool isPause;
+    
 
 
 	void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};
@@ -59,8 +61,8 @@ private:
     //使用道具
     void useProp(int propID);
     
-    //抓取矿石
-    void catchOre();
+    //暂停或继续游戏
+    void pauseGame();
 };
 
 

@@ -21,4 +21,8 @@
 #define kMoveBackTime 3.0f
 
 
+#define kSpeedProp 1
+#define kBombProp 2
+#define kTimeProp 3
+
 #endif
