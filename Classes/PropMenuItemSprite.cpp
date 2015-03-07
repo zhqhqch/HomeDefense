@@ -40,6 +40,10 @@ PropSprite::PropSprite(int pID, int count, const std::string& imageName){
     countLable->setPosition(speedNumSprite->getContentSize().width / 2, speedNumSprite->getContentSize().height / 2);
     
     speedNumSprite->addChild(countLable);
+
+    if(count <= 0){
+    	setEnabled(false);
+    }
 }
 
 

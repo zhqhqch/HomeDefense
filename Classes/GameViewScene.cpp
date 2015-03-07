@@ -11,6 +11,8 @@
 #include "Constants.h"
 #include "EllipseBy.h"
 #include "PropMenuItemSprite.h"
+#include "EncyptUtil.h"
+#include "DataUtil.h"
 
 
 USING_NS_CC;
@@ -33,6 +35,17 @@ bool GameView::init(){
     
     isReady = false;
     isPause = false;
+
+    std::string s = EncyptUtil::encrypt("胡七号sdfdsds");
+    log("========%s", s.c_str());
+    std::string s1 = EncyptUtil::decrypt(s);
+    log("====########====%s", s1.c_str());
+
+    DataUtil::saveInt("test", 100);
+    int a = DataUtil::getIntForKey("test");
+    log("!!!!!!!!!!%d", a);
+    log("file path:%s", UserDefault::getXMLFilePath().c_str());
+
 
 	auto listener = EventListenerTouchOneByOne::create();       //单点触摸
 	//auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸
@@ -110,7 +123,7 @@ bool GameView::init(){
     
 
     
-    PropSprite *speedItem = new PropSprite(kSpeedProp, 3, "speed");
+    PropSprite *speedItem = new PropSprite(kSpeedProp, 0, "speed");
     bottomX += speedItem->getContentSize().width / 2 + 150;
     speedItem->setPosition(Vec2(bottomX,bottomY));
     

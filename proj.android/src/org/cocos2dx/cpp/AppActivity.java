@@ -26,7 +26,54 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.cpp;
 
+import java.io.ByteArrayInputStream;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.os.Bundle;
+
 public class AppActivity extends Cocos2dxActivity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		getSingInfo();
+	}
+	
+	
+	private void getSingInfo() {
+		try {
+			PackageInfo packageInfo = getPackageManager().getPackageInfo(
+					"com.homedefense", PackageManager.GET_SIGNATURES);
+			Signature[] signs = packageInfo.signatures;
+			Signature sign = signs[0];
+			parseSignature(sign.toByteArray());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void parseSignature(byte[] signature) {
+		try {
+			CertificateFactory certFactory = CertificateFactory
+					.getInstance("X.509");
+			X509Certificate cert = (X509Certificate) certFactory
+					.generateCertificate(new ByteArrayInputStream(signature));
+			String pubKey = cert.getPublicKey().toString();
+			String signNumber = cert.getSerialNumber().toString();
+			System.out.println("signName:" + cert.getSigAlgName());
+			System.out.println("pubKey:" + pubKey);
+			System.out.println("signNumber:" + signNumber);
+			System.out.println("subjectDN:" + cert.getSubjectDN().toString());
+		} catch (CertificateException e) {
+			e.printStackTrace();
+		}
+	}
 }
