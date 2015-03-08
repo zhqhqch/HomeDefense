@@ -32,6 +32,11 @@ private:
     
     cocos2d::PhysicsWorld* m_world;
     
+    cocos2d::Sprite * layer1;
+    cocos2d::Sprite * layer2;
+    cocos2d::Sprite * layer3;
+    cocos2d::Sprite * layer4;
+    
 	bool init();
     
 };

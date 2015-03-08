@@ -65,16 +65,6 @@ bool GameView::init(){
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
-	auto body = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
-	body->setContactTestBitmask(0x0001);
-	body->setCategoryBitmask(0x0001);
-	body->setCollisionBitmask(0x0001);
-	auto edgeNode = Node::create();
-	edgeNode->setPosition(Point(visibleSize.width/2,visibleSize.height/2));
-	edgeNode->setPhysicsBody(body);
-	edgeNode->setTag(kWallTag);
-	this->addChild(edgeNode);
-
 	Label * backLable = Label::create();
 	backLable->setString("返回");
 	backLable->setSystemFontSize(48);
@@ -142,6 +132,19 @@ bool GameView::init(){
     bottomMenu->setPosition(Vec2::ZERO);
     this->addChild(bottomMenu, 3);
     
+    float x = visibleSize.width;
+    float y = visibleSize.height - bottomSprite->getContentSize().height;
+    
+    auto body = PhysicsBody::createEdgeBox(Size(x, y), PHYSICSBODY_MATERIAL_DEFAULT, 3);
+	body->setContactTestBitmask(0x0001);
+	body->setCategoryBitmask(0x0001);
+	body->setCollisionBitmask(0x0001);
+	auto edgeNode = Node::create();
+	edgeNode->setPosition(Point(visibleSize.width/2,visibleSize.height/2 + bottomSprite->getContentSize().height / 2));
+	edgeNode->setPhysicsBody(body);
+	edgeNode->setTag(kWallTag);
+	this->addChild(edgeNode);
+    
     
     magnetite = new Magnetite(this, 0, 0);
     this->addChild(magnetite,3);
@@ -161,9 +164,10 @@ void GameView::pauseGame() {
     log("####################pauseGame");
     if (isPause) {
         this->pause();
+        Director::getInstance()->pause();
         isPause = true;
     } else {
-        this->resume();
+        Director::getInstance()->resume();
         isPause = false;
     }
 }
