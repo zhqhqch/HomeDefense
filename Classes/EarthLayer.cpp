@@ -194,8 +194,8 @@ bool Earth::init(){
     layer4->addChild(rock3_2_1);
     layer4->addChild(rock3_2_2);
     this->addChild(layer1, 4);
-    this->addChild(layer2, 3);
-    this->addChild(layer3, 2);
+    this->addChild(layer2, 2);
+    this->addChild(layer3, 3);
     this->addChild(layer4, 1);
     
 
