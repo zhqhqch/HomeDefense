@@ -13,6 +13,7 @@
 #include "PropMenuItemSprite.h"
 #include "EncyptUtil.h"
 #include "DataUtil.h"
+#include "Checkpoint.h"
 
 
 USING_NS_CC;
@@ -46,6 +47,8 @@ bool GameView::init(){
     log("!!!!!!!!!!%d", a);
     log("file path:%s", UserDefault::getXMLFilePath().c_str());
 
+    Checkpoint *checkpoint_1 = new Checkpoint(1);
+    log("&&&&&&&&&&&&&&%d", checkpoint_1->id);
 
 	auto listener = EventListenerTouchOneByOne::create();       //单点触摸
 	//auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸
