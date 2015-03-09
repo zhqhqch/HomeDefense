@@ -33,7 +33,7 @@ private:
 	};
 
 public:
-	Checkpoint(int checkpointID);
+	Checkpoint(std::string data);
 
 	int id;
 	float layer1Speed;
