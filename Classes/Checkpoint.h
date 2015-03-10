@@ -36,6 +36,7 @@ public:
 	Checkpoint(int checkpointID);
 
 	int id;
+    int rockCount;
 	float layer1Speed;
 	float layer2Speed;
 	float layer3Speed;

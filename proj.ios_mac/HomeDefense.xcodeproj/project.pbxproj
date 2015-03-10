@@ -54,8 +54,6 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
-		9F06027D1A8763EA00EFB88C /* bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F06027A1A8763EA00EFB88C /* bottom.png */; };
-		9F06027E1A8763EA00EFB88C /* bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F06027A1A8763EA00EFB88C /* bottom.png */; };
 		9F0D06631A63EF490044089E /* item_a_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F0D065A1A63EF490044089E /* item_a_1.png */; };
 		9F0D06641A63EF490044089E /* item_a_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F0D065A1A63EF490044089E /* item_a_1.png */; };
 		9F0D06651A63EF490044089E /* item_a_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F0D065B1A63EF490044089E /* item_a_2.png */; };
@@ -86,6 +84,8 @@
 		9F192C5A1AA9E848001AE79C /* level1.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9F192C581AA9E848001AE79C /* level1.pvr.ccz */; };
 		9F192C5D1AA9EE02001AE79C /* PropMenuItemSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F192C5B1AA9EE02001AE79C /* PropMenuItemSprite.cpp */; };
 		9F192C5E1AA9EE02001AE79C /* PropMenuItemSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F192C5B1AA9EE02001AE79C /* PropMenuItemSprite.cpp */; };
+		9F1E937E1AAF3DE40033E58A /* checkpoint-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F1E937D1AAF3DE40033E58A /* checkpoint-1.json */; };
+		9F1E93811AAF3E180033E58A /* Checkpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E937F1AAF3E180033E58A /* Checkpoint.cpp */; };
 		9F3EA6771A6539AC00F5996E /* AirShipRopeSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */; };
 		9F3EA6781A6539AC00F5996E /* AirShipSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA6751A6539AC00F5996E /* AirShipSprite.cpp */; };
 		9F3EA67D1A6539B500F5996E /* Vec2Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA67B1A6539B500F5996E /* Vec2Util.cpp */; };
@@ -338,7 +338,6 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
-		9F06027A1A8763EA00EFB88C /* bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom.png; sourceTree = "<group>"; };
 		9F0D065A1A63EF490044089E /* item_a_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_a_1.png; sourceTree = "<group>"; };
 		9F0D065B1A63EF490044089E /* item_a_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_a_2.png; sourceTree = "<group>"; };
 		9F0D065C1A63EF490044089E /* item_a_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_a_3.png; sourceTree = "<group>"; };
@@ -357,6 +356,9 @@
 		9F192C581AA9E848001AE79C /* level1.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = level1.pvr.ccz; sourceTree = "<group>"; };
 		9F192C5B1AA9EE02001AE79C /* PropMenuItemSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PropMenuItemSprite.cpp; path = ../Classes/PropMenuItemSprite.cpp; sourceTree = "<group>"; };
 		9F192C5C1AA9EE02001AE79C /* PropMenuItemSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropMenuItemSprite.h; path = ../Classes/PropMenuItemSprite.h; sourceTree = "<group>"; };
+		9F1E937D1AAF3DE40033E58A /* checkpoint-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "checkpoint-1.json"; sourceTree = "<group>"; };
+		9F1E937F1AAF3E180033E58A /* Checkpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Checkpoint.cpp; path = ../Classes/Checkpoint.cpp; sourceTree = "<group>"; };
+		9F1E93801AAF3E180033E58A /* Checkpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Checkpoint.h; path = ../Classes/Checkpoint.h; sourceTree = "<group>"; };
 		9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirShipRopeSprite.cpp; path = ../Classes/AirShipRopeSprite.cpp; sourceTree = "<group>"; };
 		9F3EA6741A6539AC00F5996E /* AirShipRopeSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirShipRopeSprite.h; path = ../Classes/AirShipRopeSprite.h; sourceTree = "<group>"; };
 		9F3EA6751A6539AC00F5996E /* AirShipSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirShipSprite.cpp; path = ../Classes/AirShipSprite.cpp; sourceTree = "<group>"; };
@@ -480,6 +482,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9F1E937F1AAF3E180033E58A /* Checkpoint.cpp */,
+				9F1E93801AAF3E180033E58A /* Checkpoint.h */,
 				9F582E6A1AAB44CF00FB2F7A /* aes.cpp */,
 				9F582E6B1AAB44CF00FB2F7A /* aes.h */,
 				9F582E6C1AAB44CF00FB2F7A /* DataUtil.cpp */,
@@ -634,12 +638,12 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F1E937D1AAF3DE40033E58A /* checkpoint-1.json */,
 				9F192C581AA9E848001AE79C /* level1.pvr.ccz */,
 				9F192C551AA9D587001AE79C /* game-bg.jpg */,
 				9F4443521A87A84A00AEFE94 /* track_point.png */,
 				9F192C4D1AA9D35F001AE79C /* level1.plist */,
 				9F44434D1A87A83300AEFE94 /* track_arc.png */,
-				9F06027A1A8763EA00EFB88C /* bottom.png */,
 				9F5602641A74DFC600A50D5F /* lighting.png */,
 				9F5602651A74DFC600A50D5F /* LightLineRender.fsh */,
 				9F5602661A74DFC600A50D5F /* LightLineRender.vsh */,
@@ -845,6 +849,7 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				9F1E937E1AAF3DE40033E58A /* checkpoint-1.json in Resources */,
 				9F0D066B1A63EF490044089E /* item_b_2.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
@@ -868,7 +873,6 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				9F4443531A87A84A00AEFE94 /* track_point.png in Resources */,
 				9F44434E1A87A83300AEFE94 /* track_arc.png in Resources */,
-				9F06027D1A8763EA00EFB88C /* bottom.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				9F192C561AA9D587001AE79C /* game-bg.jpg in Resources */,
 				9F8825DD1A61373A000067F1 /* shopBtn_selected.png in Resources */,
@@ -909,7 +913,6 @@
 				9F8825DC1A61373A000067F1 /* shareBtn.png in Resources */,
 				9F192C571AA9D587001AE79C /* game-bg.jpg in Resources */,
 				9F0D066E1A63EF490044089E /* item_b_3.png in Resources */,
-				9F06027E1A8763EA00EFB88C /* bottom.png in Resources */,
 				9F8825D81A61373A000067F1 /* main_bg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,6 +932,7 @@
 				9F582E701AAB44CF00FB2F7A /* aes.cpp in Sources */,
 				9F56025E1A74DFB700A50D5F /* LightLineRender.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				9F1E93811AAF3E180033E58A /* Checkpoint.cpp in Sources */,
 				9F3EA6771A6539AC00F5996E /* AirShipRopeSprite.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				9F192C5D1AA9EE02001AE79C /* PropMenuItemSprite.cpp in Sources */,

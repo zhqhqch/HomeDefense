@@ -28,6 +28,7 @@ Checkpoint::Checkpoint(int checkpointID) {
 	}
 
 	id = d["checkPointID"].GetInt();
+    rockCount = d["rockCount"].GetInt();
 	layer1Speed = d["layer1Speed"].GetDouble();
 	layer2Speed = d["layer2Speed"].GetDouble();
 	layer3Speed = d["layer3Speed"].GetDouble();
