@@ -11,26 +11,28 @@
 
 USING_NS_CC;
 
-Checkpoint::Checkpoint(std::string data) {
+Checkpoint::Checkpoint(int checkpointID) {
+	char fileName[20];
+	sprintf(fileName, "checkpoint-%d.json", checkpointID);
+
 	rapidjson::Document d;
-	d.Parse<0>(data.c_str());
-	if (d.HasParseError()) {
-		CCLOG("GetParseError %s\n",d.GetParseError());
+	std::string str = FileUtils::getInstance()->getStringFromFile(fileName);
+
+	d.Parse<0>(str.c_str());
+
+	if(d.HasParseError()){
+		log("GetParseError %s\n", d.GetParseError());
+	}
+	if(!d.IsObject()){
+		return;
 	}
 
-	if (!d.IsObject())
-		return;
-
 	id = d["checkPointID"].GetInt();
+	layer1Speed = d["layer1Speed"].GetDouble();
+	layer2Speed = d["layer2Speed"].GetDouble();
+	layer3Speed = d["layer3Speed"].GetDouble();
+	layer4Speed = d["layer4Speed"].GetDouble();
 
-	//*** 读取 json 文件 ***
-//	rapidjson::Document d;
-//	std::string str = FileUtils::getInstance()->getStringFromFile("levelData1.json");
-//	d.Parse<0>(str.c_str());
-//
-//	log("data====%s", str.c_str());
-//
-//	if(d.HasParseError()){
-//		log("GetParseError %s\n", d.GetParseError());
-//	}
+
+
 }
