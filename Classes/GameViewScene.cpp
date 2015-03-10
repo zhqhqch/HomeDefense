@@ -48,7 +48,11 @@ bool GameView::init(){
     log("file path:%s", UserDefault::getXMLFilePath().c_str());
 
     Checkpoint *checkpoint_1 = new Checkpoint(1);
-    log("&&&&&&&&&&&&&&%d", checkpoint_1->id);
+    Checkpoint::BgData * bgData = checkpoint_1->bgArray.at(0);
+    Checkpoint::RockData * rockData = checkpoint_1->rockArray.at(0);
+
+    log("%d&&&&&&&%f===%s====%s", checkpoint_1->id,
+    		checkpoint_1->layer1Speed, bgData->imageName.c_str(), rockData->imageName.c_str());
 
 	auto listener = EventListenerTouchOneByOne::create();       //单点触摸
 	//auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸

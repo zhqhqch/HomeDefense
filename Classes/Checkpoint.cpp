@@ -33,6 +33,34 @@ Checkpoint::Checkpoint(int checkpointID) {
 	layer3Speed = d["layer3Speed"].GetDouble();
 	layer4Speed = d["layer4Speed"].GetDouble();
 
+	const rapidjson::Value &bgArr = d["bg"];
+	if(bgArr.IsArray()){
+		for (rapidjson::SizeType i = 0; i < bgArr.Size(); i++) {
+			const rapidjson::Value &bg = bgArr[i];
+			BgData * bgData = new BgData();
+			bgData->imageName = bg["bgImageName"].GetString();
+			bgData->positionX = bg["bgPositionX"].GetDouble();
+			bgData->positionY = bg["bgPositionY"].GetDouble();
+			bgData->rotation = bg["bgRotation"].GetDouble();
+			bgData->layerNum = bg["bgLayerNum"].GetInt();
 
+			bgArray.pushBack(bgData);
+		}
+	}
 
+	const rapidjson::Value &rockArr = d["rock"];
+	if(rockArr.IsArray()){
+		for (rapidjson::SizeType i = 0; i < rockArr.Size(); i++) {
+			const rapidjson::Value &rock = rockArr[i];
+			RockData * rockData = new RockData();
+			rockData->imageName = rock["rockImageName"].GetString();
+			rockData->positionX = rock["rockPositionX"].GetDouble();
+			rockData->positionY = rock["rockPositionY"].GetDouble();
+			rockData->rotation = rock["rockRotation"].GetDouble();
+			rockData->score = rock["rockScore"].GetInt();
+			rockData->weight = rock["rockWeight"].GetInt();
+
+			rockArray.pushBack(rockData);
+		}
+	}
 }

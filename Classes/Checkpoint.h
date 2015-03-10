@@ -12,7 +12,7 @@
 #include "cocos2d.h"
 
 class Checkpoint {
-private:
+public:
 	class BgData : public cocos2d::Ref {
 	public:
 		std::string imageName;
