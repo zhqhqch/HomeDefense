@@ -17,6 +17,7 @@ class AirShip : public cocos2d::Sprite {
 public:
 	AirShip(float x, float y);
     void startMove();
+
     void stopMove();
     void makeCurPosition();
 

@@ -32,15 +32,19 @@ void AirShip::startMove() {
         this->resume();
     } else {
         //椭圆旋转
-        EllipseConfig config;
-        config.ellipseA = 5;
-        config.ellipseB = 15;
-        config.cenPos = Vec2(startX, startY);
-        config.isAntiClockwise = true;
-        config.startAngle = 0;
-        config.selfAngle = 45;
-        
-        this->runAction(RepeatForever::create(EllipseBy::create(2.5f,config)));
+//        EllipseConfig config;
+//        config.ellipseA = 5;
+//        config.ellipseB = 15;
+//        config.cenPos = Vec2(startX, startY);
+//        config.isAntiClockwise = true;
+//        config.startAngle = 0;
+//        config.selfAngle = 45;
+//        this->runAction(RepeatForever::create(EllipseBy::create(2.5f,config)));
+
+        MoveTo *moveTo = MoveTo::create(2.0f, Vec2(startX, startY + 30));
+        MoveTo *moveBack = MoveTo::create(2.0f, Vec2(startX, startY));
+		Sequence *seq = Sequence::create(moveTo,moveBack,NULL);
+		this->runAction(RepeatForever::create(seq));
     }
 }
 

@@ -98,7 +98,7 @@ bool GameView::init(){
     
     earthLayer = new Earth();
 	earthLayer->setPosition(visibleSize.width / 2 - earthLayer->getContentSize().width / 2 ,
-			visibleSize.height * 0.6 - earthLayer->getContentSize().height);
+			visibleSize.height * 0.65 - earthLayer->getContentSize().height);
     earthLayer->setPhyWorld(this->getPhysicsWorld());
     this->addChild(earthLayer, 1);
     
@@ -192,7 +192,7 @@ void GameView::onEnterTransitionDidFinish(){
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
-	MoveTo *moveTo = MoveTo::create(2.0f, Vec2(visibleSize.width / 2, visibleSize.height * 0.7));
+	MoveTo *moveTo = MoveTo::create(2.0f, Vec2(visibleSize.width / 2, visibleSize.height * 0.8));
 	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::startGame, this));
 	Sequence *seq = Sequence::create(moveTo,fun,NULL);
 	airshipSprite->runAction(seq);
@@ -330,19 +330,17 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
         trackSprite->setVisible(false);
         trackPointSprite->setVisible(false);
         
-        Point curPoint = airshipSprite->getPosition();
+        Point curAirShipPoint = airshipSprite->getPosition();
         magnetite->show();
-        magnetite->moveToPoint(curPoint, trackPointSprite->getPosition());
+        magnetite->moveToPoint(curAirShipPoint, trackPointSprite->getPosition());
 
+        Point curTrackPoint = trackPointSprite->getPosition();
+        Point tmp = curAirShipPoint - curTrackPoint;
+        tmp.normalize();
         
-        
-        float catchAngle = atan2(curPoint.x,curPoint.y);
-        float pointX = trackPointSprite->getPosition().x;
-        if (pointX > curPoint.x) {
-            catchAngle = -catchAngle;
-        }
+        float catchAngle = atan2(tmp.x,tmp.y);
         catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
-        airShipRopeSprite = new AirShipRope(this, curPoint.x,curPoint.y,catchAngle);
+        airShipRopeSprite = new AirShipRope(this, curAirShipPoint.x,curAirShipPoint.y,catchAngle);
         this->addChild(airShipRopeSprite,3);
         
     } else {
