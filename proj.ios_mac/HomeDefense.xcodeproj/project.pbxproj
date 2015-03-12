@@ -76,16 +76,21 @@
 		9F0D06781A63EF900044089E /* GameViewScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D06751A63EF900044089E /* GameViewScene.cpp */; };
 		9F0D067B1A63EFA60044089E /* TransitionUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D06791A63EFA60044089E /* TransitionUtil.cpp */; };
 		9F0D067C1A63EFA60044089E /* TransitionUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D06791A63EFA60044089E /* TransitionUtil.cpp */; };
-		9F192C4F1AA9D35F001AE79C /* level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F192C4D1AA9D35F001AE79C /* level1.plist */; };
-		9F192C501AA9D35F001AE79C /* level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F192C4D1AA9D35F001AE79C /* level1.plist */; };
 		9F192C561AA9D587001AE79C /* game-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F192C551AA9D587001AE79C /* game-bg.jpg */; };
 		9F192C571AA9D587001AE79C /* game-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F192C551AA9D587001AE79C /* game-bg.jpg */; };
-		9F192C591AA9E848001AE79C /* level1.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9F192C581AA9E848001AE79C /* level1.pvr.ccz */; };
-		9F192C5A1AA9E848001AE79C /* level1.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9F192C581AA9E848001AE79C /* level1.pvr.ccz */; };
 		9F192C5D1AA9EE02001AE79C /* PropMenuItemSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F192C5B1AA9EE02001AE79C /* PropMenuItemSprite.cpp */; };
 		9F192C5E1AA9EE02001AE79C /* PropMenuItemSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F192C5B1AA9EE02001AE79C /* PropMenuItemSprite.cpp */; };
 		9F1E937E1AAF3DE40033E58A /* checkpoint-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F1E937D1AAF3DE40033E58A /* checkpoint-1.json */; };
 		9F1E93811AAF3E180033E58A /* Checkpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E937F1AAF3E180033E58A /* Checkpoint.cpp */; };
+		9F2974CA1AB1D3AA00B0DB6D /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F2974C81AB1D3AA00B0DB6D /* Util.cpp */; };
+		9F2974CF1AB1D79600B0DB6D /* checkpoint1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F2974CB1AB1D79600B0DB6D /* checkpoint1.plist */; };
+		9F2974D01AB1D79600B0DB6D /* checkpoint1.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9F2974CC1AB1D79600B0DB6D /* checkpoint1.pvr.ccz */; };
+		9F2974D11AB1D79600B0DB6D /* game.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F2974CD1AB1D79600B0DB6D /* game.plist */; };
+		9F2974D21AB1D79600B0DB6D /* game.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9F2974CE1AB1D79600B0DB6D /* game.pvr.ccz */; };
+		9F2974D71AB1DAB100B0DB6D /* checkpoint1-earth-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2974D31AB1DAB100B0DB6D /* checkpoint1-earth-1.png */; };
+		9F2974D81AB1DAB100B0DB6D /* checkpoint1-earth-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2974D41AB1DAB100B0DB6D /* checkpoint1-earth-2.png */; };
+		9F2974D91AB1DAB100B0DB6D /* checkpoint1-earth-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2974D51AB1DAB100B0DB6D /* checkpoint1-earth-3.png */; };
+		9F2974DA1AB1DAB100B0DB6D /* checkpoint1-earth-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2974D61AB1DAB100B0DB6D /* checkpoint1-earth-4.png */; };
 		9F3EA6771A6539AC00F5996E /* AirShipRopeSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */; };
 		9F3EA6781A6539AC00F5996E /* AirShipSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA6751A6539AC00F5996E /* AirShipSprite.cpp */; };
 		9F3EA67D1A6539B500F5996E /* Vec2Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EA67B1A6539B500F5996E /* Vec2Util.cpp */; };
@@ -114,8 +119,6 @@
 		9F5602701A74DFE200A50D5F /* VertexVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F56026D1A74DFE200A50D5F /* VertexVector.cpp */; };
 		9F567A3D1A866BC9005CEC71 /* EarthLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F567A391A866BC9005CEC71 /* EarthLayer.cpp */; };
 		9F567A3E1A866BC9005CEC71 /* EarthLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F567A391A866BC9005CEC71 /* EarthLayer.cpp */; };
-		9F567A3F1A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */; };
-		9F567A401A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */; };
 		9F582E701AAB44CF00FB2F7A /* aes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F582E6A1AAB44CF00FB2F7A /* aes.cpp */; };
 		9F582E711AAB44CF00FB2F7A /* aes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F582E6A1AAB44CF00FB2F7A /* aes.cpp */; };
 		9F582E721AAB44CF00FB2F7A /* DataUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F582E6C1AAB44CF00FB2F7A /* DataUtil.cpp */; };
@@ -351,14 +354,22 @@
 		9F0D06761A63EF900044089E /* GameViewScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewScene.h; path = ../Classes/GameViewScene.h; sourceTree = "<group>"; };
 		9F0D06791A63EFA60044089E /* TransitionUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TransitionUtil.cpp; path = ../Classes/TransitionUtil.cpp; sourceTree = "<group>"; };
 		9F0D067A1A63EFA60044089E /* TransitionUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransitionUtil.h; path = ../Classes/TransitionUtil.h; sourceTree = "<group>"; };
-		9F192C4D1AA9D35F001AE79C /* level1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level1.plist; sourceTree = "<group>"; };
 		9F192C551AA9D587001AE79C /* game-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "game-bg.jpg"; sourceTree = "<group>"; };
-		9F192C581AA9E848001AE79C /* level1.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = level1.pvr.ccz; sourceTree = "<group>"; };
 		9F192C5B1AA9EE02001AE79C /* PropMenuItemSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PropMenuItemSprite.cpp; path = ../Classes/PropMenuItemSprite.cpp; sourceTree = "<group>"; };
 		9F192C5C1AA9EE02001AE79C /* PropMenuItemSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropMenuItemSprite.h; path = ../Classes/PropMenuItemSprite.h; sourceTree = "<group>"; };
 		9F1E937D1AAF3DE40033E58A /* checkpoint-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "checkpoint-1.json"; sourceTree = "<group>"; };
 		9F1E937F1AAF3E180033E58A /* Checkpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Checkpoint.cpp; path = ../Classes/Checkpoint.cpp; sourceTree = "<group>"; };
 		9F1E93801AAF3E180033E58A /* Checkpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Checkpoint.h; path = ../Classes/Checkpoint.h; sourceTree = "<group>"; };
+		9F2974C81AB1D3AA00B0DB6D /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Util.cpp; path = ../Classes/Util.cpp; sourceTree = "<group>"; };
+		9F2974C91AB1D3AA00B0DB6D /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util.h; path = ../Classes/Util.h; sourceTree = "<group>"; };
+		9F2974CB1AB1D79600B0DB6D /* checkpoint1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = checkpoint1.plist; sourceTree = "<group>"; };
+		9F2974CC1AB1D79600B0DB6D /* checkpoint1.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkpoint1.pvr.ccz; sourceTree = "<group>"; };
+		9F2974CD1AB1D79600B0DB6D /* game.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = game.plist; sourceTree = "<group>"; };
+		9F2974CE1AB1D79600B0DB6D /* game.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = game.pvr.ccz; sourceTree = "<group>"; };
+		9F2974D31AB1DAB100B0DB6D /* checkpoint1-earth-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkpoint1-earth-1.png"; sourceTree = "<group>"; };
+		9F2974D41AB1DAB100B0DB6D /* checkpoint1-earth-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkpoint1-earth-2.png"; sourceTree = "<group>"; };
+		9F2974D51AB1DAB100B0DB6D /* checkpoint1-earth-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkpoint1-earth-3.png"; sourceTree = "<group>"; };
+		9F2974D61AB1DAB100B0DB6D /* checkpoint1-earth-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkpoint1-earth-4.png"; sourceTree = "<group>"; };
 		9F3EA6731A6539AC00F5996E /* AirShipRopeSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirShipRopeSprite.cpp; path = ../Classes/AirShipRopeSprite.cpp; sourceTree = "<group>"; };
 		9F3EA6741A6539AC00F5996E /* AirShipRopeSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirShipRopeSprite.h; path = ../Classes/AirShipRopeSprite.h; sourceTree = "<group>"; };
 		9F3EA6751A6539AC00F5996E /* AirShipSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirShipSprite.cpp; path = ../Classes/AirShipSprite.cpp; sourceTree = "<group>"; };
@@ -386,8 +397,6 @@
 		9F56026E1A74DFE200A50D5F /* VertexVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VertexVector.h; path = ../Classes/VertexVector.h; sourceTree = "<group>"; };
 		9F567A391A866BC9005CEC71 /* EarthLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EarthLayer.cpp; path = ../Classes/EarthLayer.cpp; sourceTree = "<group>"; };
 		9F567A3A1A866BC9005CEC71 /* EarthLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EarthLayer.h; path = ../Classes/EarthLayer.h; sourceTree = "<group>"; };
-		9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameViewOldScene.cpp; path = ../Classes/GameViewOldScene.cpp; sourceTree = "<group>"; };
-		9F567A3C1A866BC9005CEC71 /* GameViewOldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewOldScene.h; path = ../Classes/GameViewOldScene.h; sourceTree = "<group>"; };
 		9F582E6A1AAB44CF00FB2F7A /* aes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = aes.cpp; path = ../Classes/aes.cpp; sourceTree = "<group>"; };
 		9F582E6B1AAB44CF00FB2F7A /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aes.h; path = ../Classes/aes.h; sourceTree = "<group>"; };
 		9F582E6C1AAB44CF00FB2F7A /* DataUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataUtil.cpp; path = ../Classes/DataUtil.cpp; sourceTree = "<group>"; };
@@ -482,6 +491,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9F2974C81AB1D3AA00B0DB6D /* Util.cpp */,
+				9F2974C91AB1D3AA00B0DB6D /* Util.h */,
 				9F1E937F1AAF3E180033E58A /* Checkpoint.cpp */,
 				9F1E93801AAF3E180033E58A /* Checkpoint.h */,
 				9F582E6A1AAB44CF00FB2F7A /* aes.cpp */,
@@ -494,8 +505,6 @@
 				9FB429EC1A88E28C002DA991 /* EllipseBy.h */,
 				9F567A391A866BC9005CEC71 /* EarthLayer.cpp */,
 				9F567A3A1A866BC9005CEC71 /* EarthLayer.h */,
-				9F567A3B1A866BC9005CEC71 /* GameViewOldScene.cpp */,
-				9F567A3C1A866BC9005CEC71 /* GameViewOldScene.h */,
 				9F56026D1A74DFE200A50D5F /* VertexVector.cpp */,
 				9F56026E1A74DFE200A50D5F /* VertexVector.h */,
 				9F56025A1A74DFB700A50D5F /* LightLineRender.cpp */,
@@ -638,11 +647,17 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F2974D31AB1DAB100B0DB6D /* checkpoint1-earth-1.png */,
+				9F2974D41AB1DAB100B0DB6D /* checkpoint1-earth-2.png */,
+				9F2974D51AB1DAB100B0DB6D /* checkpoint1-earth-3.png */,
+				9F2974D61AB1DAB100B0DB6D /* checkpoint1-earth-4.png */,
+				9F2974CB1AB1D79600B0DB6D /* checkpoint1.plist */,
+				9F2974CC1AB1D79600B0DB6D /* checkpoint1.pvr.ccz */,
+				9F2974CD1AB1D79600B0DB6D /* game.plist */,
+				9F2974CE1AB1D79600B0DB6D /* game.pvr.ccz */,
 				9F1E937D1AAF3DE40033E58A /* checkpoint-1.json */,
-				9F192C581AA9E848001AE79C /* level1.pvr.ccz */,
 				9F192C551AA9D587001AE79C /* game-bg.jpg */,
 				9F4443521A87A84A00AEFE94 /* track_point.png */,
-				9F192C4D1AA9D35F001AE79C /* level1.plist */,
 				9F44434D1A87A83300AEFE94 /* track_arc.png */,
 				9F5602641A74DFC600A50D5F /* lighting.png */,
 				9F5602651A74DFC600A50D5F /* LightLineRender.fsh */,
@@ -836,10 +851,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2974D91AB1DAB100B0DB6D /* checkpoint1-earth-3.png in Resources */,
+				9F2974D11AB1D79600B0DB6D /* game.plist in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				9F8825D91A61373A000067F1 /* shareBtn_selected.png in Resources */,
 				9F56026B1A74DFC600A50D5F /* LightLineRender.vsh in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				9F2974CF1AB1D79600B0DB6D /* checkpoint1.plist in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				9F0D06731A63EF490044089E /* item_c_3.png in Resources */,
 				9F5602691A74DFC600A50D5F /* LightLineRender.fsh in Resources */,
@@ -854,14 +872,15 @@
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				9F3EA6821A6539CA00F5996E /* line.png in Resources */,
-				9F192C591AA9E848001AE79C /* level1.pvr.ccz in Resources */,
 				9F0D066F1A63EF490044089E /* item_c_1.png in Resources */,
+				9F2974DA1AB1DAB100B0DB6D /* checkpoint1-earth-4.png in Resources */,
+				9F2974D21AB1D79600B0DB6D /* game.pvr.ccz in Resources */,
 				9F3EA6831A6539CA00F5996E /* target_point.png in Resources */,
 				9F8825D71A61373A000067F1 /* main_bg.jpg in Resources */,
 				9F5602671A74DFC600A50D5F /* lighting.png in Resources */,
-				9F192C4F1AA9D35F001AE79C /* level1.plist in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				9F8825DF1A61373A000067F1 /* shopBtn.png in Resources */,
+				9F2974D81AB1DAB100B0DB6D /* checkpoint1-earth-2.png in Resources */,
 				9F3EA67F1A6539BE00F5996E /* airship_game.png in Resources */,
 				9F0D06711A63EF490044089E /* item_c_2.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
@@ -869,6 +888,7 @@
 				9F0D06651A63EF490044089E /* item_a_2.png in Resources */,
 				9F0D06671A63EF490044089E /* item_a_3.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				9F2974D71AB1DAB100B0DB6D /* checkpoint1-earth-1.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				9F4443531A87A84A00AEFE94 /* track_point.png in Resources */,
@@ -879,6 +899,7 @@
 				9F0D066D1A63EF490044089E /* item_b_3.png in Resources */,
 				9F8825D51A61373A000067F1 /* airship.png in Resources */,
 				9F0D06631A63EF490044089E /* item_a_1.png in Resources */,
+				9F2974D01AB1D79600B0DB6D /* checkpoint1.pvr.ccz in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				9F0D06691A63EF490044089E /* item_b_1.png in Resources */,
 			);
@@ -892,11 +913,9 @@
 				9F0D06681A63EF490044089E /* item_a_3.png in Resources */,
 				9F8825DE1A61373A000067F1 /* shopBtn_selected.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
-				9F192C5A1AA9E848001AE79C /* level1.pvr.ccz in Resources */,
 				9F4443541A87A84A00AEFE94 /* track_point.png in Resources */,
 				9F0D06741A63EF490044089E /* item_c_3.png in Resources */,
 				9F8825E21A61373A000067F1 /* startBtn_selected.png in Resources */,
-				9F192C501AA9D35F001AE79C /* level1.plist in Resources */,
 				9F44434F1A87A83300AEFE94 /* track_arc.png in Resources */,
 				9F8825DA1A61373A000067F1 /* shareBtn_selected.png in Resources */,
 				9F0D06661A63EF490044089E /* item_a_2.png in Resources */,
@@ -925,6 +944,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F567A3D1A866BC9005CEC71 /* EarthLayer.cpp in Sources */,
+				9F2974CA1AB1D3AA00B0DB6D /* Util.cpp in Sources */,
 				9F8825E81A6138AF000067F1 /* MainViewScene.cpp in Sources */,
 				9F3EA6781A6539AC00F5996E /* AirShipSprite.cpp in Sources */,
 				9FB429ED1A88E28C002DA991 /* EllipseBy.cpp in Sources */,
@@ -936,7 +956,6 @@
 				9F3EA6771A6539AC00F5996E /* AirShipRopeSprite.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				9F192C5D1AA9EE02001AE79C /* PropMenuItemSprite.cpp in Sources */,
-				9F567A3F1A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */,
 				9F56026F1A74DFE200A50D5F /* VertexVector.cpp in Sources */,
 				9F0D067B1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				9F582E721AAB44CF00FB2F7A /* DataUtil.cpp in Sources */,
@@ -960,7 +979,6 @@
 				9F0D06781A63EF900044089E /* GameViewScene.cpp in Sources */,
 				9F0D067C1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				9F5602611A74DFB700A50D5F /* Noise.cpp in Sources */,
-				9F567A401A866BC9005CEC71 /* GameViewOldScene.cpp in Sources */,
 				9F582E731AAB44CF00FB2F7A /* DataUtil.cpp in Sources */,
 				9FB429EE1A88E28C002DA991 /* EllipseBy.cpp in Sources */,
 				9FC031C31A6BEC960084DF07 /* AirShipRopeSprite.cpp in Sources */,

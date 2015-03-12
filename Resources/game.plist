@@ -7,7 +7,7 @@
             <key>bomb-disabled.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1937,198},{91,91}}</string>
+                <string>{{388,288},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>bomb-selected.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1937,101},{91,91}}</string>
+                <string>{{295,288},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>bomb.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1937,4},{91,91}}</string>
+                <string>{{202,288},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,72 +46,20 @@
             <key>controlui-bottom.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1291,1642},{640,198}}</string>
+                <string>{{2,2},{640,198}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{640,198}}</string>
                 <key>sourceSize</key>
                 <string>{640,198}</string>
             </dict>
-            <key>earth-1.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{818,4},{804,794}}</string>
-                <key>offset</key>
-                <string>{18,-23}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{36,46},{804,794}}</string>
-                <key>sourceSize</key>
-                <string>{840,840}</string>
-            </dict>
-            <key>earth-2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{814,828},{808,794}}</string>
-                <key>offset</key>
-                <string>{-16,-23}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,46},{808,794}}</string>
-                <key>sourceSize</key>
-                <string>{840,840}</string>
-            </dict>
-            <key>earth-3.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{4,4},{808,818}}</string>
-                <key>offset</key>
-                <string>{-16,11}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{808,818}}</string>
-                <key>sourceSize</key>
-                <string>{840,840}</string>
-            </dict>
-            <key>earth-4.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{4,828},{804,818}}</string>
-                <key>offset</key>
-                <string>{18,11}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{36,0},{804,818}}</string>
-                <key>sourceSize</key>
-                <string>{840,840}</string>
-            </dict>
             <key>number-bg.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{4,1982},{32,32}}</string>
+                <string>{{456,2},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -124,11 +72,11 @@
             <key>pause-selected.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{597,1875},{125,98}}</string>
+                <string>{{329,2},{125,98}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{125,98}}</string>
                 <key>sourceSize</key>
@@ -137,98 +85,20 @@
             <key>pause.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{493,1907},{125,98}}</string>
+                <string>{{202,2},{125,98}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{125,98}}</string>
                 <key>sourceSize</key>
                 <string>{125,98}</string>
             </dict>
-            <key>plant1.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{493,1652},{96,249}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{96,249}}</string>
-                <key>sourceSize</key>
-                <string>{96,249}</string>
-            </dict>
-            <key>plant2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{701,1875},{81,124}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{81,124}}</string>
-                <key>sourceSize</key>
-                <string>{81,124}</string>
-            </dict>
-            <key>rock1.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{4,1652},{269,324}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{269,324}}</string>
-                <key>sourceSize</key>
-                <string>{269,324}</string>
-            </dict>
-            <key>rock2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1114,1642},{171,213}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{171,213}}</string>
-                <key>sourceSize</key>
-                <string>{171,213}</string>
-            </dict>
-            <key>rock3.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{279,1652},{316,208}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{316,208}}</string>
-                <key>sourceSize</key>
-                <string>{316,208}</string>
-            </dict>
-            <key>rock4.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{595,1652},{513,217}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{513,217}}</string>
-                <key>sourceSize</key>
-                <string>{513,217}</string>
-            </dict>
             <key>speed-disabled.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1273,1861},{91,91}}</string>
+                <string>{{388,195},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -241,7 +111,7 @@
             <key>speed-selected.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1176,1861},{91,91}}</string>
+                <string>{{295,195},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,7 +124,7 @@
             <key>speed.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1079,1875},{91,91}}</string>
+                <string>{{202,195},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,7 +137,7 @@
             <key>time-disabled.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{982,1875},{91,91}}</string>
+                <string>{{388,102},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +150,7 @@
             <key>time-selected.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{885,1875},{91,91}}</string>
+                <string>{{295,102},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -293,7 +163,7 @@
             <key>time.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{788,1875},{91,91}}</string>
+                <string>{{202,102},{91,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -309,13 +179,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>level1.pvr.ccz</string>
+            <string>game.pvr.ccz</string>
             <key>size</key>
-            <string>{2048,2048}</string>
+            <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a06e228b8fdb2e82c63ed6f24cad81fd:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:af701cfd2474d8e90fff88c266608eb6:1/1$</string>
             <key>textureFileName</key>
-            <string>level1.pvr.ccz</string>
+            <string>game.pvr.ccz</string>
         </dict>
     </dict>
 </plist>

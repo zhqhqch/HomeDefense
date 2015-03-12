@@ -17,7 +17,7 @@ Ore::Ore(const std::string& fileName, float x, float y, float r, int s, int w) {
 	score = s;
 	weight = w;
 
-	Sprite::initWithFile(fileName);
+    Sprite::initWithSpriteFrameName(fileName);
 	setPosition(x,y);
 	setRotation(r);
 

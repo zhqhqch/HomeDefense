@@ -90,7 +90,8 @@ bool GameView::init(){
 	this->addChild(gameBgSprite, 0);
 
     //加载纹理
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("level1.plist", "level1.pvr.ccz");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("game.plist", "game.pvr.ccz");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("checkpoint1.plist", "checkpoint1.pvr.ccz");
     
 	airshipSprite = new AirShip(visibleSize.width / 2, visibleSize.height);
 	airshipSprite->setVisible(false);

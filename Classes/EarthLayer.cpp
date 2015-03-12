@@ -46,21 +46,26 @@ bool Earth::init(){
     w = layer1->getContentSize().width / 2;
     h = layer1->getContentSize().height / 2;
     
-	Sprite * earth1 = Sprite::createWithSpriteFrameName("earth-1.png");
+	Sprite * earth1 = Sprite::create("checkpoint1-earth-1.png");
 	earth1->setAnchorPoint(Vec2(1, 0));
 	earth1->setPosition(w, h);
 
-	Sprite * earth2 = Sprite::createWithSpriteFrameName("earth-2.png");
+	Sprite * earth2 = Sprite::create("checkpoint1-earth-2.png");
 	earth2->setAnchorPoint(Vec2(0, 0));
 	earth2->setPosition(w, h);
 
-	Sprite * earth3 = Sprite::createWithSpriteFrameName("earth-3.png");
+	Sprite * earth3 = Sprite::create("checkpoint1-earth-3.png");
 	earth3->setAnchorPoint(Vec2(0, 1));
 	earth3->setPosition(w, h);
 
-	Sprite * earth4 = Sprite::createWithSpriteFrameName("earth-4.png");
+	Sprite * earth4 = Sprite::create("checkpoint1-earth-4.png");
 	earth4->setAnchorPoint(Vec2(1, 1));
 	earth4->setPosition(w, h);
+    
+    layer1->addChild(earth1);
+    layer1->addChild(earth2);
+    layer1->addChild(earth3);
+    layer1->addChild(earth4);
 
 
 	Vector<Checkpoint::BgData *> bgArr = checkpoint->bgArray;
@@ -106,7 +111,7 @@ void Earth::initOre(Vector<Checkpoint::RockData *> rockArr, int tag){
 				 rock->rotation, rock->score, rock->weight);
 		item->setOpacity(0);
 		item->setTag(tag ++);
-		layer4->addChild(item);
+		layer1->addChild(item);
 		itemArr.pushBack(item);
 	}
 }
