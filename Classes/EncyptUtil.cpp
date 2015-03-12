@@ -14,7 +14,6 @@ std::string EncyptUtil::encrypt(const std::string& content) {
 	char miwen_hex[1024];
 	AES *aes = new AES(key);
 	aes->Cipher(const_cast<char*>(content.c_str()), miwen_hex);
-	getchar();
 	return miwen_hex;
 }
 
@@ -23,6 +22,5 @@ std::string EncyptUtil::decrypt(const std::string& content) {
 	char result[1024];
 	AES *aes = new AES(key);
 	aes->InvCipher(const_cast<char*>(content.c_str()), result);
-	getchar();
 	return result;
 }

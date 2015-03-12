@@ -6,7 +6,6 @@
  */
 
 #include "EarthLayer.h"
-#include "Checkpoint.h"
 #include "Constants.h"
 
 
@@ -89,15 +88,15 @@ bool Earth::init(){
 
     int tag = 10;
     Vector<Checkpoint::RockData *> innterRockArr = checkpoint->getShowRockByType(kInnterType);
-    initOre(innterRockArr);
+    initOre(innterRockArr, tag);
 
     tag += innterRockArr.size();
     Vector<Checkpoint::RockData *> middleRockArr = checkpoint->getShowRockByType(kMiddleType);
-    initOre(middleRockArr);
+    initOre(middleRockArr, tag);
 
     tag += middleRockArr.size();
 	Vector<Checkpoint::RockData *> outerRockArr = checkpoint->getShowRockByType(kOuterType);
-	initOre(outerRockArr);
+	initOre(outerRockArr, tag);
 	return true;
 }
 

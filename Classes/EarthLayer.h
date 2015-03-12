@@ -11,8 +11,7 @@
 
 #include "cocos2d.h"
 #include "OreSprite.h"
-
-class Checkpoint;
+#include "Checkpoint.h"
 
 class Earth : public cocos2d::Layer {
 public:
