@@ -47,12 +47,12 @@ bool GameView::init(){
     log("!!!!!!!!!!%d", a);
     log("file path:%s", UserDefault::getXMLFilePath().c_str());
 
-    Checkpoint *checkpoint_1 = new Checkpoint(1);
-    Checkpoint::BgData * bgData = checkpoint_1->bgArray.at(0);
-    Checkpoint::RockData * rockData = checkpoint_1->rockArray.at(0);
+    checkpoint = new Checkpoint(1);
+    Checkpoint::BgData * bgData = checkpoint->bgArray.at(0);
+    Checkpoint::ItemData * itemData = checkpoint->itemArray.at(0);
 
-    log("%d&&&&&&&%f===%s====%s", checkpoint_1->id,
-    		checkpoint_1->layer1Speed, bgData->imageName.c_str(), rockData->imageName.c_str());
+    log("%d&&&&&&&%f===%s====%s", checkpoint->id,
+    		checkpoint->layer1Speed, bgData->imageName.c_str(), itemData->imageName.c_str());
 
 	auto listener = EventListenerTouchOneByOne::create();       //单点触摸
 	//auto listener = EventListenerTouchAllAtOnce::create();      //多点触摸
@@ -96,7 +96,7 @@ bool GameView::init(){
 	airshipSprite->setVisible(false);
 	this->addChild(airshipSprite, 2);
     
-    earthLayer = new Earth();
+    earthLayer = new Earth(checkpoint);
 	earthLayer->setPosition(visibleSize.width / 2 - earthLayer->getContentSize().width / 2 ,
 			visibleSize.height * 0.65 - earthLayer->getContentSize().height);
     earthLayer->setPhyWorld(this->getPhysicsWorld());

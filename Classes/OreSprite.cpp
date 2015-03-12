@@ -11,7 +11,7 @@
 
 USING_NS_CC;
 
-Ore::Ore(const std::string& fileName, float x, float y, int s, int w) {
+Ore::Ore(const std::string& fileName, float x, float y, float r, int s, int w) {
 	startX = x;
 	startY = y;
 	score = s;
@@ -19,6 +19,7 @@ Ore::Ore(const std::string& fileName, float x, float y, int s, int w) {
 
 	Sprite::initWithFile(fileName);
 	setPosition(x,y);
+	setRotation(r);
 
 //	isFollow = false;
 }

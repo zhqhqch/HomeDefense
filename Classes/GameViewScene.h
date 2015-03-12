@@ -16,6 +16,8 @@
 #include "OreSprite.h"
 #include "AirShipRopeSprite.h"
 
+class Checkpoint;
+
 class GameView : public cocos2d::Scene {
 public:
 	static cocos2d::Scene * createScene();
@@ -34,8 +36,9 @@ private:
     Ore *targetOre;
     AirShipRope *airShipRopeSprite;
     bool isReady;
-    
     bool isPause;
+    
+    Checkpoint *checkpoint;
     
 
 

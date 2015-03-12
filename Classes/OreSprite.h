@@ -14,7 +14,7 @@
 
 class Ore : public cocos2d::Sprite {
 public:
-	Ore(const std::string& fileName, float x, float y, int score, int weight);
+	Ore(const std::string& fileName, float x, float y, float r, int s, int w);
     int getScore();
     
     void startFollow(Magnetite * m, float rotation);

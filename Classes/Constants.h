@@ -25,4 +25,9 @@
 #define kBombProp 2
 #define kTimeProp 3
 
+//显示矿石层级
+#define kInnterType 1	//内层
+#define kMiddleType 2	//中层
+#define kOuterType 3	//外层
+
 #endif

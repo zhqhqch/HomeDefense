@@ -1,5 +1,4 @@
 #include "MainViewScene.h"
-#include "GameViewOldScene.h"
 #include "TransitionUtil.h"
 #include "GameViewScene.h"
 #include "base/ZipUtils.h"

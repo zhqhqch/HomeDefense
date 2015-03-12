@@ -12,9 +12,11 @@
 #include "cocos2d.h"
 #include "OreSprite.h"
 
+class Checkpoint;
+
 class Earth : public cocos2d::Layer {
 public:
-	Earth();
+	Earth(Checkpoint *c);
 
     void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};
     
@@ -29,16 +31,17 @@ public:
     
 private:
     cocos2d::Vector<Ore *> itemArr;
-    
     cocos2d::PhysicsWorld* m_world;
-    
     cocos2d::Sprite * layer1;
     cocos2d::Sprite * layer2;
     cocos2d::Sprite * layer3;
     cocos2d::Sprite * layer4;
     
+    Checkpoint *checkpoint;
+
 	bool init();
     
+	void initOre(cocos2d::Vector<Checkpoint::RockData *> rockArr, int tag);
 };
 
 
