@@ -7,13 +7,15 @@
 
 #include "EarthLayer.h"
 #include "Constants.h"
-
+#include "Util.h"
+#include "GameViewScene.h"
 
 USING_NS_CC;
 
 
-Earth::Earth(Checkpoint *c){
+Earth::Earth(GameView * gw, Checkpoint *c){
 	checkpoint = c;
+	gameView = gw;
 	init();
 }
 
@@ -107,39 +109,88 @@ bool Earth::init(){
 
 void Earth::initOre(Vector<Checkpoint::RockData *> rockArr, int tag){
 	for(Checkpoint::RockData *rock : rockArr){
-		 Ore* item = new Ore(rock->imageName, rock->positionX, rock->positionY,
+		Array * strs = Util::split(rock->imageName.c_str(), "-");
+		char imageName[50];
+		sprintf(imageName, "Checkpoint1-pit-%s", static_cast<String*>(strs->objectAtIndex(2))->_string.c_str());
+		OrePit* orePit = new OrePit(imageName, rock->positionX, rock->positionY,
+				 rock->rotation);
+		orePit->setOpacity(0);
+		layer1->addChild(orePit);
+		orePitArr.pushBack(orePit);
+
+		Ore* ore = new Ore(rock->imageName, rock->positionX, rock->positionY,
 				 rock->rotation, rock->score, rock->weight);
-		item->setOpacity(0);
-		item->setTag(tag ++);
-		layer1->addChild(item);
-		itemArr.pushBack(item);
+		ore->setOpacity(0);
+		ore->setTag(tag ++);
+		layer1->addChild(ore);
+		oreArr.pushBack(ore);
 	}
 }
 
 void Earth::showOre(){
-    for(Ore* item : itemArr){
+	for(int i = 0; i < oreArr.size(); i++){
+		OrePit* orepit = orePitArr.at(i);
 		float time = CCRANDOM_0_1() * 3 + 0.5f;
-		FadeIn *itemA1FadeIn = FadeIn::create(time);
-		item->runAction(itemA1FadeIn);
+		FadeIn *orePitFadeIn = FadeIn::create(time);
+		orepit->runAction(orePitFadeIn);
+
+		Ore* ore = oreArr.at(i);
+		FadeIn *oreFadeIn = FadeIn::create(time);
+		ore->runAction(oreFadeIn);
 	}
 }
 
 void Earth::startTurn(){
-    layer1->runAction(RepeatForever::create(RotateBy::create(5.0f,45)));
-    layer2->runAction(RepeatForever::create(RotateBy::create(6.0f,45)));
-    layer3->runAction(RepeatForever::create(RotateBy::create(7.0f,45)));
-    layer4->runAction(RepeatForever::create(RotateBy::create(8.0f,45)));
+    layer1->runAction(RepeatForever::create(RotateBy::create(checkpoint->layer1Speed,45)));
+    layer2->runAction(RepeatForever::create(RotateBy::create(checkpoint->layer2Speed,45)));
+    layer3->runAction(RepeatForever::create(RotateBy::create(checkpoint->layer3Speed,45)));
+    layer4->runAction(RepeatForever::create(RotateBy::create(checkpoint->layer4Speed,45)));
     
-    for(Ore* item : itemArr){
+    for(Ore* item : oreArr){
 		item->changeToNormalBody();
+//		item->changeToPhysicsBody();
 	}
+
 }
 
 
 void Earth::stopTurn() {
     this->stopAllActions();
     
-    for(Ore* item : itemArr){
+    for(Ore* item : oreArr){
 		item->changeToPhysicsBody();
 	}
+}
+
+bool Earth::isCatchOre(Point point, float r) {
+	Point tmp = layer1->convertToNodeSpace(point);
+	for(Ore * ore : oreArr){
+		//计算圆心距离
+		float dist = ore->getPosition().getDistance(tmp);
+		isCatch = dist < (ore->getContentSize().width / 2 + r);
+		if(isCatch){
+			catchOre = ore;
+			gameView->catchOreToAirShip(ore);
+			ore->removeFromParentAndCleanup(true);
+			oreArr.eraseObject(ore);
+			return isCatch;
+		}
+	}
+
+	return false;
+}
+
+void Earth::catchOreToAirShip(Point position) {
+	Point tmp = layer1->convertToNodeSpace(position);
+	MoveTo * moveTo = MoveTo::create(5.0, tmp);
+	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Earth::finishCatch, this));
+	Sequence * seq = Sequence::create(moveTo, fun, NULL);
+	catchOre->runAction(seq);
+}
+
+void Earth::finishCatch(){
+//	gameView->catchBack(catchOre);
+
+	catchOre->removeFromParentAndCleanup(true);
+	oreArr.eraseObject(catchOre);
 }

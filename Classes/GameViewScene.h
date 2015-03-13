@@ -24,6 +24,10 @@ public:
 	virtual bool init();
 	CREATE_FUNC(GameView);
 
+	void catchOreToAirShip(Ore * ore);
+
+	void catchBack();
+
 private:
 	cocos2d::PhysicsWorld* m_world;
 	AirShip *airshipSprite;
@@ -33,10 +37,10 @@ private:
     cocos2d::Sprite *trackSprite;
     Magnetite *magnetite;
     bool isCatch;
-    Ore *targetOre;
     AirShipRope *airShipRopeSprite;
     bool isReady;
     bool isPause;
+    Ore * targetOre;
     
     Checkpoint *checkpoint;
     
@@ -66,6 +70,8 @@ private:
     
     //暂停或继续游戏
     void pauseGame();
+
+    void removeScoreLabel(cocos2d::Label * scoreLabel);
 };
 
 

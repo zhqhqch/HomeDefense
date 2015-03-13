@@ -11,11 +11,14 @@
 
 #include "cocos2d.h"
 #include "OreSprite.h"
+#include "OrePitSprite.h"
 #include "Checkpoint.h"
+
+class GameView;
 
 class Earth : public cocos2d::Layer {
 public:
-	Earth(Checkpoint *c);
+	Earth(GameView * gw, Checkpoint *c);
 
     void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};
     
@@ -28,8 +31,15 @@ public:
     //地球停止旋转
     void stopTurn();
     
+    //检测是否抓取到矿石
+    bool isCatchOre(cocos2d::Point point, float r);
+
+    //让抓取的矿石飞回飞船
+    void catchOreToAirShip(cocos2d::Point position);
+
 private:
-    cocos2d::Vector<Ore *> itemArr;
+    cocos2d::Vector<Ore *> oreArr;
+    cocos2d::Vector<OrePit *> orePitArr;
     cocos2d::PhysicsWorld* m_world;
     cocos2d::Sprite * layer1;
     cocos2d::Sprite * layer2;
@@ -37,10 +47,16 @@ private:
     cocos2d::Sprite * layer4;
     
     Checkpoint *checkpoint;
+    GameView * gameView;
+
+    Ore * catchOre;
+    bool isCatch;
 
 	bool init();
     
 	void initOre(cocos2d::Vector<Checkpoint::RockData *> rockArr, int tag);
+
+	void finishCatch();
 };
 
 

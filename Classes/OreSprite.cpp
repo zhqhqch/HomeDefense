@@ -16,6 +16,7 @@ Ore::Ore(const std::string& fileName, float x, float y, float r, int s, int w) {
 	startY = y;
 	score = s;
 	weight = w;
+	imageName = fileName;
 
     Sprite::initWithSpriteFrameName(fileName);
 	setPosition(x,y);
@@ -38,10 +39,6 @@ void Ore::changeToPhysicsBody() {
 
 void Ore::changeToNormalBody() {
     setPhysicsBody(nullptr);
-}
-
-int Ore::getScore() {
-    return score;
 }
 
 

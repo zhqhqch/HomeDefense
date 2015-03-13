@@ -15,18 +15,23 @@
 class Ore : public cocos2d::Sprite {
 public:
 	Ore(const std::string& fileName, float x, float y, float r, int s, int w);
-    int getScore();
     
     void startFollow(Magnetite * m, float rotation);
     
     void changeToPhysicsBody();
     void changeToNormalBody();
+
+    std::string getImageName(){return imageName;}
+    float getPositionX(){return startX;}
+    float getPositionY(){return startY;}
+    int getScore(){return score;}
+    int getWeight(){return weight;}
 private:
+    std::string imageName;
 	float startX;
 	float startY;
 	int weight;
     int score;
-    float scopeRadius;
     bool isFollow;
 };
 

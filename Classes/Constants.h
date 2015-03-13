@@ -11,6 +11,11 @@
 
 #define kPintNull Point(9999,9999)
 
+#define kEarthZOrder 5
+#define kGameUIZOrder 6
+#define kAirShipZOrder 7
+#define kMagnetiteZOrder 8
+
 #define kWallTag 99
 
 #define kLightLineTag 100

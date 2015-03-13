@@ -8,10 +8,13 @@
 #ifndef UTIL_H_
 #define UTIL_H_
 
+#include "cocos2d.h"
 
 class Util {
 public:
 	static int * randomOrder(int total, int quantity);
+
+	static cocos2d::Array * split(const char* srcStr, const char* sSep);
 };
 
 

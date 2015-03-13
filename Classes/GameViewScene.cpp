@@ -83,11 +83,11 @@ bool GameView::init(){
 
 	auto menu = Menu::create(backItem, NULL);
 	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu, 1);
+	this->addChild(menu, kGameUIZOrder);
 
 	auto gameBgSprite = Sprite::create("game-bg.jpg");
 	gameBgSprite->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2));
-	this->addChild(gameBgSprite, 0);
+	this->addChild(gameBgSprite);
 
     //加载纹理
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("game.plist", "game.pvr.ccz");
@@ -95,20 +95,20 @@ bool GameView::init(){
     
 	airshipSprite = new AirShip(visibleSize.width / 2, visibleSize.height);
 	airshipSprite->setVisible(false);
-	this->addChild(airshipSprite, 2);
+	this->addChild(airshipSprite, kAirShipZOrder);
     
-    earthLayer = new Earth(checkpoint);
+    earthLayer = new Earth(this, checkpoint);
 	earthLayer->setPosition(visibleSize.width / 2 - earthLayer->getContentSize().width / 2 ,
 			visibleSize.height * 0.65 - earthLayer->getContentSize().height);
     earthLayer->setPhyWorld(this->getPhysicsWorld());
-    this->addChild(earthLayer, 1);
+    this->addChild(earthLayer, kEarthZOrder);
     
     shipMove = false;
     
     auto bottomSprite = Sprite::createWithSpriteFrameName("controlui-bottom.png");
     bottomSprite->setAnchorPoint(Vec2(0 , 0));
     bottomSprite->setPosition(0, 0);
-    this->addChild(bottomSprite, 2);
+    this->addChild(bottomSprite, kGameUIZOrder);
 
     auto pauseItem = MenuItemSprite::create(Sprite::createWithSpriteFrameName("pause.png"),
                                  Sprite::createWithSpriteFrameName("pause-selected.png"),
@@ -138,7 +138,7 @@ bool GameView::init(){
     
     auto bottomMenu = Menu::create(pauseItem, speedItem, bombItem, timeItem, NULL);
     bottomMenu->setPosition(Vec2::ZERO);
-    this->addChild(bottomMenu, 3);
+    this->addChild(bottomMenu, kGameUIZOrder);
     
     float x = visibleSize.width;
     float y = visibleSize.height - bottomSprite->getContentSize().height;
@@ -155,7 +155,7 @@ bool GameView::init(){
     
     
     magnetite = new Magnetite(this, 0, 0);
-    this->addChild(magnetite,3);
+    this->addChild(magnetite, kMagnetiteZOrder);
     
     
     this->scheduleUpdate();
@@ -211,7 +211,7 @@ void GameView::startGame() {
     
     trackSprite = Sprite::create("track_arc.png");
     trackSprite->setPosition(airshipSprite->getPosition().x, airshipSprite->getPosition().y - 100);
-    this->addChild(trackSprite, 2);
+    this->addChild(trackSprite, kAirShipZOrder);
 
     
     trackPointSprite = Sprite::create("track_point.png");
@@ -219,7 +219,7 @@ void GameView::startGame() {
     float y = trackSprite->getPosition().y;
     y -= 20;
     trackPointSprite->setPosition(x, y);
-    this->addChild(trackPointSprite, 3);
+    this->addChild(trackPointSprite, kAirShipZOrder);
     
     
     float point1X = trackSprite->getPosition().x - trackSprite->getContentSize().width / 2;
@@ -272,6 +272,14 @@ void GameView::update(float dTime){
         if(magnetite->isMove()){
             airShipRopeSprite->refreshRopeLen(magnetite->getPosition(),
                                               magnetite->isReach(), magnetite->isBack());
+            if(!isCatch){
+            	isCatch = earthLayer->isCatchOre(magnetite->getPosition(), magnetite->getContentSize().width / 2);
+				if(isCatch){
+					magnetite->backToStartPoint();
+//					earthLayer->catchOreToAirShip(airshipSprite->getPosition());
+				}
+            }
+
         }
         if (magnetite->isBack()) {
             bool backEnd = airshipSprite->getBoundingBox().intersectsRect(magnetite->getBoundingBox());
@@ -296,15 +304,7 @@ bool GameView::onContactBegin(const PhysicsContact& contact){
 	log("^^^^^^^^^^^^^^^^^^^^");
 	auto sp1 = (Sprite *)contact.getShapeA()->getBody()->getNode();
 	auto sp2 = (Sprite *)contact.getShapeB()->getBody()->getNode();
-	if(sp1->getTag() > 0 && sp1->getTag() != kWallTag){
-		targetOre = (Ore *) sp1;
-		isCatch = true;
-		magnetite->backWithOreToStartPoint();
-	} else if(sp2->getTag() > 0 && sp2->getTag() != kWallTag){
-		targetOre = (Ore *) sp2;
-		isCatch = true;
-		magnetite->backWithOreToStartPoint();
-	} else if(sp1->getTag() == kWallTag || sp2->getTag() == kWallTag){
+	if(sp1->getTag() == kWallTag || sp2->getTag() == kWallTag){
         magnetite->backToStartPoint();
     }
 	return true;
@@ -342,7 +342,7 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
         float catchAngle = atan2(tmp.x,tmp.y);
         catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
         airShipRopeSprite = new AirShipRope(this, curAirShipPoint.x,curAirShipPoint.y,catchAngle);
-        this->addChild(airShipRopeSprite,3);
+        this->addChild(airShipRopeSprite, kAirShipZOrder);
         
     } else {
 //        earthLayer->startTurn();
@@ -351,5 +351,46 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
         trackSprite->setVisible(true);
         trackPointSprite->setVisible(true);
     }
-    
+}
+
+
+void GameView::catchOreToAirShip(Ore * ore){
+	Point p = Point(ore->getPositionX(), ore->getPositionY());
+	Point tmp = this->convertToWindowSpace(p);
+	log("%f--%f^^^^^^^^^^^^################%f--%f", p.x, p.x, tmp.x, tmp.y);
+	targetOre = new Ore(ore->getImageName(), tmp.x, tmp.y, ore->getRotation(), ore->getScore(), ore->getWeight());
+	this->addChild(targetOre, kMagnetiteZOrder);
+
+	MoveTo * moveTo = MoveTo::create(5.0, this->convertToWindowSpace(airshipSprite->getPosition()));
+	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::catchBack, this));
+	Sequence * seq = Sequence::create(moveTo, fun, NULL);
+	targetOre->runAction(seq);
+}
+
+void GameView::catchBack() {
+	targetOre->removeFromParentAndCleanup(true);
+
+	std::stringstream ss;
+	ss<<"+";
+	ss<<targetOre->getScore();
+	std::string text = ss.str();
+
+	Label *scoreLable = Label::create();
+	scoreLable->setString(text);
+	scoreLable->setSystemFontSize(21);
+	scoreLable->setColor(Color3B::RED);
+	scoreLable->setPosition(airshipSprite->getPosition().x, airshipSprite->getPosition().y + 100);
+	this->addChild(scoreLable);
+
+	MoveTo * moveTo = MoveTo::create(2.0f, Vec2(scoreLable->getPosition().x, scoreLable->getPosition().y + 100));
+	FadeOut * fadeOut = FadeOut::create(2.0f);
+	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::removeScoreLabel, this, scoreLable));
+	Sequence *seq = Sequence::create(moveTo,fadeOut,fun,NULL);
+	scoreLable->runAction(seq);
+
+	isCatch = false;
+}
+
+void GameView::removeScoreLabel(Label * scoreLabel) {
+    scoreLabel->removeFromParentAndCleanup(true);
 }
