@@ -14,7 +14,7 @@ class Util {
 public:
 	static int * randomOrder(int total, int quantity);
 
-	static cocos2d::Array * split(const char* srcStr, const char* sSep);
+	static cocos2d::ValueVector split(const char* srcStr, const char* sSep);
 };
 
 

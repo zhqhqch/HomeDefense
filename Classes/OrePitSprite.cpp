@@ -7,6 +7,10 @@
 
 
 #include "OrePitSprite.h"
+#include "AnimationUtil.h"
+#include "Constants.h"
+
+USING_NS_CC;
 
 OrePit::OrePit(const std::string& fileName, float x, float y, float r) {
 	Sprite::initWithSpriteFrameName(fileName);
@@ -15,5 +19,21 @@ OrePit::OrePit(const std::string& fileName, float x, float y, float r) {
 }
 
 void OrePit::playAnimation() {
+    Sprite * layer = Sprite::create();
+    Size size = getContentSize();
+    layer->setPosition(size.width / 2, size.height / 2);
+    this->addChild(layer);
+    
+    Animation * animation = AnimationUtil::getAnimationByName(Value(pitFallenRockAnimationName));
+    animation->setDelayPerUnit(0.5f);
+    animation->setRestoreOriginalFrame(true);
+    Animate * action = Animate::create(animation);
+    CallFunc *fun = CallFunc::create(CC_CALLBACK_0(OrePit::removeAnimationBg, this, layer));
+    Sequence * seq = Sequence::create(action,fun, NULL);
+    
+    layer->runAction(seq);
+}
 
+void OrePit::removeAnimationBg(Sprite * layer) {
+    layer->removeFromParentAndCleanup(true);
 }

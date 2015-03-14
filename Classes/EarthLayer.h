@@ -34,9 +34,6 @@ public:
     //检测是否抓取到矿石
     bool isCatchOre(cocos2d::Point point, float r);
 
-    //让抓取的矿石飞回飞船
-    void catchOreToAirShip(cocos2d::Point position);
-
 private:
     cocos2d::Vector<Ore *> oreArr;
     cocos2d::Vector<OrePit *> orePitArr;
@@ -49,14 +46,11 @@ private:
     Checkpoint *checkpoint;
     GameView * gameView;
 
-    Ore * catchOre;
     bool isCatch;
 
 	bool init();
     
 	void initOre(cocos2d::Vector<Checkpoint::RockData *> rockArr, int tag);
-
-	void finishCatch();
 };
 
 

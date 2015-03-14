@@ -141,7 +141,7 @@ Vector<Checkpoint::RockData *> Checkpoint::getShowRockByType(int type) {
 	for(ShowData *showData : showArr){
 		ItemData *itemData = getItemByImageName(showData->imageName);
 		Vector<Checkpoint::PositionData *> posArr = getRandomPosition(positionArr, showData->count);
-		for(PositionData * pos : posArr){
+        for(PositionData * pos : posArr){
 			RockData *rock = new RockData();
 			rock->imageName = itemData->imageName;
 			rock->positionX = pos->positionX;
@@ -171,12 +171,12 @@ Checkpoint::ItemData * Checkpoint::getItemByImageName(std::string imageName) {
 }
 
 Vector<Checkpoint::PositionData *> Checkpoint::getRandomPosition(Vector<PositionData *>positionArr, int quantity) {
-	int * order = Util::randomOrder(10, quantity);
+	int * order = Util::randomOrder((int)positionArr.size(), quantity);
 	Vector<Checkpoint::PositionData *> retArr;
 	for (int i=0;i<quantity;i++) {
 		retArr.pushBack(positionArr.at(order[i]));
 	}
-
+    
 	free(order);
 
 	return retArr;

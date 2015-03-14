@@ -17,6 +17,9 @@ public:
 
 	//播放矿石从坑中抓走时的动画
 	void playAnimation();
+    
+private:
+    void removeAnimationBg(cocos2d::Sprite * layer);
 };
 
 

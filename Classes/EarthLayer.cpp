@@ -92,8 +92,8 @@ bool Earth::init(){
     this->addChild(layer3, 3);
     this->addChild(layer4, 1);
     
-
-    int tag = 10;
+    
+    int tag = kOreTag;
     Vector<Checkpoint::RockData *> innterRockArr = checkpoint->getShowRockByType(kInnterType);
     initOre(innterRockArr, tag);
 
@@ -109,21 +109,24 @@ bool Earth::init(){
 
 void Earth::initOre(Vector<Checkpoint::RockData *> rockArr, int tag){
 	for(Checkpoint::RockData *rock : rockArr){
-		Array * strs = Util::split(rock->imageName.c_str(), "-");
+		ValueVector strs = Util::split(rock->imageName.c_str(), "-");
 		char imageName[50];
-		sprintf(imageName, "Checkpoint1-pit-%s", static_cast<String*>(strs->objectAtIndex(2))->_string.c_str());
+		sprintf(imageName, "Checkpoint1-pit-%s", strs.at(2).asString().c_str());
 		OrePit* orePit = new OrePit(imageName, rock->positionX, rock->positionY,
 				 rock->rotation);
 		orePit->setOpacity(0);
+        orePit->setTag(tag + kOrePitWithOreTag);
 		layer1->addChild(orePit);
 		orePitArr.pushBack(orePit);
 
 		Ore* ore = new Ore(rock->imageName, rock->positionX, rock->positionY,
 				 rock->rotation, rock->score, rock->weight);
 		ore->setOpacity(0);
-		ore->setTag(tag ++);
+		ore->setTag(tag);
 		layer1->addChild(ore);
 		oreArr.pushBack(ore);
+        
+        tag ++;
 	}
 }
 
@@ -164,33 +167,21 @@ void Earth::stopTurn() {
 
 bool Earth::isCatchOre(Point point, float r) {
 	Point tmp = layer1->convertToNodeSpace(point);
+    OrePit *orePit;
 	for(Ore * ore : oreArr){
 		//计算圆心距离
 		float dist = ore->getPosition().getDistance(tmp);
 		isCatch = dist < (ore->getContentSize().width / 2 + r);
 		if(isCatch){
-			catchOre = ore;
 			gameView->catchOreToAirShip(ore);
 			ore->removeFromParentAndCleanup(true);
 			oreArr.eraseObject(ore);
+
+            orePit = (OrePit *)layer1->getChildByTag(ore->getTag() + kOrePitWithOreTag);
+            orePit->playAnimation();
 			return isCatch;
 		}
 	}
 
 	return false;
-}
-
-void Earth::catchOreToAirShip(Point position) {
-	Point tmp = layer1->convertToNodeSpace(position);
-	MoveTo * moveTo = MoveTo::create(5.0, tmp);
-	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(Earth::finishCatch, this));
-	Sequence * seq = Sequence::create(moveTo, fun, NULL);
-	catchOre->runAction(seq);
-}
-
-void Earth::finishCatch(){
-//	gameView->catchBack(catchOre);
-
-	catchOre->removeFromParentAndCleanup(true);
-	oreArr.eraseObject(catchOre);
 }

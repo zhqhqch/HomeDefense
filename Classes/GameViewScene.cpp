@@ -14,6 +14,7 @@
 #include "EncyptUtil.h"
 #include "DataUtil.h"
 #include "Checkpoint.h"
+#include "AnimationUtil.h"
 
 
 USING_NS_CC;
@@ -92,6 +93,10 @@ bool GameView::init(){
     //加载纹理
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("game.plist", "game.pvr.ccz");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("checkpoint1.plist", "checkpoint1.pvr.ccz");
+    //初始化动画
+    AnimationUtil::createAnimationByName(Value(pitFallenRockAnimationName),
+                                         Value(pitFallenRockAnimationPrefixStr),
+                                         pitFallenRockAnimationCount);
     
 	airshipSprite = new AirShip(visibleSize.width / 2, visibleSize.height);
 	airshipSprite->setVisible(false);
@@ -274,7 +279,7 @@ void GameView::update(float dTime){
                                               magnetite->isReach(), magnetite->isBack());
             if(!isCatch){
             	isCatch = earthLayer->isCatchOre(magnetite->getPosition(), magnetite->getContentSize().width / 2);
-				if(isCatch){
+				if(isCatch && !magnetite->isBack()){
 					magnetite->backToStartPoint();
 //					earthLayer->catchOreToAirShip(airshipSprite->getPosition());
 				}
@@ -350,18 +355,21 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
         shipMove = true;
         trackSprite->setVisible(true);
         trackPointSprite->setVisible(true);
+        
+        airShipRopeSprite->removeFromParentAndCleanup(true);
     }
 }
 
 
 void GameView::catchOreToAirShip(Ore * ore){
 	Point p = Point(ore->getPositionX(), ore->getPositionY());
-	Point tmp = this->convertToWindowSpace(p);
-	log("%f--%f^^^^^^^^^^^^################%f--%f", p.x, p.x, tmp.x, tmp.y);
+    Point tmp = ore->convertToWorldSpace(ore->getAnchorPointInPoints());
 	targetOre = new Ore(ore->getImageName(), tmp.x, tmp.y, ore->getRotation(), ore->getScore(), ore->getWeight());
 	this->addChild(targetOre, kMagnetiteZOrder);
 
-	MoveTo * moveTo = MoveTo::create(5.0, this->convertToWindowSpace(airshipSprite->getPosition()));
+    Point target = airshipSprite->convertToWorldSpace(airshipSprite->getAnchorPointInPoints());
+    
+	MoveTo * moveTo = MoveTo::create(5.0, target);
 	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::catchBack, this));
 	Sequence * seq = Sequence::create(moveTo, fun, NULL);
 	targetOre->runAction(seq);

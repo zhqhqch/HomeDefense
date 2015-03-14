@@ -125,6 +125,9 @@
 		9F582E731AAB44CF00FB2F7A /* DataUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F582E6C1AAB44CF00FB2F7A /* DataUtil.cpp */; };
 		9F582E741AAB44CF00FB2F7A /* EncyptUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F582E6E1AAB44CF00FB2F7A /* EncyptUtil.cpp */; };
 		9F582E751AAB44CF00FB2F7A /* EncyptUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F582E6E1AAB44CF00FB2F7A /* EncyptUtil.cpp */; };
+		9F762A961AB40EA200695FE7 /* OrePitSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F762A941AB40EA200695FE7 /* OrePitSprite.cpp */; };
+		9F762A9F1AB42D2800695FE7 /* AnimationUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F762A9D1AB42D2800695FE7 /* AnimationUtil.cpp */; };
+		9F762AA01AB42D2800695FE7 /* AnimationUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F762A9D1AB42D2800695FE7 /* AnimationUtil.cpp */; };
 		9F8825D51A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
 		9F8825D61A61373A000067F1 /* airship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CD1A61373A000067F1 /* airship.png */; };
 		9F8825D71A61373A000067F1 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F8825CE1A61373A000067F1 /* main_bg.jpg */; };
@@ -403,6 +406,10 @@
 		9F582E6D1AAB44CF00FB2F7A /* DataUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataUtil.h; path = ../Classes/DataUtil.h; sourceTree = "<group>"; };
 		9F582E6E1AAB44CF00FB2F7A /* EncyptUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EncyptUtil.cpp; path = ../Classes/EncyptUtil.cpp; sourceTree = "<group>"; };
 		9F582E6F1AAB44CF00FB2F7A /* EncyptUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EncyptUtil.h; path = ../Classes/EncyptUtil.h; sourceTree = "<group>"; };
+		9F762A941AB40EA200695FE7 /* OrePitSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OrePitSprite.cpp; path = ../Classes/OrePitSprite.cpp; sourceTree = "<group>"; };
+		9F762A951AB40EA200695FE7 /* OrePitSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrePitSprite.h; path = ../Classes/OrePitSprite.h; sourceTree = "<group>"; };
+		9F762A9D1AB42D2800695FE7 /* AnimationUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnimationUtil.cpp; path = ../Classes/AnimationUtil.cpp; sourceTree = "<group>"; };
+		9F762A9E1AB42D2800695FE7 /* AnimationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationUtil.h; path = ../Classes/AnimationUtil.h; sourceTree = "<group>"; };
 		9F8825CD1A61373A000067F1 /* airship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airship.png; sourceTree = "<group>"; };
 		9F8825CE1A61373A000067F1 /* main_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_bg.jpg; sourceTree = "<group>"; };
 		9F8825CF1A61373A000067F1 /* shareBtn_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareBtn_selected.png; sourceTree = "<group>"; };
@@ -491,6 +498,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9F762A941AB40EA200695FE7 /* OrePitSprite.cpp */,
+				9F762A951AB40EA200695FE7 /* OrePitSprite.h */,
 				9F2974C81AB1D3AA00B0DB6D /* Util.cpp */,
 				9F2974C91AB1D3AA00B0DB6D /* Util.h */,
 				9F1E937F1AAF3E180033E58A /* Checkpoint.cpp */,
@@ -532,6 +541,8 @@
 				9F472EB01A6944580054B114 /* MagnetiteSprite.cpp */,
 				9F192C5B1AA9EE02001AE79C /* PropMenuItemSprite.cpp */,
 				9F192C5C1AA9EE02001AE79C /* PropMenuItemSprite.h */,
+				9F762A9D1AB42D2800695FE7 /* AnimationUtil.cpp */,
+				9F762A9E1AB42D2800695FE7 /* AnimationUtil.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -946,6 +957,7 @@
 				9F567A3D1A866BC9005CEC71 /* EarthLayer.cpp in Sources */,
 				9F2974CA1AB1D3AA00B0DB6D /* Util.cpp in Sources */,
 				9F8825E81A6138AF000067F1 /* MainViewScene.cpp in Sources */,
+				9F762A961AB40EA200695FE7 /* OrePitSprite.cpp in Sources */,
 				9F3EA6781A6539AC00F5996E /* AirShipSprite.cpp in Sources */,
 				9FB429ED1A88E28C002DA991 /* EllipseBy.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
@@ -957,6 +969,7 @@
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				9F192C5D1AA9EE02001AE79C /* PropMenuItemSprite.cpp in Sources */,
 				9F56026F1A74DFE200A50D5F /* VertexVector.cpp in Sources */,
+				9F762A9F1AB42D2800695FE7 /* AnimationUtil.cpp in Sources */,
 				9F0D067B1A63EFA60044089E /* TransitionUtil.cpp in Sources */,
 				9F582E721AAB44CF00FB2F7A /* DataUtil.cpp in Sources */,
 				9F3EA67D1A6539B500F5996E /* Vec2Util.cpp in Sources */,
@@ -973,6 +986,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F762AA01AB42D2800695FE7 /* AnimationUtil.cpp in Sources */,
 				9F5602701A74DFE200A50D5F /* VertexVector.cpp in Sources */,
 				9F56025F1A74DFB700A50D5F /* LightLineRender.cpp in Sources */,
 				9F8825E91A6138AF000067F1 /* MainViewScene.cpp in Sources */,
