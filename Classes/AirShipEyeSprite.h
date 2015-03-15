@@ -24,6 +24,9 @@ public:
     
 private:
     cocos2d::Sprite * eyes;
+    
+    
+    void replaceEye();
 };
 
 

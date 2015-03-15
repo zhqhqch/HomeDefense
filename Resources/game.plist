@@ -150,7 +150,7 @@
             <key>player-eye.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,386},{23,22}}</string>
+                <string>{{482,410},{23,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -163,13 +163,26 @@
             <key>player-eyes.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,410},{11,12}}</string>
+                <string>{{482,434},{11,12}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
                 <string>{{6,5},{11,12}}</string>
+                <key>sourceSize</key>
+                <string>{23,22}</string>
+            </dict>
+            <key>player-eyes2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{482,386},{23,22}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{23,22}}</string>
                 <key>sourceSize</key>
                 <string>{23,22}</string>
             </dict>
@@ -300,7 +313,7 @@
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:2db02e0c4d6ad74db75a8f9f782ca62a:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:327511770cca7790f2c35f9e00bbdd15:1/1$</string>
             <key>textureFileName</key>
             <string>game.pvr.ccz</string>
         </dict>
