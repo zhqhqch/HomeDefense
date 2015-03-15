@@ -44,6 +44,8 @@ private:
     
     Checkpoint *checkpoint;
     
+    float trackAngle;
+    
 
 
 	void setPhyWorld(cocos2d::PhysicsWorld* world) {m_world=world;};

@@ -212,6 +212,7 @@ void GameView::startGame() {
     
     airshipSprite->makeCurPosition();
 	airshipSprite->startMove();
+    airshipSprite->eyeLookDown();
     shipMove = true;
     
     trackSprite = Sprite::create("track_arc.png");
@@ -296,7 +297,19 @@ void GameView::update(float dTime){
                 shipMove = true;
                 trackSprite->setVisible(true);
                 trackPointSprite->setVisible(true);
+                trackPointSprite->resume();
             }
+        }
+        
+        if(shipMove){
+            Point curAirShipPoint = airshipSprite->getPosition();
+            Point curTrackPoint = trackPointSprite->getPosition();
+            Point tmp = curAirShipPoint - curTrackPoint;
+            tmp.normalize();
+            trackAngle = atan2(tmp.x,tmp.y);
+            trackAngle = CC_RADIANS_TO_DEGREES(trackAngle);
+            
+            airshipSprite->eyeLook(trackAngle);
         }
     }
 	
@@ -335,6 +348,7 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
         shipMove = false;
         trackSprite->setVisible(false);
         trackPointSprite->setVisible(false);
+        trackPointSprite->pause();
         
         Point curAirShipPoint = airshipSprite->getPosition();
         magnetite->show();
@@ -355,6 +369,7 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
         shipMove = true;
         trackSprite->setVisible(true);
         trackPointSprite->setVisible(true);
+        trackPointSprite->resume();
         
         airShipRopeSprite->removeFromParentAndCleanup(true);
     }

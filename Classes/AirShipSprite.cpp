@@ -8,14 +8,21 @@
 #include "AirShipSprite.h"
 #include "AirShipRopeSprite.h"
 #include "EllipseBy.h"
+#include "AirShipEyeSprite.h"
 
 USING_NS_CC;
 
 AirShip::AirShip(float x, float y){
 
-	Sprite::initWithFile("airship_game.png");
-	y = y + getContentSize().height;
+	Sprite::initWithSpriteFrameName("player-normal.png");
+    
+    Size size = getContentSize();
+    
+	y = y + size.height;
 	setPosition(x, y);
+    
+    eyeSprite = new AirShipEye(size.width / 2, size.height / 2);
+    this->addChild(eyeSprite);
     
     isPause = false;
 }
@@ -51,4 +58,13 @@ void AirShip::startMove() {
 void AirShip::stopMove() {
     this->pause();
     isPause = true;
+}
+
+void AirShip::eyeLookDown() {
+    eyeSprite->lookDown();
+}
+
+
+void AirShip::eyeLook(float eyeLookAngle) {
+    eyeSprite->changeLook(eyeLookAngle);
 }
