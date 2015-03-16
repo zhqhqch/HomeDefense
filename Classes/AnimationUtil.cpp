@@ -7,6 +7,7 @@
 //
 
 #include "AnimationUtil.h"
+#include "AirShipSprite.h"
 
 
 USING_NS_CC;

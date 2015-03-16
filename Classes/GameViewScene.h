@@ -26,7 +26,7 @@ public:
 
 	void catchOreToAirShip(Ore * ore);
 
-	void catchBack();
+	void catchBack(bool success);
 
 private:
 	cocos2d::PhysicsWorld* m_world;

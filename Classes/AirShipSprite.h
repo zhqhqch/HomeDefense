@@ -10,8 +10,8 @@
 
 
 #include "cocos2d.h"
+#include "AirShipEyeSprite.h"
 
-class AirShipEye;
 class AirShipRope;
 
 
@@ -33,14 +33,27 @@ public:
     
     //设置飞船眼睛看的角度
     void eyeLook(float eyeLookAngle);
+    
+    //播放正在抓取的动画
+    void playCatchAnimation();
+    
+    //播放抓取成功的动画
+    void playCatchedSuccessAnimation();
+    
+    //播放抓取失败的动画
+    void playCatchedFailAnimation();
 
 private:
 	AirShipRope * ropeSprite;
     AirShipEye * eyeSprite;
     float startX;
     float startY;
-    bool isPause;
     
+    //停止正在抓取的动画
+    void stopCatchAnimation();
+    
+    //动画结束后显示眼睛
+    void eyeBack();
 };
 
 #endif /* AIRSHIPSPRITE_H_ */

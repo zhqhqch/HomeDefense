@@ -98,12 +98,23 @@ bool GameView::init(){
                                          Value(pitFallenRockAnimationPrefixStr),
                                          pitFallenRockAnimationCount);
     
+    AnimationUtil::createAnimationByName(Value(catchedFailAnimationName),
+                                         Value(catchedFailAnimationPrefixStr),
+                                         catchedFailAnimationCount);
+    
+    AnimationUtil::createAnimationByName(Value(catchedSuccessAnimationName),
+                                         Value(catchedSuccessAnimationPrefixStr),
+                                         catchedSuccessAnimationCount);
+    
+    AnimationUtil::createAnimationByName(Value(catchingAnimationName),
+                                         Value(catchingAnimationPrefixStr),
+                                         catchingAnimationCount);
 
 
 	airshipSprite = new AirShip(visibleSize.width / 2, visibleSize.height);
 	airshipSprite->setVisible(false);
 	this->addChild(airshipSprite, kAirShipZOrder);
-    
+
     earthLayer = new Earth(this, checkpoint);
 	earthLayer->setPosition(visibleSize.width / 2 - earthLayer->getContentSize().width / 2 ,
 			visibleSize.height * 0.65 - earthLayer->getContentSize().height);
@@ -291,15 +302,16 @@ void GameView::update(float dTime){
         }
         if (magnetite->isBack()) {
             bool backEnd = airshipSprite->getBoundingBox().intersectsRect(magnetite->getBoundingBox());
-            if (backEnd) {
+            if (backEnd && !shipMove) {
                 airShipRopeSprite->removeFromParentAndCleanup(true);
                 magnetite->hide();
-                
                 airshipSprite->startMove();
                 shipMove = true;
                 trackSprite->setVisible(true);
                 trackPointSprite->setVisible(true);
                 trackPointSprite->resume();
+                
+                catchBack(isCatch);
             }
         }
         
@@ -363,7 +375,10 @@ void GameView::onTouchEnded(Touch *touch, Event *unused_event) {
         float catchAngle = atan2(tmp.x,tmp.y);
         catchAngle = CC_RADIANS_TO_DEGREES(catchAngle);
         airShipRopeSprite = new AirShipRope(this, curAirShipPoint.x,curAirShipPoint.y,catchAngle);
-        this->addChild(airShipRopeSprite, kAirShipZOrder);
+        this->addChild(airShipRopeSprite, kAirShipZOrder - 1);
+        
+        
+        airshipSprite->playCatchAnimation();
         
     } else {
 //        earthLayer->startTurn();
@@ -387,12 +402,19 @@ void GameView::catchOreToAirShip(Ore * ore){
     Point target = airshipSprite->convertToWorldSpace(airshipSprite->getAnchorPointInPoints());
     
 	MoveTo * moveTo = MoveTo::create(5.0, target);
-	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::catchBack, this));
+	CallFunc *fun = CallFunc::create(CC_CALLBACK_0(GameView::catchBack, this, true));
 	Sequence * seq = Sequence::create(moveTo, fun, NULL);
 	targetOre->runAction(seq);
 }
 
-void GameView::catchBack() {
+void GameView::catchBack(bool success) {
+    if(!success){
+        airshipSprite->playCatchedFailAnimation();
+        return;
+    }
+    
+    airshipSprite->playCatchedSuccessAnimation();
+    
 	targetOre->removeFromParentAndCleanup(true);
 
 	std::stringstream ss;

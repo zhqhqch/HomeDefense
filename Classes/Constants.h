@@ -45,13 +45,23 @@
 #define pitFallenRockAnimationCount 9
 
 //抓取失败动画
-#define catchFailAnimationName "catchFail"
-#define catchFailAnimationPrefixStr "player-cry"
-#define catchFailAnimationCount 2
+#define catchedFailAnimationName "catchedFail"
+#define catchedFailAnimationPrefixStr "player-cry"
+#define catchedFailAnimationCount 2
 
 //抓取成功动画
-#define catchSuccessAnimationName "catchSuccess"
-#define catchSuccessAnimationPrefixStr "player-happy"
-#define catchSuccessAnimationCount 2
+#define catchedSuccessAnimationName "catchedSuccess"
+#define catchedSuccessAnimationPrefixStr "player-happy"
+#define catchedSuccessAnimationCount 2
+
+//正在抓取动画
+#define catchingAnimationName "catching"
+#define catchingAnimationPrefixStr "player-catch"
+#define catchingAnimationCount 2
+
+
+//飞船动作
+#define kAirShipMove 1
+#define kAirShipCatching 2
 
 #endif

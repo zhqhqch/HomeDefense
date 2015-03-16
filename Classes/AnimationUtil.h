@@ -12,6 +12,8 @@
 
 #include "cocos2d.h"
 
+class AirShip;
+
 class AnimationUtil {
 public:
     static void createAnimationByName(cocos2d::Value animationName, cocos2d::Value prefixStr, int count);
