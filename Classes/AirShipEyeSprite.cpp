@@ -24,17 +24,9 @@ AirShipEye::AirShipEye(float x, float y){
 void AirShipEye::lookDown() {
     Size size = getContentSize();
     MoveTo * moveTo = MoveTo::create(0.5f, Vec2(size.width / 2, size.height / 2 - 7));
-    CallFunc *fun = CallFunc::create(CC_CALLBACK_0(AirShipEye::replaceEye, this));
-    Sequence * seq = Sequence::create(moveTo, fun, NULL);
-    eyes->runAction(seq);
+    eyes->runAction(moveTo);
 }
 
 void AirShipEye::changeLook(float lookAngle) {
     this->setRotation(lookAngle);
-}
-
-void AirShipEye::replaceEye() {
-    eyes->removeFromParentAndCleanup(true);
-
-    this->setSpriteFrame("player-eyes2.png");
 }

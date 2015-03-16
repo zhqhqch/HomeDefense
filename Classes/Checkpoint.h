@@ -84,7 +84,7 @@ private:
 	ItemData * getItemByImageName(std::string imageName);
 
 	//获取随机的指定个数的位置信息
-	cocos2d::Vector<PositionData *> getRandomPosition(cocos2d::Vector<PositionData *>positionArr, int quantity);
+	cocos2d::Vector<PositionData *> getRandomPosition(cocos2d::Vector<PositionData *>positionArr);
 };
 
 

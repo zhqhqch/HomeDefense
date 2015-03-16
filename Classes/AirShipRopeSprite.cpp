@@ -27,7 +27,7 @@ AirShipRope::AirShipRope(GameView * gw, float x, float y,float ca) {
 
 	setTextureRect(Rect(0, 0, ropeSize.width, 0));
 
-	targetPoint = Sprite::create("item_c_2.png");
+	targetPoint = Sprite::create();
 	targetPoint->setPosition(ropeSize.width / 2, 0);
 //    targetPoint->setAnchorPoint(Vec2(0.0f, 0.0f));
 //	targetPoint->setVisible(false);
