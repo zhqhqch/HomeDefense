@@ -98,6 +98,8 @@ bool GameView::init(){
                                          Value(pitFallenRockAnimationPrefixStr),
                                          pitFallenRockAnimationCount);
     
+
+
 	airshipSprite = new AirShip(visibleSize.width / 2, visibleSize.height);
 	airshipSprite->setVisible(false);
 	this->addChild(airshipSprite, kAirShipZOrder);

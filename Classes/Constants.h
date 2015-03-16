@@ -44,4 +44,14 @@
 #define pitFallenRockAnimationPrefixStr "pit"
 #define pitFallenRockAnimationCount 9
 
+//抓取失败动画
+#define catchFailAnimationName "catchFail"
+#define catchFailAnimationPrefixStr "player-cry"
+#define catchFailAnimationCount 2
+
+//抓取成功动画
+#define catchSuccessAnimationName "catchSuccess"
+#define catchSuccessAnimationPrefixStr "player-happy"
+#define catchSuccessAnimationCount 2
+
 #endif
